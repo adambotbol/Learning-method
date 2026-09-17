@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
-  :root { --course-gradient: linear-gradient(135deg, #ff375f, #ff6482); --accent: #ff375f; --accent-2: #ff6482; }
+  :root { --course-color: #d6265a; --accent: #d6265a; --accent-2: #ff6482; }
 </style>
 </head>
 <body>
@@ -17,9 +17,10 @@
   <div class="nav-inner">
     <a class="nav-back" href="../index.html">← Mon semestre</a>
     <div class="nav-links">
-      <a href="#c1">Algorithmes</a>
       <a href="#c2">Complexité</a>
       <a href="#c3">Récursivité</a>
+      <a href="#c7">Turing</a>
+      <a href="#c8">NP</a>
     </div>
   </div>
 </nav>
@@ -32,103 +33,416 @@
       <span class="pill">Langage · <strong>C++</strong></span>
     </div>
     <h1>Information, Calcul et Communication</h1>
-    <p class="prof">Les bases de l'algorithmique — écrire un algorithme, mesurer sa complexité, le rendre récursif.</p>
-    <div class="progress-track"><div class="progress-fill" style="width: 8%"></div></div>
-    <div class="progress-label">Tout début de semestre — fondamentaux de l'algorithmique</div>
+    <p class="prof">Le dossier de l'édition en cours ne contient pas de notes de cours dédiées — tout ce qui suit est reconstruit à partir des examens de mi-semestre (2023, 2024) et d'exercices équivalents d'éditions antérieures, qui couvrent fidèlement la même matière de début de semestre.</p>
+    <div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div>
+    <div class="progress-label">Matière du premier examen — algorithmique, complexité, machines de Turing, NP</div>
   </div>
 </header>
 
 <div class="course-layout">
   <nav class="toc">
     <div class="toc-title">Sommaire</div>
-    <a href="#c1">Écrire un algorithme</a>
-    <a href="#c2">Complexité</a>
-    <a href="#c3">Récursivité en C++</a>
+    <a href="#c1">1. Écrire un algorithme</a>
+    <a href="#c2">2. Complexité</a>
+    <a href="#c3">3. Récursivité</a>
+    <a href="#c4">4. Listes et structures</a>
+    <a href="#c5">5. Représentation binaire</a>
+    <a href="#c6">6. Débogage</a>
+    <a href="#c7">7. Machines de Turing</a>
+    <a href="#c8">8. NP, SAT, SSP</a>
   </nav>
 
   <article class="content">
 
     <div class="box remark">
       <span class="box-label">Une note avant de commencer</span>
-      <p>Le dossier de section pour cette édition (2025, Doeraene) ne contient ni slides ni notes de cours — seulement des dossiers d'examens vides et un mini-projet. Ce qui suit a donc été reconstruit à partir des rappels de cours présents dans les énoncés et corrigés d'examens des éditions précédentes (Chappelier, Doeraene), qui couvrent les mêmes fondamentaux en tout début de semestre. Le langage utilisé au fil du cours est le <strong>C++</strong>, pas Python.</p>
+      <p>Le cours utilise un <strong>pseudo-code structuré</strong> (<code>entrée</code>/<code>sortie</code>, <code>Pour</code>, <code>Tant que</code>, <code>Si</code>, <code>←</code> pour l'affectation, <code>⊕</code> pour l'ajout en fin de liste) et le <strong>C++</strong> réel. Un examen de mi-semestre couvre en réalité toute cette matière — bien plus que de l'algorithmique 101 : jusqu'aux machines de Turing et à la classe de complexité NP.</p>
     </div>
 
     <h2 id="c1"><span class="chapter-num">Fondamentaux</span>Écrire un algorithme</h2>
-    <p>Un algorithme s'écrit d'abord en pseudo-code : entrées/sorties, assignations, conditions (<code>Si</code>), boucles (<code>tant que</code>), et récursivité. Cette structure abstraite précède toujours l'implémentation dans un langage précis.</p>
 
     <div class="box example">
-      <span class="box-label">Structures et fonctions</span>
-      <p>Le cours introduit tôt les <code>struct</code> pour regrouper des données liées, dans une approche procédurale — par exemple une <code>struct Ressource</code> ou une <code>struct Tache</code> — avec une attention particulière portée à la minimisation de la duplication de code et au respect strict du format d'affichage attendu.</p>
+      <span class="box-label">Exemple — « Machin »</span>
+      <p>Que sort <code>Machin(7)</code> ?</p>
+      <pre><code>Machin
+entrée : a, entier strictement positif
+b ← 0 ; c ← 1 ; d ← 0
+Tant que c &lt; a
+    d ← d + 1
+    Si d est un multiple de 7 ou de 11
+        b ← b + d
+        c ← c + 1
+Sortir : b</code></pre>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>103</strong> = somme des 6 premiers multiples communs de 7 ou 11 ($7+11+14+21+22+28$) — attention à l'inégalité stricte <code>c &lt; a</code>.</p>
+      <p>Traduction C++ directe :</p>
+      <pre><code>unsigned int f(unsigned int a) {
+    unsigned int b(0), c(1), d(0);
+    while (c &lt; a) {
+        ++d;
+        if ((d % 7 == 0) or (d % 11 == 0)) {
+            b += d;
+            ++c;
+        }
+    }
+    return b;
+}</code></pre>
+    </div>
+
+    <div class="box remark">
+      <span class="box-label">Erreurs classiques signalées dans les corrigés</span>
+      <ul style="margin-bottom:0;">
+        <li>Une fonction récursive doit <code>return</code>, pas seulement affecter une variable.</li>
+        <li>Confondre l'affectation d'une liste entière et l'ajout d'un élément.</li>
+        <li>Accès hors bornes classique : comparer <code>L[i]</code> à <code>L[i+1]</code> jusqu'au dernier indice.</li>
+        <li>Oublier d'incrémenter la variable de contrôle d'une boucle <code>Tant que</code> → non-terminaison.</li>
+      </ul>
     </div>
 
     <hr class="divider" />
 
     <h2 id="c2"><span class="chapter-num">Fondamentaux</span>Complexité algorithmique</h2>
-    <p>La complexité $C(n)$ compte le nombre d'opérations fondamentales en fonction de la taille $n$ de l'entrée, avec les notations $\Theta$, $O$, $\Omega$. Classes usuelles, de la plus rapide à la plus lente :</p>
-    <ul>
-      <li>constante — $O(1)$</li>
-      <li>logarithmique — $O(\log n)$ (dichotomie)</li>
-      <li>linéaire — $O(n)$</li>
-      <li>polynomiale — $O(n^2), O(n^3), \dots$</li>
-      <li>quasi-linéaire — $O(n\log n)$</li>
-      <li>exponentielle — $O(2^n)$</li>
-    </ul>
+    <p>Convention du cours : opérations arithmétiques, taille d'une liste et accès à un élément sont $\Theta(1)$ ; on parle de complexité <strong>temporelle pire cas</strong>, notée $C(n)$ en fonction de la taille $n$ de l'entrée — bien définir $n$ est souvent la moitié du travail.</p>
 
-    <div class="box theorem">
-      <span class="box-label">Exemple travaillé : compter les chiffres d'un entier</span>
-      <p>Une fonction récursive <code>chiffres(p)</code> qui compte les chiffres d'un entier $p$ vérifie l'équation de récurrence $T(n) = T(n/10) + \Theta(1)$, d'où $T(n) \in \Theta(\log n)$.</p>
-      <div class="proof">
-        <span class="box-label">Le piège méthodologique</span>
-        <p>Il faut bien définir ce qu'est « $n$ » : si $n=|p|$ (la valeur de l'entier) plutôt que $n=\log|p|$ (le nombre de chiffres), la complexité s'exprime différemment. Une erreur classique du cours est de confondre le nombre d'itérations d'une boucle avec sa complexité totale — celle-ci dépend aussi de la complexité du corps de la boucle.</p>
-      </div>
+    <div class="box example">
+      <span class="box-label">Exercice — « chiffres », récursion + équation de récurrence</span>
+      <pre><code>chiffres
+entrée : nombre entier p
+Si p &lt; 0
+    Sortir : 1 + chiffres(−p)
+Si p &lt; 10
+    Sortir : 1
+Sortir : chiffres(⌊p/10⌋) + 1</code></pre>
+      <p>Donner la complexité.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$\texttt{chiffres}(-486)=1+\texttt{chiffres}(486)=1+((\texttt{chiffres}(4)+1)+1)=4$. Pour $p\ge0$, l'équation de récurrence est $T(n)=T(n/10)+\Theta(1)$, donc $T(n)\in\Theta(\log n)$ avec $n=|p|$. <em>Remarque du corrigé</em> : si l'on prend $n=\log|p|$ (la taille de la <em>représentation</em> de $p$), la complexité devient $\Theta(n)$ — très peu de copies traitent la complexité formellement ; méthode recommandée : équation de récurrence plutôt qu'arbre d'appels.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice — « testeListe », optimisation Θ(n²) → Θ(n)</span>
+      <pre><code>testeListe
+entrée : liste L de nombres entiers positifs
+n ← taille(L)
+Pour i de 1 à n−1
+    Pour j de i+1 à n
+        Si L[i] &gt; L[j]
+            Sortir : « non »
+Sortir : « oui »</code></pre>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Pour $(2,5,4,6)$ : sortie « non » (couple $5>4$) — l'algorithme teste si la liste est <strong>triée</strong>. Complexité : double boucle imbriquée, $\sum_{i=1}^{n-1}(n-i)\in\Theta(n^2)$.</p>
+      <p><strong>Optimisation en $\Theta(n)$</strong> : comparer chaque élément à son seul successeur immédiat :</p>
+      <pre><code>Pour i de 1 à n−1
+    Si L[i] &gt; L[i+1]
+        Sortir : « non »
+Sortir : « oui »</code></pre>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice — récursion terminale simple</span>
+      <pre><code>int g(int n, int x, int y) {
+    if (n &lt;= 0) return x;
+    return g(n-1, x+y, y);
+}
+int f(int n) { return g(n, 0, 3); }</code></pre>
+      <p>Calculer $f(3), f(5)$, l'expression générale et la complexité.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$f(3)=9$, $f(5)=15$. Par récurrence, $g(n,x,y)$ retourne $x+ny$ pour $n\ge0$, donc $f(n)=3n$. Complexité $\Theta(n)$ : $n+1$ appels, chacun $\Theta(1)$ hors récursion. <em>Piège</em> : « faire quelque chose $n$ fois » ne garantit $\Theta(n)$ que si le corps est bien $\Theta(1)$.</p>
     </div>
 
     <hr class="divider" />
 
-    <h2 id="c3"><span class="chapter-num">Fondamentaux — dernier vu</span>Récursivité en C++</h2>
-    <p>Exemple complet et représentatif : le calcul de $1/e$ par sa série entière, $\dfrac1e = \sum_{k=0}^\infty \dfrac{(-1)^k}{k!}$.</p>
+    <h2 id="c3"><span class="chapter-num">Fondamentaux</span>Récursivité</h2>
 
-    <pre><code>double factorielle(double n) {
-    if (n &lt;= 1.0) return 1.0;
-    return n * factorielle(n - 1.0);
+    <div class="box example">
+      <span class="box-label">Exercice — intersection récursive de listes triées</span>
+      <p><code>L1</code>, <code>L2</code> triées, sans doublons. Intersection récursive, sans boucle :</p>
+      <pre><code>intersecR
+entrée : L1, L2
+Si L1 est vide ou L2 est vide
+    Sortir : ()
+Si L1(1) = L2(1)
+    Sortir : L1(1) ⊕ intersecR(L1(2..), L2(2..))
+Si L1(1) &lt; L2(1)
+    Sortir : intersecR(L1(2..), L2)
+Sortir : intersecR(L1, L2(2..))</code></pre>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Complexité $\Theta(n)$ : chaque appel diminue la longueur d'au moins une des deux listes, au plus $2n$ appels. <em>Pièges signalés</em> (« très peu réussi ») : mauvais cas de base (renvoyer <code>L1</code> ou <code>L2</code> au lieu de la liste vide), mauvaise gestion du retour d'appel récursif, oubli de distinguer les cas $L1(1)<L2(1)$ et $>$.</p>
+    </div>
+
+    <div class="box theorem">
+      <span class="box-label">Exercice — Plus Longue Sous-Séquence Commune (PLSC)</span>
+      <p>Définition : $f(i,j)=0$ si $i=0$ ou $j=0$ ; $f(i-1,j-1)+1$ si $X[i]=Y[j]$ ; $\max(f(i,j-1),f(i-1,j))$ sinon.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — version récursive naïve, exponentielle</span>
+      <pre><code>PLSCAnnexe(X, Y, i, j)
+Si i = 0 ou j = 0 : Sortir 0
+Sinon si X[i] = Y[j] : Sortir PLSCAnnexe(X,Y,i−1,j−1) + 1
+Sinon : Sortir max(PLSCAnnexe(X,Y,i,j−1), PLSCAnnexe(X,Y,i−1,j))</code></pre>
+      <p>Équation de récurrence (pire cas) : $T(i,j)=T(i,j-1)+T(i-1,j)+\Theta(1)$. En posant $k=i+j$ : $S(k)=2S(k-1)+\Theta(1)\in\Theta(2^k)$, donc avec $i=j=n$ : <strong>$T\in\Theta(2^{2n})$</strong>, exponentiel.</p>
+      <span class="box-label" style="margin-top:14px;">Solution — version dynamique, $\Theta(n^2)$</span>
+      <pre><code>PLSCDynamique(X, Y)
+n ← taille(X) ; m ← taille(Y)
+f ← matrice (n+1)×(m+1), initialisée à 0 sur les bords
+Pour i de 1 à n
+    Pour j de 1 à m
+        Si X[i] = Y[j] : f[i,j] ← f[i−1,j−1] + 1
+        Sinon : f[i,j] ← max(f[i,j−1], f[i−1,j])
+Sortir : f[n,m]</code></pre>
+      <p>Double boucle $n\times m$ en $\Theta(1)$ chacune $\to\Theta(n^2)$ — un cas d'école de programmation dynamique, proche des coefficients binomiaux vus en cours.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice — fusion triée et fusion alternée récursives</span>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <pre><code>// fusion triée récursive — Θ(n)
+liste fusion_triee(liste&amp; L1, liste&amp; L2) {
+    if (L1.empty()) return L2;
+    if (L2.empty()) return L1;
+    liste retour;
+    auto valeur(L1.back());
+    if (L1.back() &gt; L2.back()) { L1.pop_back(); }
+    else { valeur = L2.back(); L2.pop_back(); }
+    retour = fusion_triee(L1, L2);
+    retour.push_back(valeur);
+    return retour;
 }
 
-// version efficace, Θ(n) : chaque terme se déduit du précédent
-double approx_inv_e(double n) {
-    double term(1.0), res(term);
-    for (double i(1); i &lt;= n; ++i) {
-        term = -term;
-        term /= i;
-        res += term;
-    }
-    return res;
-}
-
-// version naïve : recalcule factorielle(k) à chaque terme → Θ(n²)
-
-void affiche_inv_e() {
-    int n(-1);
-    do {
-        cout &lt;&lt; "Entrez un entier strictement supérieur à 1 : ";
-        cin &gt;&gt; n;
-    } while (n &lt;= 1);
-
-    for (int i(2); i &lt;= n; ++i)
-        cout &lt;&lt; "ordre " &lt;&lt; i &lt;&lt; " : " &lt;&lt; approx_inv_e(i) &lt;&lt; endl;
+// fusion alternée récursive
+liste fusion_alt_rec(liste&amp; L1, liste&amp; L2) {
+    if (L1.empty()) return L2;
+    if (L2.empty()) return L1;
+    const auto first(L1.back());  L1.pop_back();
+    const auto second(L2.back()); L2.pop_back();
+    liste retour(fusion_alt_rec(L1, L2));
+    retour.push_back(first);
+    retour.push_back(second);
+    return retour;
 }</code></pre>
+      <p>Complexité $\Theta(n)$ où $n$ = taille totale, chaque liste étant parcourue une seule fois.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c4"><span class="chapter-num">Fondamentaux</span>Listes et structures de données</h2>
+
+    <div class="box example">
+      <span class="box-label">Exercice — intersection de listes, trois approches comparées</span>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(a) Naïve, $\Theta(n^2)$</strong> — double boucle comparant chaque élément de <code>L1</code> à chaque élément de <code>L2</code>.</p>
+      <p><strong>(b) $\Theta(n\log n)$</strong> — trier <code>L1</code> puis rechercher dichotomiquement chaque élément de <code>L2</code> (tri en $\Theta(n\log n)$ + $m$ recherches en $\Theta(\log n)$).</p>
+      <p><strong>(c) $\Theta(n)$</strong> — la version récursive <code>intersecR</code> ci-dessus, sur listes déjà triées.</p>
+      <p><em>Commentaire du correcteur</em> : « l'appartenance d'un élément à une liste n'est pas une opération élémentaire » — piège classique de considérer $x\in L$ comme $\Theta(1)$, de même pour la concaténation de deux listes.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice — structures C++ pour la répartition de tâches</span>
+      <p>Modéliser des ordinateurs, tâches et ressources, puis écrire un algorithme glouton d'allocation.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <pre><code>struct Ressource {
+    int memoire;
+    double mips;      // Million Instructions Per Second
+};
+struct Tache {
+    string nom;
+    Ressource besoin;
+};
+struct Ordinateur {
+    string nom;
+    int memoire;
+    vector&lt;Tache&gt; taches;
+    vector&lt;int&gt; processeurs;   // capacité de calcul de chacun
+};</code></pre>
+      <p><code>calculer_opmoyen(Ordinateur)</code> : moyenne des capacités des processeurs. <code>allocation(liste&lt;Ordinateur&gt;, liste&lt;Tache&gt;)</code> : algorithme glouton — chaque tâche est affectée au <strong>premier</strong> ordinateur dont les ressources restantes suffisent, puis les ressources restantes sont mises à jour par soustraction.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice — régression linéaire (structures Point/Line)</span>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <pre><code>struct Point { double x; double y; };
+struct Line  { double a; double b; };   // y = a*x + b
+typedef vector&lt;Point&gt; Cloud;
+
+Line fit(Cloud const&amp; data) {
+    if (data.empty()) return { 0.0, 0.0 };
+    double Sxy(0.0), Sx2(0.0), Sx(0.0), Sy(0.0);
+    for (auto p : data) {
+        Sxy += p.x * p.y; Sx2 += p.x * p.x;
+        Sx += p.x; Sy += p.y;
+    }
+    const double diviseur(Sx2 - (Sx*Sx)/data.size());
+    if (abs(diviseur) &lt;= 1e-12) return { 0.0, 0.0 };
+    const double a((Sxy - (Sx*Sy)/data.size()) / diviseur);
+    return { a, (Sy - a*Sx)/data.size() };
+}
+
+double mse(Line const&amp; line, Cloud const&amp; data) {
+    if (data.empty()) return 0.0;
+    double s(0.0);
+    for (auto p : data) {
+        const double val(p.y - (line.a * p.x + line.b));
+        s += val * val;
+    }
+    return s / data.size();
+}</code></pre>
+      <p>Bon exemple de manipulation combinée <code>struct</code> + <code>vector</code> + boucle unique + gestion d'un cas limite (division par $\approx0$).</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c5"><span class="chapter-num">Fondamentaux</span>Représentation binaire des nombres</h2>
+    <p>Thème quasi systématique en première question des deux examens intermédiaires lus.</p>
+
+    <div class="box example">
+      <span class="box-label">Virgule flottante — décodage</span>
+      <p>Nombre binaire <code>0100100110</code> sur 10 bits (1 signe + 3 exposant + 6 mantisse).</p>
+    </div>
+    <div class="proof"><span class="box-label">Solution</span><p>Signe <code>0</code> (positif), exposant <code>100</code>=4, mantisse <code>100110</code> → $1{,}100110\times2^4=11001{,}1_2=$ <strong>25.5</strong>.</p></div>
+
+    <div class="box example">
+      <span class="box-label">Complément à deux — encodage d'un négatif</span>
+      <p><code>int i(-54)</code> sur 8 bits ?</p>
+    </div>
+    <div class="proof"><span class="box-label">Solution</span><p>$54=$ <code>00110110</code> → inverser tous les bits puis $+1$ → <strong><code>11001010</code></strong> (équivalent à $256-54=202$ en binaire non signé).</p></div>
+
+    <div class="box example">
+      <span class="box-label">Bits nécessaires pour une opération sans dépassement</span>
+      <p>$m$ sur $p$ bits non signés, $n$ sur $q$ bits. Bits nécessaires pour $m\times n$ et $m+n$ ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$m\times n$ : <strong>$p+q$ bits</strong> ($m\times n<2^p\cdot2^q=2^{p+q}$). $m+n$ : <strong>$\max(p,q)+1$ bits</strong>. <em>Piège signalé</em> : beaucoup pensent à tort que le maximum représentable sur $p$ bits est $2^p$ (c'est $2^p-1$).</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c6"><span class="chapter-num">Fondamentaux</span>Débogage et tests</h2>
+
+    <div class="box example">
+      <span class="box-label">Exercice — « Zébrons », trouver des tests puis corriger</span>
+      <p>Détecter des variations anormales (&gt;10) dans des mesures, en ignorant les capteurs à 0 :</p>
+      <pre><code>constexpr int TOLERANCE = 10;
+vector&lt;size_t&gt; monitoring(vector&lt;int&gt; mesures) {
+    vector&lt;size_t&gt; resultat;
+    for (size_t i = 0; i + 1 &lt; mesures.size(); i++) {
+        int elemCourant = mesures.at(i);
+        int elemSuivant = mesures.at(i + 1);
+        if (elemCourant == 0) { /* déjà traité */ }
+        else if (elemSuivant != 0) {
+            if (abs(elemSuivant - elemCourant) &gt;= TOLERANCE)   // bug
+                resultat.push_back(i + 1);
+        } else {
+            int elemSuivantSuivant = mesures.at(i + 2);          // bug
+            if (abs(elemSuivantSuivant - elemCourant) &gt; TOLERANCE)
+                resultat.push_back(i + 2);
+        }
+    }
+    return resultat;
+}</code></pre>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Trois tests, un par catégorie de bug :</p>
+      <table style="width:100%; border-collapse:collapse; font-size:14.5px; margin:12px 0;">
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;"><strong>Faux positif</strong></td><td>{5,15}</td><td>attendu {}</td><td>obtenu {1}</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 8px;"><strong>Faux négatif</strong></td><td>{5,0,0,20}</td><td>attendu {3}</td><td>obtenu {}</td></tr>
+        <tr><td style="padding:6px 8px;"><strong>Crash</strong></td><td>{5,0}</td><td>attendu {}</td><td>crash (accès hors bornes)</td></tr>
+      </table>
+      <p>Corrections : <code>&gt;=</code> doit être <code>&gt;</code> ; il faut une boucle sautant tous les zéros consécutifs (pas seulement un) tout en vérifiant les bornes à chaque pas :</p>
+      <pre><code>size_t j = i + 2;
+while (j &lt; mesures.size() &amp;&amp; mesures.at(j) == 0) { j++; }
+if (j &lt; mesures.size() &amp;&amp; abs(mesures.at(j) - elemCourant) &gt; TOLERANCE)
+    resultat.push_back(j);</code></pre>
+      <p><em>Commentaire du correcteur</em> : beaucoup de copies inventent de fausses erreurs (changer un type de retour, par exemple) — un code donné par l'énoncé comme fonctionnel ne doit pas être suspecté d'erreurs de compilation.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c7"><span class="chapter-num">Fondamentaux</span>Machines de Turing</h2>
+
+    <div class="box example">
+      <span class="box-label">Exercice type — reconnaître $0^n1^n$</span>
+      <p>Table de transition à 6 états, appliquée à la bande <code>0 0 0 0 1 1 1 1</code>.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — méthode</span>
+      <p>Les états 1/2/3 parcourent la bande de gauche à droite en effaçant, cyclant à chaque 0 vu ; si l'on retombe sur une case vide dans l'état 1 (multiple de 3 zéros), on va chercher un 1 en fin de bande pour l'effacer, puis on recommence. <strong>Conclusion</strong> : la machine vérifie si l'entrée est de la forme $0^n1^n$ (même nombre de 0 que de 1). <em>Piège</em> : beaucoup concluent à tort que la machine « efface tout » — impossible puisque tout arrêt de cette machine écrit quelque chose avant de s'arrêter.</p>
+    </div>
 
     <div class="box remark">
-      <span class="box-label">Ce que cet exemple enseigne</span>
-      <p>Deux implémentations du même calcul peuvent avoir des complexités très différentes : la version qui recalcule <code>factorielle(k)</code> à chaque terme de la somme est en $\Theta(n^2)$, alors que la version qui met à jour le terme précédent est en $\Theta(n)$. C'est l'illustration centrale du lien entre complexité et façon d'écrire le code, pas seulement l'algorithme sur le papier.</p>
+      <span class="box-label">Méthode générale pour ce type d'exercice</span>
+      <p>Simuler « au crayon » la machine, repérer les cycles d'états qui parcourent/effacent la bande, identifier ce qui déclenche un changement de branche (souvent une condition modulo un petit nombre), puis formuler en une phrase la fonction globale en justifiant le rôle de chaque groupe d'états — y compris un éventuel état de simple « repositionnement » de la tête avant l'arrêt, souvent oublié dans les copies.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c8"><span class="chapter-num">Fondamentaux</span>Complexité NP, certificats, SAT / SSP</h2>
+
+    <div class="box theorem">
+      <span class="box-label">SAT — satisfaisabilité booléenne</span>
+      <p>Entrée : une formule booléenne. Sortie : satisfiable ou non (+ une assignation satisfaisante = le <strong>certificat</strong>).</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Pourquoi SAT ∈ NP</span>
+      <p>Toute formule se transforme (taille linéaire) en forme normale conjonctive équisatisfiable ($\wedge$ de $\vee$ de littéraux). Vérifier une assignation donnée coûte alors $\Theta(n)\times\Theta(n)+\Theta(n)=\Theta(n^2)$ — polynomial, donc <strong>SAT $\in$ NP</strong>. <em>Piège signalé</em> : confondre « vérifier » (polynomial → NP) et « résoudre » (pas nécessairement polynomial).</p>
+      <pre><code>// résolution par force brute
+SAT_solver(F) :
+n ← nb_var(F)
+Pour i de 0 à 2ⁿ − 1
+    L ← assignation(i, n)
+    Si évalue(F, L) : Sortir L
+Sortir ()</code></pre>
+      <p>Complexité : boucle en $\Theta(2^n)$, chaque évaluation polynomiale → <strong>au moins $\Theta(2^n)$</strong>, exponentielle. <em>Piège</em> : confondre le nombre de variables $n$ et la taille de l'espace de recherche $2^n$.</p>
+    </div>
+
+    <div class="box theorem">
+      <span class="box-label">SSP — sous-ensemble de somme nulle</span>
+      <p>Ex : $\{3,4,12,-1,6,-2\}\to$ « oui » ($\{3,-1,-2\}$ somme à 0) ; $\{3,2,14,-8,1\}\to$ « non ».</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>Résolution</strong> (par force brute, $k$ codant un sous-ensemble en binaire) :</p>
+      <pre><code>SSP(E) :
+n ← taille(E) ; maxK ← 2ⁿ−1
+Pour k de 1 à maxK
+    Si somme(E,k) = 0 : Sortir « oui »
+Sortir « non »</code></pre>
+      <p>Complexité : $(2^n-1)$ itérations $\times\ \Theta(n)$ par appel à <code>somme</code> → <strong>$\Theta(n\cdot2^n)$</strong>, exponentielle. Ce n'est <strong>pas contradictoire</strong> avec SSP $\in$ NP : NP ne dit rien sur la complexité de <em>résolution</em>, seulement de <em>vérification</em>.</p>
+      <p><strong>Vérification</strong> (certificat = le sous-ensemble codé par $k$), en $\Theta(n)$ :</p>
+      <pre><code>VérifieSSP(E, k) :
+Si k &lt; 1 ou k &gt; 2^taille(E) − 1 : Sortir « non »
+s ← 0
+Pour i de taille(E) à 1 en descendant
+    Si k est impair : s ← s + E[i]
+    k ← ⌊k/2⌋
+Sortir « oui » si s = 0, sinon « non »</code></pre>
+      <p>Vérification polynomiale ($\Theta(n)$) — cohérent avec SSP $\in$ NP.</p>
     </div>
 
     <div class="end-banner">
-      <span class="badge">✓</span>
-      <span>C'est la matière la plus fiable disponible pour le début de ce cours. Pas de contenu sur la logique formelle, l'information/entropie, les réseaux ou la cryptographie (RSA) — ces sujets, vus en fin de semestre dans les archives d'examens, ne sont pas inclus ici.</span>
+      <strong>C'est la matière la plus fiable disponible pour ce cours.</strong> Rien sur l'information/entropie, la cryptographie RSA, les réseaux ou le signal (Shannon-Nyquist) — ces sujets apparaissent en fin de semestre dans les archives d'examens et ne sont pas inclus ici.
     </div>
 
     <p class="source-note">
-      Contenu reconstruit à partir de rappels de cours présents dans des corrigés d'examens (Chappelier 2023, Doeraene 2024) et du fichier <em>Lisez-moi (CS-119).docx</em> — à défaut de notes de cours dédiées pour l'édition en cours dans le Drive de section.
+      Contenu reconstruit à partir des examens de mi-semestre 2023 (Chappelier) et 2024 (Doeraene), lus intégralement, enrichis d'exercices équivalents d'éditions antérieures — à défaut de notes de cours dédiées pour l'édition en cours dans le Drive de section.
     </p>
 
   </article>

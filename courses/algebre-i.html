@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
-  :root { --course-gradient: linear-gradient(135deg, #5e5ce6, #af52de); --accent: #5e5ce6; --accent-2: #af52de; }
+  :root { --course-color: #5e5ce6; --accent: #5e5ce6; --accent-2: #af52de; }
 </style>
 </head>
 <body>
@@ -33,7 +33,7 @@
       <span class="pill">Section · <strong>Mathématiques</strong></span>
     </div>
     <h1>Algèbre I</h1>
-    <p class="prof">Les fondations avant l'algèbre : logique, ensembles, fonctions, relations — les structures algébriques (groupes, anneaux) arrivent juste après.</p>
+    <p class="prof">Les fondations avant l'algèbre : logique, ensembles, fonctions, relations — les structures algébriques (groupes, anneaux) arrivent juste après. Il n'existe pas de polycopié dédié : toute la matière ci-dessous vient des séries d'exercices et de leurs corrigés très détaillés, reproduits ici intégralement.</p>
     <div class="progress-track"><div class="progress-fill" style="width: 29%"></div></div>
     <div class="progress-label">Semaine 4 sur 14 — Relations d'équivalence et construction de ℤ</div>
   </div>
@@ -50,21 +50,21 @@
 
   <article class="content">
 
-    <p class="lede">Pas de notes de cours dédiées trouvées pour cette édition : ce qui suit est reconstruit fidèlement à partir des quatre premières séries d'exercices et de leurs corrigés très détaillés — qui contiennent définitions, théorèmes et démonstrations complètes.</p>
-
     <h2 id="s1"><span class="chapter-num">Semaine 1</span>Logique et raisonnement mathématique</h2>
 
-    <h3>1.1 Logique propositionnelle</h3>
-    <p>On combine des propositions $P, Q, R$ avec les connecteurs $\wedge$ (et), $\vee$ (ou), $\neg$ (négation), $\Rightarrow$ (implication), $\Leftrightarrow$ (équivalence). Une <strong>tautologie</strong> est une expression toujours vraie, quelle que soit la valeur de vérité de ses composantes — vérifiable par table de vérité.</p>
-    <div class="box theorem">
-      <span class="box-label">Tautologies fondamentales</span>
-      <ul style="margin-bottom:0;">
-        <li><em>Ex falso quodlibet</em> : $(P \wedge \neg P) \Rightarrow Q$ — d'une contradiction on déduit n'importe quoi.</li>
-        <li>Double négation : $\neg\neg P \Leftrightarrow P$.</li>
-        <li>Modus ponens : $(P \wedge (P\Rightarrow Q)) \Rightarrow Q$.</li>
-        <li>Négation d'une implication : $\neg(P\Rightarrow Q) \Leftrightarrow (P \wedge \neg Q)$ — montre que $\Rightarrow$ s'exprime entièrement avec $\neg, \wedge, \vee$.</li>
-        <li>Distributivité : $(P \wedge (Q\vee R)) \Leftrightarrow ((P\wedge Q)\vee(P\wedge R))$.</li>
-      </ul>
+    <h3>1.1 Tautologies logiques</h3>
+    <p>On combine des propositions $P, Q, R$ avec les connecteurs $\wedge$ (et), $\vee$ (ou), $\neg$ (négation), $\Rightarrow$ (implication), $\Leftrightarrow$ (équivalence). Une <strong>tautologie</strong> est une expression toujours vraie, quelle que soit la valeur de vérité de ses composantes — on le vérifie par table de vérité.</p>
+
+    <div class="box example">
+      <span class="box-label">Exercice 1 — cinq tautologies à démontrer</span>
+      <p>Démontrer : (1) $P \wedge \neg P \Rightarrow Q$ ; (2) $\neg\neg P \Rightarrow P$ ; (3) modus ponens $(P \wedge (P \Rightarrow Q)) \Rightarrow Q$ ; (4) $\neg(P \Rightarrow Q) \Leftrightarrow P \wedge \neg Q$ ; (5) $(P \wedge (Q \vee R)) \Leftrightarrow ((P \wedge Q) \vee (P \wedge R))$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> $P\wedge\neg P$ est toujours faux, donc l'implication $(P\wedge\neg P)\Rightarrow Q$ est toujours vraie — c'est le principe <em>ex falso quodlibet</em> : d'une contradiction, on peut déduire n'importe quoi.</p>
+      <p><strong>(2)</strong> et <strong>(3)</strong> se vérifient directement par table de vérité sur les 2 ou 4 lignes possibles : les deux colonnes finales coïncident toujours.</p>
+      <p><strong>(4)</strong> Table à 4 lignes sur $P,Q$ : $\neg(P\Rightarrow Q)$ et $P\wedge\neg Q$ coïncident exactement (toutes deux vraies uniquement quand $P$=V, $Q$=F). <em>Remarque du corrigé</em> : ceci montre que $\Rightarrow$ s'exprime entièrement à l'aide de $\neg,\wedge,\vee$ (on a aussi $P\Rightarrow Q \equiv \neg P \vee Q$).</p>
+      <p><strong>(5)</strong> Distributivité de $\wedge$ sur $\vee$ — table à 8 lignes ($P,Q,R$) : les colonnes $P\wedge(Q\vee R)$ et $(P\wedge Q)\vee(P\wedge R)$ coïncident dans tous les cas.</p>
     </div>
 
     <h3>1.2 Raisonnement par récurrence</h3>
@@ -72,40 +72,95 @@
       <span class="box-label">Principe d'induction simple</span>
       <p>Pour montrer $P(n)$ pour tout $n\ge n_0$ : <strong>initialisation</strong> — montrer $P(n_0)$ ; <strong>hérédité</strong> — montrer $P(n)\Rightarrow P(n+1)$ pour tout $n\ge n_0$.</p>
     </div>
-    <p>Exemple classique : $\forall n\ge 1,\ 1+2+\cdots+n = \dfrac{n(n+1)}{2}$. Initialisation triviale ; à l'hérédité, $1+\cdots+(n+1) = \dfrac{n(n+1)}{2}+(n+1) = \dfrac{(n+1)(n+2)}{2}$, exactement la formule au rang $n+1$.</p>
-    <div class="box remark">
-      <span class="box-label">Le piège du « paradoxe des chevaux »</span>
-      <p>Un faux raisonnement par récurrence prétend prouver que tous les chevaux d'un groupe de $n$ sont de la même couleur. L'erreur : l'hérédité suppose implicitement que les sous-groupes $\{h_1,\dots,h_n\}$ et $\{h_2,\dots,h_{n+1}\}$ se chevauchent — faux pour $n=1$. Ça illustre pourquoi il faut vérifier l'hérédité pour <em>tout</em> $n$, petits cas compris.</p>
+
+    <div class="box example">
+      <span class="box-label">Exercice 2 (*) — somme des n premiers entiers</span>
+      <p>Démontrer par induction, pour tout $n\ge1$ : $1+2+\cdots+n=\dfrac{n(n+1)}{2}$.</p>
     </div>
-    <div class="box theorem">
-      <span class="box-label">Théorème fondamental de l'arithmétique</span>
-      <p>Tout entier $n\ge 2$ s'écrit comme un produit de nombres premiers, de façon unique à l'ordre près. Démontré par récurrence forte : existence en factorisant $n+1=k\cdot k'$ si non premier, unicité via le lemme d'Euclide (si $p_1'$ divise un produit de premiers, il est égal à l'un d'eux).</p>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Soit $P(n)$ cette propriété. <strong>Initialisation</strong> ($n=1$) : $1=\frac{1\cdot2}{2}$, vrai. <strong>Hérédité</strong> : en supposant $P(n)$ vraie,
+      $$1+\cdots+(n+1)=(1+\cdots+n)+(n+1)=\frac{n(n+1)}{2}+(n+1)=\frac{(n+1)(n+2)}{2},$$
+      exactement $P(n+1)$. Par récurrence, $P(n)$ est vraie pour tout $n\ge1$. $\blacksquare$</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 3 — le paradoxe des chevaux</span>
+      <p>Trouver l'erreur dans la preuve suivante : « Tous les chevaux d'un groupe de $n\ge1$ chevaux sont de la même couleur. » <em>Preuve proposée (fausse)</em> : pour $n=1$, trivial. Pour $n\to n+1$ : soit $n+1$ chevaux $h_1,\dots,h_{n+1}$ ; les $n$ premiers $h_1,\dots,h_n$ sont de même couleur (hypothèse de récurrence), de même que $h_2,\dots,h_{n+1}$ ; ces deux groupes partageant $h_2,\dots,h_n$, tous les $n+1$ chevaux seraient de la même couleur.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>L'erreur se situe dans le passage $n=1\to n=2$ : les deux sous-groupes $\{h_1\}$ et $\{h_2\}$ sont alors <strong>disjoints</strong> (aucun cheval en commun), donc l'argument de recollement des couleurs par intersection non vide ne s'applique pas à cette étape précise, même s'il fonctionne pour $n\ge2$. Ceci illustre l'importance de vérifier que l'hypothèse d'induction s'applique bien à <em>toutes</em> les étapes, y compris les plus petites.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 4 — décomposition en facteurs premiers</span>
+      <p>Un entier $p>0$ est <strong>premier</strong> s'il a exactement deux diviseurs positifs distincts. Montrer par récurrence forte que tout $n\ge2$ s'écrit $n=p_1\cdots p_k$ (produit de premiers), de façon unique à l'ordre près.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>Existence</strong> (récurrence forte) : si $n+1$ n'est pas premier, il s'écrit $k\cdot k'$ avec $1<k,k'<n+1$ ; on combine les décompositions de $k$ et $k'$, qui existent par hypothèse de récurrence. Sinon $n+1$ est premier, décomposition triviale.</p>
+      <p><strong>Unicité</strong> : si $n+1=p_1\cdots p_k=p_1'\cdots p_l'$, alors $p_1'$ divise $p_1\cdots p_k$. Par le <strong>lemme d'Euclide</strong> (un premier divisant un produit divise l'un des facteurs), $p_1'$ divise l'un des $p_i$, donc lui est égal (les deux sont premiers). En simplifiant ce facteur commun des deux côtés, on obtient un entier strictement plus petit que $n+1$ dont la décomposition est unique par récurrence — ce qui force l'unicité pour $n+1$. $\blacksquare$</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 5 (difficile) — inégalité sous-additive</span>
+      <p>Soient $a_1,a_2,\dots$ des réels tels que $a_{i+j}\le a_i+a_j$ pour tous $i,j\ge1$. Montrer par induction, pour tout $n\ge1$ :
+      $$a_n \le a_1+\frac{a_2}{2}+\frac{a_3}{3}+\cdots+\frac{a_n}{n}.$$</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>On montre la propriété plus forte $P(n)$ : « pour tout $k\le n$, $a_k\le a_1+\frac{a_2}{2}+\cdots+\frac{a_k}{k}$ ». Initialisation triviale ($n=1$).</p>
+      <p><strong>Étape préparatoire.</strong> En appliquant $a_{i+j}\le a_i+a_j$ avec $i+j=n+1$ pour chaque couple $(1,n),(2,n-1),\dots,(n,1)$ et en sommant les $n$ inégalités obtenues :
+      $$n\cdot a_{n+1}\le 2(a_1+\cdots+a_n).\qquad(\ast)$$</p>
+      <p><strong>Hérédité.</strong> En supposant $P(n)$, on somme les $n$ inégalités $a_k\le a_1+\frac{a_2}{2}+\cdots+\frac{a_k}{k}$ pour $k=1,\dots,n$, puis on ajoute $(a_1+\cdots+a_n)$ des deux côtés, pour obtenir
+      $$2(a_1+\cdots+a_n)\le(n+1)\Big(a_1+\frac{a_2}{2}+\cdots+\frac{a_n}{n}\Big).$$
+      En combinant avec $(\ast)$ : $n\cdot a_{n+1}\le(n+1)\big(a_1+\cdots+\frac{a_{n+1}}{n+1}\big)$. On ajoute $a_{n+1}$ des deux côtés puis on divise par $(n+1)$ : on obtient exactement $P(n+1)$. $\blacksquare$</p>
     </div>
 
     <hr class="divider" />
 
     <h2 id="s2"><span class="chapter-num">Semaine 2</span>Théorie des ensembles</h2>
 
-    <h3>2.1 Union, intersection, différence</h3>
-    <p>Pour $A=\{1,2,3,4\}$, $B=\{3,4,5,6\}$ : $A\cup B = \{1,2,3,4,5,6\}$, $A\cap B=\{3,4\}$, $A\setminus B=\{1,2\}$.</p>
-    <div class="box theorem">
-      <span class="box-label">Simplification par union/intersection</span>
-      <p>Si $A\cup B=A\cup C$ et $A\cap B=A\cap C$, alors $B=C$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration</span>
-        <p>Double inclusion : pour $x\in B$, si $x\notin A$ alors $x\in A\cup B=A\cup C$ donc $x\in C$ ; si $x\in A$ alors $x\in A\cap B=A\cap C$ donc $x\in C$. Dans les deux cas $x\in C$, donc $B\subseteq C$ ; par symétrie $C\subseteq B$.<span class="qed">∎</span></p>
-      </div>
+    <div class="box example">
+      <span class="box-label">Exercice 1 — opérations élémentaires</span>
+      <p>$A=\{1,2,3,4\}$, $B=\{3,4,5,6\}$. Déterminer $A\cup B$, $A\cap B$, $A\setminus B$, $B\setminus A$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$A\cup B=\{1,2,3,4,5,6\}$, $A\cap B=\{3,4\}$, $A\setminus B=\{1,2\}$, $B\setminus A=\{5,6\}$.</p>
     </div>
 
-    <h3>2.2 Lois de De Morgan</h3>
-    <div class="eq">$$ A\setminus(B\cup C) = (A\setminus B)\cap(A\setminus C), \qquad A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C) $$</div>
-    <p>Elles découlent directement des tautologies logiques $\neg(P\vee Q)\Leftrightarrow(\neg P\wedge\neg Q)$ appliquées à l'appartenance ensembliste.</p>
-
-    <h3>2.3 Cardinalité : produit cartésien et ensemble des parties</h3>
-    <p>Pour $A,B$ finis : $|A\times B|=|A|\cdot|B|$, et $|2^A|=2^{|A|}$.</p>
+    <div class="box example">
+      <span class="box-label">Exercice 2 (*) — simplification par union/intersection</span>
+      <p>Si $A\cup B=A\cup C$ et $A\cap B=A\cap C$, montrer que $B=C$.</p>
+    </div>
     <div class="proof">
-      <span class="box-label">Démonstration de $|2^A|=2^{|A|}$</span>
-      <p>En énumérant $A=\{a_1,\dots,a_n\}$, on met en bijection les sous-ensembles $E\subseteq A$ et les $n$-uplets $(e_i)\in\{0,1\}^n$ via la fonction indicatrice ($e_i=1$ si $a_i\in E$). Donc $|2^A|=|\{0,1\}^n|=2^n$.<span class="qed">∎</span></p>
+      <span class="box-label">Solution — méthode 1 (éléments)</span>
+      <p>Par symétrie, il suffit de montrer $B\subset C$. Soit $x\in B$ : si $x\notin A$, alors $x\in B\subset A\cup B=A\cup C$ donne $x\in C$ ; si $x\in A$, alors $x\in A\cap B=A\cap C$ donne $x\in C$. Dans les deux cas $x\in C$.</p>
+      <span class="box-label" style="margin-top:14px;">Solution — méthode 2 (calcul ensembliste)</span>
+      <p>$B=(A\cap B)\cup(B\setminus A)=(A\cap B)\cup((A\cup B)\setminus A)=(A\cap C)\cup((A\cup C)\setminus A)=(A\cap C)\cup(C\setminus A)=C$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 3 — cardinaux du produit cartésien et de $2^A$</span>
+      <p>$A,B$ finis. (1) Cardinal de $A\times B$ ? (2) Cardinal de $2^A$ (ensemble des parties) ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Un élément de $A\times B$ est un couple $(a,b)$, deux couples étant égaux ssi mêmes coordonnées. Donc $|A\times B|=\sum_{a\in A}\sum_{b\in B}1=\sum_{a\in A}|B|=|A|\cdot|B|$.</p>
+      <p><strong>(2)</strong> En énumérant $A=\{a_1,\dots,a_n\}$, on associe à $E\subset A$ le $n$-uplet $(e_i)\in\{0,1\}^n$ avec $e_i=1$ si $a_i\in E$ — bijection entre $2^A$ et $\{0,1\}^n$. Donc $|2^A|=2^{|A|}$. <em>Remarque du corrigé</em> : cette bijection dépend du choix d'énumération de $A$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 4 — lois de De Morgan</span>
+      <p>Montrer $A\setminus(B\cup C)=(A\setminus B)\cap(A\setminus C)$ et $A\setminus(B\cap C)=(A\setminus B)\cup(A\setminus C)$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>On part des tautologies $\neg(P\vee Q)\Leftrightarrow(\neg P\wedge\neg Q)$ et $\neg(P\wedge Q)\Leftrightarrow(\neg P\vee\neg Q)$. Pour la première égalité :
+      $$A\setminus(B\cup C)=\{x\in A\mid\neg(x\in B\vee x\in C)\}=\{x\in A\mid x\notin B\wedge x\notin C\}=(A\setminus B)\cap(A\setminus C).$$
+      La seconde se démontre de façon analogue avec l'autre tautologie. Ces deux égalités s'appellent les <strong>lois de De Morgan</strong>.</p>
     </div>
 
     <hr class="divider" />
@@ -116,13 +171,48 @@
       <span class="box-label">Injectivité, surjectivité, bijectivité</span>
       <p>Pour $f:A\to B$ : <strong>injective</strong> si $f(x)=f(y)\Rightarrow x=y$ ; <strong>surjective</strong> si $\forall b\in B,\exists a\in A, f(a)=b$ ; <strong>bijective</strong> si les deux à la fois.</p>
     </div>
-    <p>Exemple travaillé : $f:\mathbb N\to\mathbb N$, $f(n)=n+1$ si $n$ pair, $f(n)=n-1$ si $n$ impair, est une <em>involution</em> ($f\circ f=\mathrm{id}$), donc bijective — sa réciproque est elle-même.</p>
-    <div class="box theorem">
-      <span class="box-label">Composition et surjectivité</span>
-      <p>Si $f:A\to B$ et $g:B\to C$ sont surjectives, $g\circ f$ l'est aussi. Si $g\circ f$ est surjective, alors $g$ l'est (mais pas nécessairement $f$).</p>
+
+    <div class="box example">
+      <span class="box-label">Exercice 1 — une bijection explicite sur ℕ</span>
+      <p>$f:\mathbb N\to\mathbb N$, $f(n)=n+1$ si $n$ pair, $f(n)=n-1$ si $n$ impair. (1) Calculer $f(2),f(3),f(4),f(5)$. (2) Montrer que $f$ est bijective.</p>
     </div>
-    <p>La fonction induite sur les parties $\Phi:2^A\to 2^B$, $\Phi(E)=f(E)$, est injective si et seulement si $f$ l'est — un résultat qui relie directement l'injectivité « ponctuelle » et « ensembliste ».</p>
-    <p>Dénombrement : pour $A,B$ finis de cardinaux $a,b$, il y a $b^a$ fonctions $A\to B$ au total, et $b(b-1)\cdots(b-a+1)$ fonctions injectives (nulles si $b<a$).</p>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> $f(2)=3$, $f(3)=2$, $f(4)=5$, $f(5)=4$.</p>
+      <p><strong>(2) Surjectivité.</strong> Si $m$ pair, $f(m+1)=m$ ; si $m$ impair, $f(m-1)=m$. Tout $m$ a un antécédent.</p>
+      <p><strong>Injectivité.</strong> Si $f(n)=f(m)$ avec $n$ pair, $m$ impair : $n+1=m-1$ donne $m=n+2$, donc $n,m$ auraient la même parité — contradiction. Si $n,m$ même parité, $f(n)=f(m)$ donne directement $n=m$. Donc $f$ est bijective.</p>
+      <p><em>Remarque du corrigé</em> : la construction de la surjectivité fournit explicitement la réciproque $g=f$ — $f$ est une <strong>involution</strong> ($f\circ f=\mathrm{id}$), ce qui suffit à elle seule à garantir la bijectivité.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 2 — surjectivité et composition</span>
+      <p>$f:A\to B$, $g:B\to C$. (1) Si $f,g$ surjectives, montrer $g\circ f$ surjective. (2) Si $g\circ f$ surjective, montrer $g$ surjective.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Soit $c\in C$. Par surjectivité de $g$, $\exists b_c, g(b_c)=c$ ; par surjectivité de $f$, $\exists a, f(a)=b_c$. Alors $(g\circ f)(a)=g(b_c)=c$.</p>
+      <p><strong>(2)</strong> Soit $c\in C$. Par hypothèse $\exists a_c, (g\circ f)(a_c)=c$. En posant $b_c=f(a_c)$, on a $g(b_c)=c$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 3 — image directe et injectivité</span>
+      <p>$f:A\to B$, $\Phi:2^A\to2^B$, $\Phi(E)=f(E)$. Montrer $\Phi$ injective $\Leftrightarrow$ $f$ injective.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>($\Leftarrow$) Si $f(x)=f(y)$, alors $\Phi(\{x\})=\{f(x)\}=\{f(y)\}=\Phi(\{y\})$, donc $\{x\}=\{y\}$ par injectivité de $\Phi$, donc $x=y$.</p>
+      <p>($\Rightarrow$) Si $\Phi(E)=\Phi(F)$, pour $a\in E$, $f(a)\in f(E)=f(F)$ donc $\exists b\in F, f(a)=f(b)$, donc $a=b\in F$ par injectivité de $f$ — donc $E\subset F$, et par symétrie $E=F$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 4 — dénombrement des fonctions</span>
+      <p>$A,B$ finis, $a=|A|,b=|B|$. (1) Combien de fonctions $A\to B$ ? (2) Combien de fonctions injectives $A\hookrightarrow B$ ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Il y a $b$ choix indépendants pour chacun des $a$ éléments de $A$, donc $b^a$ fonctions au total.</p>
+      <p><strong>(2)</strong> En construisant $f$ élément par élément ($f(x_1)$ : $b$ choix ; $f(x_2)$ : $b-1$ choix restants ; etc.), on obtient $0$ si $b<a$, sinon $b\cdot(b-1)\cdots(b-a+1)$.</p>
+    </div>
 
     <hr class="divider" />
 
@@ -130,33 +220,66 @@
 
     <div class="box definition">
       <span class="box-label">Relation d'équivalence</span>
-      <p>Une relation $R$ sur $X$ est une relation d'équivalence si elle est <strong>réflexive</strong> ($\forall x, xRx$), <strong>symétrique</strong> ($xRy\Rightarrow yRx$), <strong>transitive</strong> ($xRy \wedge yRz \Rightarrow xRz$).</p>
+      <p>Une relation $R$ sur $X$ est une relation d'équivalence si elle est <strong>réflexive</strong>, <strong>symétrique</strong>, <strong>transitive</strong>.</p>
     </div>
-    <p>Exemple travaillé sur $\mathbb R$ : la relation $x^2-y^2=x-y$ <em>est</em> une relation d'équivalence, car équivalente à $f(x)=f(y)$ pour $f(x)=x^2-x$. Remarque générale : toute relation induite par une fonction ($f(x)=f(x')$) est une relation d'équivalence.</p>
-    <p>Une relation d'équivalence sur $X$ induit une <strong>partition</strong> de $X$ en classes, et réciproquement — l'ensemble des classes se note $X/R$.</p>
+
+    <div class="box example">
+      <span class="box-label">Exercice 1 — quatre relations sur ℝ, laquelle est d'équivalence ?</span>
+      <p>(1) $x=-y$ ; (2) $|x-y|<1$ ; (3) $x^2y=1$ ; (4) $x^2-y^2=x-y$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1) Non</strong> — pas réflexive : $(1,1)\notin R$ car $1\ne-1$.</p>
+      <p><strong>(2) Non</strong> — pas transitive : $(0,\frac12)\in R$ et $(\frac12,1)\in R$, mais $(0,1)\notin R$.</p>
+      <p><strong>(3) Non</strong> — pas symétrique : $(2,\frac14)\in R$ (car $2^2\cdot\frac14=1$) mais $(\frac14,2)\notin R$.</p>
+      <p><strong>(4) Oui.</strong> En posant $f(x)=x^2-x$, on a $R=\{(x,y), f(x)=f(y)\}$ : réflexivité, symétrie, transitivité découlent directement des mêmes propriétés de l'égalité. <em>Remarque du corrigé</em> : toute relation $\{(x,x')\mid f(x)=f(x')\}$ induite par une fonction $f$ est une relation d'équivalence — appelée <strong>produit fibré</strong> en $f$, noté $X\times_f X$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 2 — relations plus fines qu'une partition donnée</span>
+      <p>$R$ sur $\{1,2,3,4,5\}$ de partition $\{1,2\},\{3\},\{4,5\}$. Trouver toutes les relations d'équivalence $S\supseteq R$, leur partition et $|\{1,\dots,5\}/S|$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Il existe exactement 5 telles relations, obtenues en fusionnant les blocs de la partition de $R$ de toutes les façons possibles : $R$ lui-même (partition $\{1,2\}\sqcup\{3\}\sqcup\{4,5\}$, 3 classes) ; fusion $\{1,2,3\}\sqcup\{4,5\}$ (2 classes) ; fusion $\{1,2\}\sqcup\{3,4,5\}$ (2 classes) ; fusion $\{1,2,4,5\}\sqcup\{3\}$ (2 classes) ; et la relation totale, une seule classe $\{1,2,3,4,5\}$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Exercice 3 (*) — relation « A = B ou A = complémentaire de B »</span>
+      <p>$E$ un ensemble, $R=\{(A,B)\in2^E\times2^E \mid A=B \text{ ou } A=E\setminus B\}$. (1) Montrer que $R$ est une relation d'équivalence. (2) Si $E$ fini, cardinal de $2^E/R$ ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Réflexivité ($A=A$), symétrie (si $A=E\setminus B$ alors $B=E\setminus A$ par involutivité de la complémentation), transitivité (par disjonction des 4 cas possibles pour $(A,B),(B,C)\in R$, on obtient toujours $A=C$ ou $A=E\setminus C$).</p>
+      <p><strong>(2)</strong> Chaque classe d'équivalence contient exactement 2 éléments : $A$ et $E\setminus A$ (distincts si $E\ne\varnothing$). Comme $2^E$ est l'union disjointe des classes, $|2^E|=2\cdot|2^E/R|$, donc $|2^E/R|=2^{|E|}/2=2^{|E|-1}$.</p>
+    </div>
 
     <div class="box theorem">
-      <span class="box-label">Construction de ℤ à partir de ℕ × ℕ</span>
-      <p>Sur $\mathbb N\times\mathbb N$ : $(m_1,n_1)\equiv(m_2,n_2) \iff m_1+n_2=n_1+m_2$. C'est une relation d'équivalence, et $(\mathbb N\times\mathbb N)/{\equiv}$ est en bijection avec $\mathbb Z$ via $\varphi([(a,b)])=a-b$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration (esquisse)</span>
-        <p>Réflexivité/symétrie/transitivité viennent de la commutativité de $+$ sur $\mathbb N$. $\varphi$ est bien définie (indépendante du représentant), injective ($a-b=c-d\Rightarrow a+d=b+c\Rightarrow[(a,b)]=[(c,d)]$), et surjective (pour $k\ge0$, $k=\varphi([(k,0)])$ ; pour $k<0$, $k=\varphi([(0,-k)])$).<span class="qed">∎</span></p>
-      </div>
-      <p style="margin-top:12px;">C'est la construction formelle des entiers relatifs comme « différences formelles » de deux entiers naturels — l'exemple canonique d'une construction par quotient.</p>
+      <span class="box-label">Exercice 4 — construction de ℤ à partir de ℕ × ℕ</span>
+      <p>Sur $\mathbb N\times\mathbb N$ : $(m_1,n_1)\equiv(m_2,n_2) \iff m_1+n_2=n_1+m_2$. (1) Montrer que $\equiv$ est une relation d'équivalence. (2) Montrer que $(\mathbb N\times\mathbb N)/{\equiv}$ est en bijection avec $\mathbb Z$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Réflexivité et symétrie découlent directement de la commutativité de $+$ sur $\mathbb N$. Transitivité : de $(a,b)\equiv(m,n)$ [$a+n=b+m$] et $(m,n)\equiv(x,y)$ [$m+y=n+x$], on additionne les deux égalités puis on simplifie $m+n$ des deux côtés pour obtenir $a+y=b+x$, soit $(a,b)\equiv(x,y)$.</p>
+      <p><strong>(2)</strong> Soit $\varphi([(a,b)])=a-b$. <em>Bien définie</em> : si $(a,b)\equiv(a',b')$ alors $a+b'=b+a'$ donc $a-b=a'-b'$. <em>Injective</em> : si $\varphi([(a,b)])=\varphi([(c,d)])$, alors $a-b=c-d$ donne $a+d=b+c$, donc $[(a,b)]=[(c,d)]$. <em>Surjective</em> : pour $k\ge0$, $k=\varphi([(k,0)])$ ; pour $k<0$, $k=\varphi([(0,-k)])$. Donc $\varphi$ est une bijection — c'est la construction standard de $\mathbb Z$ comme quotient de $\mathbb N\times\mathbb N$ par la relation « même différence ». $\blacksquare$</p>
     </div>
 
-    <div class="box remark">
-      <span class="box-label">Lien injection / surjection — axiome du choix</span>
-      <p>Il existe une surjection $A\twoheadrightarrow B$ si et seulement s'il existe une injection $B\hookrightarrow A$. Le sens non trivial utilise l'<strong>axiome du choix</strong> : pour chaque $a\in A$, l'ensemble $F_a=g^{-1}(\{a\})$ est non vide, et l'axiome permet de choisir un représentant $b_a\in F_a$ pour chacun, définissant une injection $A\hookrightarrow B$.</p>
+    <div class="box theorem">
+      <span class="box-label">Exercice 5 (*) — équivalence injection/surjection (axiome du choix)</span>
+      <p>Montrer qu'il existe une surjection $A\twoheadrightarrow B$ ssi il existe une injection $B\hookrightarrow A$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>($\Leftarrow$) Soit $f:A\hookrightarrow B$ injective. On construit $g:B\twoheadrightarrow A$ : pour $b\in f(A)$, on pose $g(b)=a_b$ (l'unique antécédent) ; pour $b\notin f(A)$, on pose $g(b)=a$ pour un $a\in A$ fixé arbitrairement. Pour $a\in A$, $g(f(a))=a$ : $g$ est surjective.</p>
+      <p>($\Rightarrow$) Soit $g:B\twoheadrightarrow A$ surjective. Pour $a\in A$, $F_a=g^{-1}(\{a\})$ est non vide. Par l'<strong>axiome du choix</strong>, on choisit un représentant $b_a\in F_a$ pour chaque $a$, définissant $f:A\to B$, $f(a)=b_a$. Comme les $F_a$ sont deux à deux disjoints, $f$ est injective.</p>
     </div>
 
     <div class="end-banner">
-      <span class="badge">✓</span>
-      <span>C'est tout ce qui a été vu jusqu'ici. La semaine 5 bascule vers la dénombrabilité (Cantor–Schröder–Bernstein) — pas encore couverte ici. Aucune structure algébrique (groupe, anneau) n'a encore été introduite.</span>
+      <strong>C'est tout ce qui a été vu jusqu'ici.</strong> La semaine 5 bascule vers la dénombrabilité (Cantor–Schröder–Bernstein, dénombrabilité de $\mathbb Z,\mathbb Q,\mathbb N^n$) — non couverte ici. Aucune structure algébrique (groupe, anneau) n'a encore été introduite dans ce cours.
     </div>
 
     <p class="source-note">
-      Contenu reconstruit à partir des séries 1 à 4 et de leurs corrigés complets, dossier <em>2025 (Wyss)</em> du Drive de section.
+      Contenu reconstruit intégralement (tous les exercices, toutes les solutions) à partir des séries 1 à 4 et de leurs corrigés complets, dossier <em>2025 (Wyss)</em> du Drive de section.
     </p>
 
   </article>

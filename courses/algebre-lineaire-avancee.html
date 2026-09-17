@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
-  :root { --course-gradient: linear-gradient(135deg, #00a878, #34c759); --accent: #00a878; --accent-2: #34c759; }
+  :root { --course-color: #00a878; --accent: #00a878; --accent-2: #34c759; }
 </style>
 </head>
 <body>
@@ -19,6 +19,7 @@
     <div class="nav-links">
       <a href="#c1">Ch. 1</a>
       <a href="#c2">Ch. 2</a>
+      <a href="#ex">Exercices</a>
     </div>
   </div>
 </nav>
@@ -31,9 +32,9 @@
       <span class="pill">12 chapitres au total</span>
     </div>
     <h1>Algèbre linéaire avancée I</h1>
-    <p class="prof">Du langage des ensembles à la théorie des groupes — les fondations avant les espaces vectoriels et les matrices.</p>
-    <div class="progress-track"><div class="progress-fill" style="width: 12%"></div></div>
-    <div class="progress-label">Chapitre 2 sur 12 — Groupes abstraits (début)</div>
+    <p class="prof">Du langage des ensembles à la théorie des groupes — chapitre 1 complet et chapitre 2 jusqu'à la fin des actions de groupe (§2.5), avec les cinq premières séries d'exercices corrigées.</p>
+    <div class="progress-track"><div class="progress-fill" style="width: 21%"></div></div>
+    <div class="progress-label">Chapitre 2 sur 12 — Actions de groupe (§2.5, dernier point confirmé par les séries)</div>
   </div>
 </header>
 
@@ -41,135 +42,289 @@
   <nav class="toc">
     <div class="toc-title">Sommaire</div>
     <a href="#c1">1. Le langage des ensembles</a>
-    <a href="#c2">2. Groupes (début)</a>
+    <a href="#c2">2. Groupes</a>
+    <a href="#ex">Exercices — séries 1 à 5</a>
   </nav>
 
   <article class="content">
 
-    <p class="lede">Le cours s'appuie sur un polycopié officiel (MATH-110, P. Michel) de 12 chapitres. Voici le chapitre 1 en entier, et le tout début du chapitre 2 — là où le cours s'arrête pour l'instant.</p>
+    <p class="lede">Le cours s'appuie sur un polycopié officiel de 12 chapitres. Les séries d'exercices confirment que le cours a couvert l'intégralité du chapitre 1 et les paragraphes 2.1 à 2.5 du chapitre 2 (le §2.6 « Groupe quotient » existe dans le polycopié mais n'est testé par aucune série disponible — il n'est donc pas inclus).</p>
 
     <h2 id="c1"><span class="chapter-num">Chapitre 1</span>Le langage des ensembles</h2>
     <p style="font-style:italic; color:var(--text-tertiary); margin-top:-10px;">« Le langage est un ensemble de citations. »</p>
 
     <h3>1.1 La théorie des ensembles</h3>
-    <p>La notion d'ensemble semble naturelle, mais sa formalisation rigoureuse n'est apparue qu'au XIXe siècle, quand certains objets ont semblé posséder des propriétés paradoxales défiant l'intuition. On la formalise avec le <strong>calcul des prédicats du premier ordre</strong> : variables, prédicats, quantificateurs ($\forall$, $\exists$, $\exists!$), égalité, connecteurs logiques, règles syntaxiques et système de déduction partant d'axiomes.</p>
+    <p>La notion d'ensemble semble naturelle, mais sa formalisation rigoureuse n'est apparue qu'au XIX<sup>e</sup> siècle, quand certains objets mathématiques ont semblé posséder des propriétés paradoxales défiant l'intuition. On la construit avec le <strong>calcul des prédicats du premier ordre</strong> : variables, prédicats, quantificateurs ($\forall,\exists,\exists!$), égalité, connecteurs logiques ($\wedge,\vee,\Rightarrow,\Leftrightarrow,\neg$), règles syntaxiques et système de déduction partant d'axiomes.</p>
     <div class="box definition">
       <span class="box-label">Ensemble et sous-ensemble</span>
       <p>La catégorie des Ensembles est une collection d'objets munie d'une relation d'<strong>appartenance</strong> ($e\in E$). On en déduit l'<strong>inclusion</strong> : $A\subset B$ si $\forall a,\ a\in A\Rightarrow a\in B$.</p>
     </div>
-    <div class="box remark">
-      <span class="box-label">Remarque</span>
-      <p>$\in$ et $\subset$ sont deux relations distinctes : on peut avoir $A\in B$ sans $A\subset B$, et $A\subset B$ sans $A\in B$.</p>
-    </div>
+    <div class="box remark"><span class="box-label">Remarque</span><p>$\in$ et $\subset$ sont deux relations distinctes : on peut avoir $A\in B$ sans $A\subset B$, et $A\subset B$ sans $A\in B$.</p></div>
 
-    <h3>1.1.3 Quelques axiomes (théorie ZFC)</h3>
+    <h3>1.1.3 Axiomes (théorie ZFC)</h3>
     <ol>
-      <li><strong>Ensemble vide</strong> : il existe $\varnothing$ tel que $\forall E,\ E\notin\varnothing \wedge \varnothing\subset E$.</li>
+      <li><strong>Ensemble vide</strong> : $\exists\varnothing$ tel que $\forall E,\ E\notin\varnothing \wedge \varnothing\subset E$.</li>
       <li><strong>Double inclusion</strong> : $A\subset B \wedge B\subset A \Rightarrow A=B$.</li>
-      <li><strong>Ensemble des parties</strong> : $\mathcal P(A) = \{B, B\subset A\}$, avec toujours $\varnothing, A \in \mathcal P(A)$.</li>
+      <li><strong>Ensemble des parties</strong> : $\mathcal P(A)=\{B, B\subset A\}$, avec toujours $\varnothing, A\in\mathcal P(A)$.</li>
       <li><strong>Réunion</strong> : pour $E$ un ensemble d'ensembles, $\bigcup E$ existe.</li>
-      <li><strong>Paire</strong> : pour $A,B$, $\{A,B\}$ existe (d'où le singleton $\{A\}$ si $A=B$). Combiné à l'axiome de réunion : $A\cup B = \bigcup\{A,B\}$, et plus généralement $\bigcup_{i\in I}A_i$ existe pour toute famille indexée non vide.</li>
+      <li><strong>Paire</strong> : pour $A,B$, $\{A,B\}$ existe (d'où le singleton $\{A\}$ si $A=B$). Combiné à l'axiome de réunion : $A\cup B=\bigcup\{A,B\}$, et $\bigcup_{i\in I}A_i$ existe pour toute famille indexée non vide.</li>
       <li>D'autres axiomes de ZFC, notamment l'<strong>axiome de l'infini</strong> et l'<strong>axiome du choix</strong>.</li>
     </ol>
     <div class="box example">
       <span class="box-label">Construction des ensembles de nombres</span>
-      <p>$\varnothing =: 0$, $\mathcal P(\varnothing)=\{\varnothing\}=:1$, $\{0,1\}=:2$, etc. Le successeur de $n$ est $n^+ = n\cup\{n\}$, ce qui construit $\mathbb N=\{0,1,2,\dots\}$ (axiome de l'infini requis), avec l'ordre $m\le n \iff m\subset n$. Puis $\mathbb Z$, $\mathbb Q$ (via produits cartésiens), $\mathbb R$ (construit en Analyse), et $\mathbb C$ (construit plus tard dans ce cours). Chaîne : $\varnothing\subset\mathbb N\subset\mathbb Z\subset\mathbb Q\subset\mathbb R\subset\mathbb C$.</p>
+      <p>$\varnothing=:0$, $\mathcal P(\varnothing)=\{\varnothing\}=:1$, $\{0,1\}=:2$, etc. Le successeur de $n$ est $n^+=n\cup\{n\}$, construisant $\mathbb N=\{0,1,2,\dots\}$, avec $m\le n\iff m\subset n$. Puis $\mathbb Z$, $\mathbb Q$ (via produits cartésiens), $\mathbb R$ (construit en Analyse), $\mathbb C$ (construit plus loin dans ce cours). Chaîne : $\varnothing\subset\mathbb N\subset\mathbb Z\subset\mathbb Q\subset\mathbb R\subset\mathbb C$.</p>
     </div>
     <div class="box remark">
       <span class="box-label">Paradoxe de Russell</span>
-      <p>L'ensemble de <em>tous</em> les ensembles n'est <strong>pas</strong> un ensemble : en posant $N_{cont}=\{E \text{ ensemble}, E\notin E\}$, la question « $N_{cont}\in N_{cont}$ ? » mène à une contradiction dans les deux cas. ZFC évite ce paradoxe par des axiomes adéquats ; la notion est formalisée via le concept de <em>catégorie</em>.</p>
+      <p>L'ensemble de <em>tous</em> les ensembles n'est <strong>pas</strong> un ensemble : en posant $N_{cont}=\{E,\ E\notin E\}$, « $N_{cont}\in N_{cont}$ ? » mène à une contradiction dans les deux cas. ZFC l'évite par des axiomes adéquats ; la notion est formalisée via le concept de <em>catégorie</em>.</p>
     </div>
 
     <h3>1.2 Opérations sur les ensembles</h3>
-    <p>Pour $A,B\subset E$ : réunion $A\cup B$, intersection $A\cap B$, différence $A\setminus B=\{a\in A\mid a\notin B\}$ (donc $E\setminus A=:A^c$), différence symétrique $A\,\Delta\,B=(A\setminus B)\cup(B\setminus A)$. $A,B$ sont <strong>disjoints</strong> si $A\cap B=\varnothing$.</p>
+    <p>Pour $A,B\subset E$ : réunion $A\cup B$, intersection $A\cap B$, différence $A\setminus B=\{a\in A\mid a\notin B\}$ (donc $E\setminus A=:A^c$), différence symétrique $A\,\Delta\,B=(A\setminus B)\cup(B\setminus A)$. $A,B$ <strong>disjoints</strong> si $A\cap B=\varnothing$.</p>
 
     <h3>1.2.2 Produit cartésien et relations</h3>
     <div class="box definition">
-      <span class="box-label">Paire ordonnée et produit cartésien</span>
-      <p>$(a,b) := \{a,\{a,b\}\}$ — si $a\ne b$, $(a,b)\ne(b,a)$. $A\times B = \{(a,b), a\in A, b\in B\}$, avec $\varnothing\times B=\varnothing$ et $A\times B\ne B\times A$ en général.</p>
+      <span class="box-label">Paire ordonnée, produit cartésien</span>
+      <p>$(a,b):=\{a,\{a,b\}\}$ — si $a\ne b$, $(a,b)\ne(b,a)$. $A\times B=\{(a,b), a\in A, b\in B\}$, avec $\varnothing\times B=\varnothing$ et $A\times B\ne B\times A$ en général. Pour une famille arbitraire $(A_i)_{i\in I}$, $\prod_{i\in I}A_i$ nécessite en général <strong>l'axiome du choix</strong>.</p>
     </div>
-    <p>Définir le produit cartésien d'une famille arbitraire $(A_i)_{i\in I}$, $\prod_{i\in I}A_i$, ne pose pas de problème si $I$ est fini — mais en toute généralité, cela nécessite <strong>l'axiome du choix</strong>.</p>
-    <p>Une <strong>relation binaire</strong> $R\subset A\times B$. Sur $A\times A$, on définit : <strong>réflexive</strong> ($\forall a, aRa$), <strong>symétrique</strong>, <strong>antisymétrique</strong>, <strong>transitive</strong>.</p>
+    <p>Une <strong>relation binaire</strong> $R\subset A\times B$. Sur $A\times A$ : <strong>réflexive</strong>, <strong>symétrique</strong>, <strong>antisymétrique</strong>, <strong>transitive</strong>.</p>
     <div class="box definition">
-      <span class="box-label">Relation d'équivalence / relation d'ordre</span>
-      <p>$R$ est une <strong>relation d'équivalence</strong> si réflexive, symétrique et transitive (ex : la congruence modulo $q$ sur $\mathbb N$). $R$ est une <strong>relation d'ordre</strong> si réflexive, antisymétrique et transitive (ex : $\le$ et « divise » sur $\mathbb N$).</p>
+      <span class="box-label">Relation d'équivalence / d'ordre</span>
+      <p>$R$ est <strong>d'équivalence</strong> si réflexive, symétrique, transitive (ex : congruence modulo $q$ sur $\mathbb N$). $R$ est <strong>d'ordre</strong> si réflexive, antisymétrique, transitive (ex : $\le$ et « divise » sur $\mathbb N$).</p>
     </div>
 
     <h3>1.3 Applications entre ensembles</h3>
     <div class="box definition">
       <span class="box-label">Application, graphe</span>
-      <p>$f:X\to Y$ associe à chaque $x\in X$ un unique $f(x)\in Y$. Son <strong>graphe</strong> $\Gamma_f=\{(x,f(x)), x\in X\}\subset X\times Y$ vérifie : pour tout $x$, $\Gamma_x$ possède exactement un élément. On note $\mathrm{Hom}_{ENS}(X,Y)$ l'ensemble des applications $X\to Y$.</p>
+      <p>$f:X\to Y$ associe à chaque $x\in X$ un unique $f(x)\in Y$. Son <strong>graphe</strong> $\Gamma_f=\{(x,f(x))\}\subset X\times Y$ vérifie : pour tout $x$, $\Gamma_x$ a exactement un élément. On note $\mathrm{Hom}_{ENS}(X,Y)$ l'ensemble des applications $X\to Y$.</p>
     </div>
-    <p><strong>Image</strong> de $A\subset X$ : $f(A)=\{f(x), x\in A\}$. <strong>Préimage</strong> de $B\subset Y$ : $f^{-1}(B)=\{x\in X, f(x)\in B\}$.</p>
+    <p><strong>Image</strong> de $A\subset X$ : $f(A)=\{f(x), x\in A\}$. <strong>Préimage</strong> de $B\subset Y$ : $f^{-1}(B)=\{x, f(x)\in B\}$.</p>
     <div class="box definition">
       <span class="box-label">Injectivité, surjectivité, bijectivité</span>
-      <p>$f$ est <strong>injective</strong> si $\forall y$, $f^{-1}(\{y\})$ a au plus un élément ($f:X\hookrightarrow Y$). <strong>Surjective</strong> si au moins un élément ($f:X\twoheadrightarrow Y$). <strong>Bijective</strong> si exactement un ($f:X\xrightarrow{\sim} Y$).</p>
+      <p>$f$ <strong>injective</strong> si $\forall y$, $f^{-1}(\{y\})$ a au plus un élément ($X\hookrightarrow Y$). <strong>Surjective</strong> si au moins un ($X\twoheadrightarrow Y$). <strong>Bijective</strong> si exactement un ($X\xrightarrow{\sim}Y$).</p>
     </div>
     <p>Exemple : la fonction de couplage de Cantor $C(m,n)=\dfrac{(m+n)^2+m+3n}{2}$ est une bijection $\mathbb N^2\to\mathbb N$.</p>
-
     <div class="box theorem">
       <span class="box-label">Composition — propriétés</span>
       <p><strong>Associativité</strong> : $h\circ(g\circ f)=(h\circ g)\circ f$. <strong>Neutralité</strong> de $\mathrm{id}$. Si $f,g$ injectives (resp. surjectives, bijectives), $g\circ f$ l'est aussi, et $(g\circ f)^{-1}=f^{-1}\circ g^{-1}$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration (injectivité)</span>
-        <p>Si $(g\circ f)(x)=(g\circ f)(x')$, alors $g(f(x))=g(f(x'))$, donc par injectivité de $g$, $f(x)=f(x')$, puis par injectivité de $f$, $x=x'$.<span class="qed">∎</span></p>
-      </div>
     </div>
 
     <h3>1.4 Cardinal d'un ensemble</h3>
     <div class="box definition">
       <span class="box-label">Bijection, cardinal, dénombrabilité</span>
-      <p>$X\simeq Y$ s'il existe une bijection $f:X\xrightarrow{\sim}Y$ — c'est une relation d'équivalence. $X$ est <strong>fini</strong> s'il est vide ou en bijection avec $\{0,\dots,n-1\}$ ; sinon <strong>infini</strong>. $X$ est <strong>dénombrable</strong> s'il est fini ou en bijection avec $\mathbb N$.</p>
+      <p>$X\simeq Y$ s'il existe une bijection $X\to Y$ — relation d'équivalence. $X$ <strong>fini</strong> s'il est vide ou en bijection avec $\{0,\dots,n-1\}$ ; sinon <strong>infini</strong>. $X$ <strong>dénombrable</strong> si fini ou en bijection avec $\mathbb N$.</p>
     </div>
-    <p>$\mathbb Z$ est dénombrable ($n\mapsto 2n$ si $n\ge0$, $n\mapsto2|n|-1$ sinon). $\mathbb Q$ est dénombrable (via $\{(p,q)\in\mathbb Z\times\mathbb N_{>0}, \gcd(p,q)=1\}\subset\mathbb Z\times\mathbb N\simeq\mathbb N$). Un produit de dénombrables est dénombrable.</p>
-
+    <p>$\mathbb Z$ est dénombrable ($n\mapsto2n$ si $n\ge0$, $n\mapsto2|n|-1$ sinon). $\mathbb Q$ est dénombrable. Un produit de dénombrables est dénombrable.</p>
     <div class="box theorem">
       <span class="box-label">Théorème de Cantor</span>
-      <p>Pour tout ensemble $X$, $|X|\ne|\mathcal P(X)|$ — si $X$ est infini dénombrable, $\mathcal P(X)$ ne l'est pas. (On a $|\mathcal P(X)|=|\{0,1\}^X|$ via la fonction caractéristique, donc $|\mathcal P(X)|=2^n>n$ si $X$ est fini de cardinal $n$.)</p>
+      <p>Pour tout $X$, $|X|\ne|\mathcal P(X)|$. $|\mathcal P(X)|=|\{0,1\}^X|$ (fonction caractéristique) ; si $|X|=n$ fini, $|\mathcal P(X)|=2^n>n$.</p>
       <div class="proof">
-        <span class="box-label">Démonstration (argument diagonal de Cantor)</span>
-        <p>On se ramène à $X=\mathbb N$. Supposons une bijection $n\mapsto f_n\in\{0,1\}^{\mathbb N}$. On construit la suite $f_C(m):=1-f_m(m)$. Si $f_C=f_{n_0}$, alors $f_C(n_0)=1-f_{n_0}(n_0)=1-f_C(n_0)$, donc $2f_C(n_0)=1$ — impossible car $f_C(n_0)\in\{0,1\}$. Contradiction.<span class="qed">∎</span></p>
+        <span class="box-label">Démonstration (argument diagonal)</span>
+        <p>On se ramène à $X=\mathbb N$. Supposons une bijection $n\mapsto f_n\in\{0,1\}^{\mathbb N}$. On construit $f_C(m):=1-f_m(m)$. Si $f_C=f_{n_0}$, alors $f_C(n_0)=1-f_{n_0}(n_0)=1-f_C(n_0)$, donc $2f_C(n_0)=1$ — impossible. Contradiction.<span class="qed">∎</span></p>
       </div>
     </div>
-    <p><strong>Corollaire (Cantor)</strong> : $\mathbb R$ n'est pas dénombrable — via le développement binaire $x=\sum c_n/2^{n+1}$, qui injecte $[0,1)$ dans $\{0,1\}^{\mathbb N}$.</p>
-
+    <p><strong>Corollaire (Cantor)</strong> : $\mathbb R$ n'est pas dénombrable (via le développement binaire $x=\sum c_n/2^{n+1}$ injectant $[0,1)$ dans $\{0,1\}^{\mathbb N}$).</p>
     <div class="box remark">
-      <span class="box-label">Cantor–Bernstein–Schroeder et l'hypothèse du continu</span>
-      <p>S'il existe des injections $\varphi:X\hookrightarrow Y$ et $\psi:Y\hookrightarrow X$, alors $X\simeq Y$. On sait $|\mathbb N|<|\mathbb R|$ ; l'<strong>hypothèse du continu</strong> (existe-t-il un cardinal strictement entre les deux ?) est <strong>indécidable</strong> dans ZFC (Gödel 1938 : non réfutable ; Cohen 1963 : non démontrable).</p>
+      <span class="box-label">Cantor–Bernstein–Schröder et hypothèse du continu</span>
+      <p>S'il existe des injections $X\hookrightarrow Y$ et $Y\hookrightarrow X$, alors $X\simeq Y$. On sait $|\mathbb N|<|\mathbb R|$ ; <strong>l'hypothèse du continu</strong> (existe-t-il un cardinal strictement entre les deux ?) est <strong>indécidable</strong> dans ZFC (Gödel 1938 : non réfutable ; Cohen 1963 : non démontrable).</p>
     </div>
 
     <hr class="divider" />
 
-    <h2 id="c2"><span class="chapter-num">Chapitre 2 — début</span>Groupes</h2>
+    <h2 id="c2"><span class="chapter-num">Chapitre 2 — jusqu'à §2.5</span>Groupes</h2>
     <p style="font-style:italic; color:var(--text-tertiary); margin-top:-10px;">« The introduction of the digit 0 or the group concept was general nonsense too... »</p>
 
     <h3>2.1 Groupes abstraits</h3>
     <div class="box definition">
       <span class="box-label">Groupe</span>
-      <p>Un groupe $(G,\circ,e_G,\cdot^{-1})$ est un ensemble non vide $G$ muni d'une loi $\circ:G\times G\to G$, d'un neutre $e_G$ et d'une inversion, vérifiant : <strong>associativité</strong>, <strong>neutralité</strong> ($g\circ e_G=e_G\circ g=g$), <strong>inversibilité</strong> ($g^{-1}\circ g=g\circ g^{-1}=e_G$).</p>
+      <p>Un groupe $(G,\star,e_G,\cdot^{-1})$ est un ensemble non vide $G$ muni d'une loi $\star:G\times G\to G$, d'un neutre $e_G$ et d'une inversion, vérifiant : <strong>associativité</strong>, <strong>neutralité</strong>, <strong>inversibilité</strong> ($g^{-1}\star g=g\star g^{-1}=e_G$).</p>
     </div>
     <div class="box theorem">
       <span class="box-label">Propriétés de base</span>
-      <p>Involutivité $(g^{-1})^{-1}=g$ ; unicité du neutre et de l'inverse ; $(g\circ g')^{-1}=g'^{-1}\circ g^{-1}$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration (unicité du neutre)</span>
-        <p>Si $g\circ e_G'=g$, on multiplie à gauche par $g^{-1}$ : $g^{-1}\circ g\circ e_G'=g^{-1}\circ g$, soit $e_G'=e_G$.<span class="qed">∎</span></p>
-      </div>
+      <p>Involutivité $(g^{-1})^{-1}=g$ ; unicité du neutre et de l'inverse ; $(g\star g')^{-1}=g'^{-1}\star g^{-1}$.</p>
+      <div class="proof"><span class="box-label">Démonstration (inverse d'un produit)</span><p>$(g'^{-1}\star g^{-1})\star(g\star g')=g'^{-1}\star e_G\star g'=e_G$, donc par unicité de l'inverse, $(g\star g')^{-1}=g'^{-1}\star g^{-1}$.<span class="qed">∎</span></p></div>
     </div>
-    <p>Exemples : $(\mathbb Z,+,0,-\cdot)$ (ordre infini) ; $(\mathbb Q,+,0,-\cdot)$ ; $(\mathbb Q^\times,\times,1,1/\cdot)$ ; le <strong>groupe des classes de congruence</strong> $\mathbb Z/q\mathbb Z$, de cardinal $q$, muni de l'addition modulo $q$ — un groupe commutatif.</p>
-    <div class="box definition">
-      <span class="box-label">Groupe commutatif (abélien)</span>
-      <p>$g,g'$ <strong>commutent</strong> si $g\circ g'=g'\circ g$. $G$ est abélien si tous ses éléments commutent. En notation additive, le neutre devient $0_G$, l'inverse devient l'opposé $-g$, et $n\cdot g$ remplace $g^n$.</p>
+    <p>Exemples : $(\mathbb Z,+,0,-\cdot)$ (ordre infini) ; $(\mathbb Q,+,0,-\cdot)$ ; $(\mathbb Q^\times,\times,1,1/\cdot)$ ; le <strong>groupe des classes de congruence</strong> $\mathbb Z/q\mathbb Z$, de cardinal $q$ — un groupe commutatif.</p>
+    <div class="box definition"><span class="box-label">Groupe commutatif (abélien)</span><p>$g,g'$ <strong>commutent</strong> si $g\star g'=g'\star g$. En notation additive : neutre $0_G$, opposé $-g$, $n\cdot g$ remplace $g^n$.</p></div>
+    <p>Le cardinal $|G|$ s'appelle l'<strong>ordre</strong> du groupe.</p>
+
+    <h3>2.2 Le cas du groupe symétrique</h3>
+    <p>Pour $X$ un ensemble, $\mathrm{Bij}(X)=S(X)$ : ensemble des bijections de $X$ sur lui-même (si $X$ fini, on parle de <strong>permutation</strong>). $(\mathrm{Bij}(X),\circ)$ est un groupe : non vide ($\mathrm{id}_X$), stable par composition, associatif, neutre $\mathrm{id}_X$, stable par inversion.</p>
+    <p><strong>Exemple ($X=\{1,\dots,n\}$, noté $S_n$)</strong> : $|S_n|=n!$ (récurrence : $n$ choix pour $\sigma(1)$, puis $n-1$ pour $\sigma(2)$...). Un <strong>cycle</strong> de longueur $k$, noté $(a_1a_2\cdots a_k)$, envoie $a_1\mapsto a_2\mapsto\cdots\mapsto a_k\mapsto a_1$ et fixe le reste ; un cycle de longueur 2 est une <strong>transposition</strong>.</p>
+    <div class="box theorem"><span class="box-label">Décomposition en cycles/transpositions (admis, MATH-113)</span><p>Toute permutation se décompose en cycles, et tout cycle en transpositions — donc toute permutation en transpositions. Exemple : $(134)=(34)\circ(14)$.</p></div>
+
+    <h3>2.3 Sous-groupes</h3>
+    <div class="box definition"><span class="box-label">Sous-groupe</span><p>$H\subset G$ est un sous-groupe si $e_G\in H$, $H$ stable par $\star$ et par inversion.</p></div>
+    <div class="box theorem">
+      <span class="box-label">Critère pratique</span>
+      <p>Pour $\varnothing\ne H\subset G$, il suffit de vérifier $\forall h,h'\in H,\ h\star h'^{-1}\in H$.</p>
+      <div class="proof"><span class="box-label">Démonstration</span><p>Avec $h'=h$ : $e_G\in H$. Avec $h=e_G$ : stabilité par inversion. En recombinant : stabilité par $\star$.<span class="qed">∎</span></p></div>
     </div>
-    <p>Le cardinal $|G|$ s'appelle l'<strong>ordre</strong> du groupe : $(\mathbb Z,+)$ est d'ordre infini, $\mathbb Z/q\mathbb Z$ est d'ordre $q$.</p>
+    <p>Exemples : $\{e_G\}$, $G$ ; $2\mathbb Z\subset\mathbb Z$ est un sous-groupe, $1+2\mathbb Z$ n'en est pas un.</p>
+    <div class="box theorem">
+      <span class="box-label">Les sous-groupes de ℤ sont les $q\mathbb Z$</span>
+      <div class="proof"><span class="box-label">Démonstration</span><p>$q\mathbb Z$ est un sous-groupe (critère). Réciproquement, pour $H\ne\{0\}$ sous-groupe, soit $q$ le plus petit entier $>0$ de $H$ ; $q\mathbb Z\subset H$ ; pour $h\in H$, division euclidienne $h=qk+r$ ($0\le r<q$) donne $r=h-qk\in H$, donc $r=0$ par minimalité — donc $H=q\mathbb Z$.<span class="qed">∎</span></p></div>
+    </div>
+
+    <h4>2.3.1 Groupe engendré par un ensemble</h4>
+    <div class="box definition"><span class="box-label">Sous-groupe engendré</span><p>$\langle A\rangle:=\bigcap_{H\supset A}H$ (intersection de tous les sous-groupes contenant $A$) — le plus petit sous-groupe contenant $A$.</p></div>
+    <div class="box theorem">
+      <span class="box-label">Caractérisation « linguistique »</span>
+      <p>Si $A\ne\varnothing$ : $\langle A\rangle=\{g_1\star\cdots\star g_n,\ n\ge1,\ g_i\in A\cup A^{-1}\}$ (mots en les lettres de $A\cup A^{-1}$).</p>
+    </div>
+    <div class="box definition"><span class="box-label">Groupes monogènes / cycliques</span><p>$G$ <strong>monogène</strong> si $G=\langle\{g\}\rangle=g^{\mathbb Z}$ ; <strong>cyclique</strong> si de plus fini. $\mathbb Z$ est monogène ; $\mathbb Z/q\mathbb Z$ est cyclique.</p></div>
+
+    <h4>2.3.2 Le théorème de Lagrange</h4>
+    <div class="box theorem"><span class="box-label">Théorème de Lagrange</span><p>$G$ fini, $H\subset G$ sous-groupe $\Rightarrow$ $|H|$ divise $|G|$ (démontré au §2.5.1.1, via l'action par translation).</p></div>
+    <p><strong>Corollaire</strong> : si $|G|=p$ premier, les seuls sous-groupes sont $\{e_G\}$ et $G$, et $G$ est commutatif.</p>
+    <div class="box definition"><span class="box-label">Ordre d'un élément</span><p>$\mathrm{ord}(g):=|g^{\mathbb Z}|$. Si $G$ fini, $\mathrm{ord}(g)$ divise $|G|$, et $\mathrm{ord}(g)=\inf\{n\in\mathbb N, g^n=e\}$ ; en particulier $g^{|G|}=e$ pour tout $g$.</p></div>
+
+    <h3>2.4 Morphismes de groupes</h3>
+    <div class="box definition"><span class="box-label">Morphisme</span><p>$\varphi:G\to H$ est un morphisme si $\forall g,g',\ \varphi(g\star g')=\varphi(g)*\varphi(g')$.</p></div>
+    <div class="box theorem">
+      <span class="box-label">Propriété fonctionnelle</span>
+      <p>$\varphi(e_G)=e_H$ et $\varphi(g^{-1})=\varphi(g)^{-1}$.</p>
+    </div>
+    <p>Exemples : $\exp_g:\mathbb Z\to G,\ n\mapsto g^n$ ; $\exp:(\mathbb R,+)\to(\mathbb R_{>0},\times)$ ; la réduction modulo $q$.</p>
+    <div class="box definition"><span class="box-label">Noyau</span><p>$\ker(\varphi):=\varphi^{-1}(\{e_H\})$.</p></div>
+    <div class="box theorem">
+      <span class="box-label">Critère d'injectivité</span>
+      <p>$\varphi$ injectif $\iff$ $\ker(\varphi)=\{e_G\}$.</p>
+      <div class="proof"><span class="box-label">Démonstration</span><p>Si $g,g'\in\varphi^{-1}(\{h\})$, $\varphi(g\star g'^{-1})=h*h^{-1}=e_H$, donc $g\star g'^{-1}\in\ker(\varphi)=\{e_G\}$, donc $g=g'$.<span class="qed">∎</span></p></div>
+    </div>
+    <div class="box theorem"><span class="box-label">Invariance du noyau</span><p>$\forall g,\ g.\ker(\varphi).g^{-1}=\ker(\varphi)$.</p></div>
+    <div class="box definition"><span class="box-label">Sous-groupe normal (distingué)</span><p>$K\subset G$ est <strong>normal</strong> ($K\trianglelefteq G$) si $\forall g,\ g.K.g^{-1}=K$. Un noyau est toujours distingué (la réciproque nécessite la notion de groupe quotient, §2.6, non couvert ici).</p></div>
+    <p><strong>Groupes isomorphes</strong> : $G\simeq_{Gr}H$ s'il existe un isomorphisme $\varphi:G\xrightarrow{\sim}H$ — « être isomorphe » est une relation d'équivalence.</p>
+
+    <h3>2.5 Action d'un groupe sur un ensemble</h3>
+    <div class="box definition"><span class="box-label">Action à gauche</span><p>Un morphisme $\varphi:G\to\mathrm{Bij}(X)$, noté $G\curvearrowright_\varphi X$. Équivaut à une loi externe $\odot:G\times X\to X$ vérifiant neutralité, associativité $(g\star g')\odot x=g\odot(g'\odot x)$, et simplification.</p></div>
+
+    <h4>2.5.1 Action par translations</h4>
+    <p>La translation $t_g:G\to G,\ g'\mapsto g.g'$ n'est <strong>pas</strong> un morphisme en général, mais $t_g\in\mathrm{Bij}(G)$.</p>
+    <div class="box theorem">
+      <span class="box-label">$t_\bullet:G\to\mathrm{Bij}(G)$ est un morphisme</span>
+      <div class="proof"><span class="box-label">Démonstration</span><p>$t_{g_1}\circ t_{g_2}(g')=g_1.(g_2.g')=(g_1.g_2).g'=t_{g_1.g_2}(g')$.<span class="qed">∎</span></p></div>
+      <p>$t_\bullet$ est de plus <strong>injective</strong>, donc $G\simeq t_G\subset\mathrm{Bij}(G)$ : tout groupe s'identifie à un sous-groupe d'un groupe de permutations.</p>
+    </div>
+
+    <div class="box theorem">
+      <span class="box-label">Preuve du théorème de Lagrange</span>
+      <p>On considère les translatés $g.H$ pour $g\in G$. Ils <strong>recouvrent</strong> $G$ (car $e_G\in H$), sont <strong>deux à deux disjoints ou égaux</strong>, et ont tous le <strong>même cardinal</strong> $|H|$ (via la bijection $t_g$). D'où une partition $G=\bigsqcup_{g\in G_H}g.H$, donc $|G|=|G_H|\cdot|H|$, ce qui prouve que $|H|$ divise $|G|$.<span class="qed">∎</span></p>
+    </div>
+
+    <h4>2.5.2 La conjugaison</h4>
+    <p>$\mathrm{Ad}_g:G\to G,\ h\mapsto g.h.g^{-1}$ (<strong>conjugaison</strong> par $g$).</p>
+    <div class="box theorem">
+      <span class="box-label">$\mathrm{Ad}_g$ est un automorphisme</span>
+      <p>$\mathrm{Ad}_g\in\mathrm{Aut}_{Gr}(G)$, de réciproque $\mathrm{Ad}_{g^{-1}}$ ; $\mathrm{Ad}_\bullet:G\to\mathrm{Bij}(G)$ est un morphisme. Ceci définit l'<strong>action par conjugaison</strong> $G\curvearrowright_{Ad}G$.</p>
+    </div>
+    <div class="box remark"><span class="box-label">Centre de G</span><p>$\ker(\mathrm{Ad})=\{g,\ \forall h,\ g.h=h.g\}=Z(G)$, le <strong>centre</strong> de $G$ — un sous-groupe commutatif.</p></div>
+
+    <h4>2.5.3 Action à droite</h4>
+    <div class="box definition"><span class="box-label">Anti-morphisme, action à droite</span><p>$\varphi:G\to H$ est un <strong>anti-morphisme</strong> si $\varphi(g\star g')=\varphi(g')*\varphi(g)$. Une action à droite est un anti-morphisme $\varphi:G\to\mathrm{Bij}(X)$, notée $X\curvearrowleft_\varphi G$ ; l'associativité de la loi externe associée est « inversée » : $x\odot(g\star g')=(x\odot g)\odot g'$.</p></div>
+    <p>La translation à droite $td_\bullet:G\to\mathrm{Bij}(G)$ est un <strong>anti-morphisme</strong>, définissant l'action à droite par translations.</p>
 
     <div class="end-banner">
-      <span class="badge">✓</span>
-      <span>C'est tout ce qui a été vu jusqu'ici — juste avant la section 2.2 sur le groupe symétrique. Le polycopié complet compte 12 chapitres (ensembles, groupes, anneaux, corps, nombres complexes, modules, espaces vectoriels, applications linéaires, matrices, opérations élémentaires, déterminants, polynôme caractéristique).</span>
+      <strong>C'est tout ce qui a été confirmé par les séries jusqu'ici.</strong> Le polycopié enchaîne avec le §2.6 « Groupe quotient » (classes $gK$, structure de groupe sur $G/K$ si $K\trianglelefteq G$, théorème « Noyau-Image » $G/\ker(\varphi)\simeq\varphi(G)$), mais aucune série disponible ne le teste encore — la Série 6 bascule directement sur les anneaux (chapitre 3).
     </div>
 
+    <hr class="divider" />
+
+    <h2 id="ex"><span class="chapter-num">Exercices</span>Séries 1 à 5, corrigées intégralement</h2>
+
+    <h3>Série 1 — Récurrence, ensembles</h3>
+
+    <div class="box example"><span class="box-label">Ex. 1 — principe de récurrence</span><p>Si $N\subset\mathbb N$ contient $n_0$ et est stable par successeur, alors $N_{\ge n_0}\subset N$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Si $m>n_0$ n'était pas dans $N$ : comme $m$ est le $(m-n_0)$-ième successeur de $n_0$, appliquer $(m-n_0)$ fois la stabilité par successeur force $m\in N$ — contradiction.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 2 — sommes classiques</span><p>Démontrer $\sum_1^n k=\frac{n(n+1)}2$, $\sum(2k-1)=n^2$, $\sum k^2=\frac{n(n+1)(2n+1)}{6}$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Récurrence standard dans chaque cas (initialisation triviale, hérédité par calcul direct en ajoutant le terme d'indice $n+1$).</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 3 — inégalité de Bernoulli</span><p>Pour $x>-1$, $n\ge1$ : $(1+x)^n\ge1+nx$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Hérédité : $(1+x)^{n+1}=(1+x)^n(1+x)\ge(1+nx)(1+x)=1+(n+1)x+nx^2\ge1+(n+1)x$ (car $x>-1$ donc $1+x>0$, et $nx^2\ge0$).</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 4 — unions d'ensembles emboîtés</span><p>(1) $\bigcup\{A\}=A$. (2) $\bigcup\varnothing=\varnothing$, $\bigcup\{\varnothing\}=\varnothing$, $\bigcup\{\varnothing,A\}=A$. (3) $A\cup\varnothing=A$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Par double inclusion à chaque fois, en utilisant directement la définition de $\bigcup$ (un élément de $\bigcup E$ est élément d'un élément de $E$).</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 5 — différence symétrique</span><p>$A\Delta B:=A\cup B-A\cap B$. Montrer $A\Delta B=(A-B)\cup(B-A)$, et calculer $\varnothing\Delta A$, $A\Delta A$, $A\Delta X$, $A\Delta A^c$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$A\Delta B=\{x\in A\cup B,x\notin A\cap B\}=\{(x\in A\wedge x\notin B)\vee(x\in B\wedge x\notin A)\}=(A-B)\cup(B-A)$. Puis : $\varnothing\Delta A=A$ ; $A\Delta A=\varnothing$ ; $A\Delta X=A^c$ ; $A\Delta A^c=X$.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 6 — bijection de Cantor $\mathbb N^2\to\mathbb N$</span><p>$C(m,n)=\dfrac{(m+n)^2+m+3n}{2}$. Montrer que $C$ est bien définie et bijective.</p></div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$(m+n)^2+m+3n$ est toujours pair (disjonction sur la parité de $m,n$), donc $C(m,n)\in\mathbb N$. Sur la diagonale $D_k=\{(m,k-m)\}$, en posant $c_k=(k^2+k)/2$, $C(m,k-m)=c_k+m$, donc $C(D_k)=[c_k,c_k+k]$ ; comme $c_{k+1}=c_k+k+1$, ces intervalles sont contigus et disjoints, partitionnant $\mathbb N$. $C$ étant bijective sur chaque $D_k$ (affine en $m$), elle l'est globalement.</p>
+    </div>
+
+    <h3>Série 2 — Applications</h3>
+
+    <div class="box example"><span class="box-label">Ex. 1 — étude complète de $f(x)=x^3-x$ sur $\mathbb R_{\ge-2}$</span><p>Images, préimages, injectivité, surjectivité.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>À l'aide du tableau de variation (extrema en $\pm\sqrt3/3$) et du théorème des valeurs intermédiaires, on calcule les images/préimages demandées. $f$ n'est pas injective ($f(0)=f(1)=0$), ni surjective sur $\mathbb R$ tout entier. Restreindre l'espace d'arrivée à $\mathrm{Im}(f)$ rend toute application surjective. La plus petite valeur $x_0$ rendant $f$ injective sur $[x_0,+\infty[$ est $x_0=\sqrt3/3$ (le minimum local), démontré par l'absurde via le théorème des valeurs intermédiaires.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 2 — propagation de la surjectivité/injectivité</span><p>(1) Si $g\circ f$ surjective, $g$ surjective (mais $f$ pas forcément). (2) Si $g\circ f$ injective, $f$ injective (mais $g$ pas forcément).</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>(1) Pour $z$, $\exists x,g(f(x))=z$ ; poser $y=f(x)$ donne $g(y)=z$. (2) $f(x)=f(x')\Rightarrow g(f(x))=g(f(x'))\Rightarrow x=x'$ par injectivité de $g\circ f$. Des contre-exemples explicites montrent que les réciproques (sur $f$ resp. $g$) échouent.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 3 — propriétés de $f(A)$, $f^{-1}(B)$</span><p>Sept énoncés sur images directes/réciproques et unions/intersections.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$f(\varnothing)=\varnothing$ ; $f(A\cup B)=f(A)\cup f(B)$ (égalité) ; $f(A\cap B)\subset f(A)\cap f(B)$ (inclusion stricte possible, égalité si $f$ injective) ; $f^{-1}(C\cup D)=f^{-1}(C)\cup f^{-1}(D)$ et $f^{-1}(C\cap D)=f^{-1}(C)\cap f^{-1}(D)$ (toujours des égalités) ; $f$ injective $\iff\forall A,f^{-1}(f(A))=A$ ; $f$ surjective $\iff\forall C,f(f^{-1}(C))=C$.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 4 — bijection de Cantor en dimension 3</span><p>Construire $C_3:\mathbb N^3\simeq\mathbb N$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$C_3(l,m,n):=C_2(C_2(l,m),n)$, composée de bijections ($C_2\times\mathrm{id}$ puis $C_2$), donc bijective.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 5 — encore une bijection $\mathbb N^2\to\mathbb N$</span><p>$(m,n)\mapsto m+(n+\lfloor(m+1)/2\rfloor)^2$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Généralise l'argument de partition en intervalles $\mathbb N=\bigsqcup_n[a_n,a_{n+1}-1]$ avec $a_n=n^2$. Surjectivité : tout $y$ s'écrit uniquement $y=m+x^2$ ($0\le m\le2x$). Injectivité : par unicité de cette décomposition.</p></div>
+
+    <h3>Série 3 — Groupes abstraits</h3>
+
+    <div class="box example"><span class="box-label">Ex. 1 — un groupe sur $[0,1[$</span><p>$G=[0,1[$, $x\oplus x':=x+x'$ si $<1$, sinon $x+x'-1$. Montrer que $(G,\oplus,0,1-\cdot)$ est un groupe commutatif.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Neutre $0$ immédiat ; inverse de $x$ est $1-x$. Associativité vérifiée par disjonction de cas sur les sommes partielles (un « défaut » $\varepsilon\in\{0,1\}$ ne dépend que de la somme totale). Commutativité héritée de celle de $+$ sur $\mathbb R$.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 2 (⋆) — $(\mathcal P(X),\Delta)$ est un groupe</span></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Associativité prouvée par diagramme de Venn et par calcul booléen direct. Neutre : $\varnothing$. Inverse de $A$ : $A$ lui-même ($A\Delta A=\varnothing$). Commutatif.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 3 — groupe de fonctions $\mathcal F(X,G)$</span><p>Loi $(f_1\star f_2)(x):=f_1(x)\star f_2(x)$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Neutre $e(x):=e_G$ ; inverse $f^{-1}(x):=f(x)^{-1}$ ; toutes les vérifications se font point par point, héritées des axiomes de $G$.</p></div>
+
+    <div class="box theorem"><span class="box-label">Ex. 4 — $\mathbb Z/q\mathbb Z$ est un groupe</span></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Congruence mod $q$ réflexive/symétrique/transitive ; $a(\mathrm{mod}\ q)=a+q\mathbb Z$ ; division euclidienne donne exactement $q$ classes ; $a(\mathrm{mod}\ q)\boxplus b(\mathrm{mod}\ q)=(a+b)(\mathrm{mod}\ q)$ ; associativité, neutralité de $0$, inversibilité et commutativité héritées de $(\mathbb Z,+)$.</p></div>
+
+    <h3>Série 4 — Groupe symétrique, sous-groupes, groupes engendrés</h3>
+
+    <div class="box example"><span class="box-label">Ex. 1 — commutativité de $S_n$ et stabilisateurs</span><p>(1) $S_2$ commutatif. (2)-(3) $S_3,S_4$ non commutatifs (exemples explicites). (4) $S_{4,3}=\{\sigma\in S_4,\sigma(3)=3\}$ est un sous-groupe.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>(1) Vérification directe sur les 2 éléments. (2)-(3) Exhiber deux permutations $\sigma,\tau$ avec $\sigma\tau\ne\tau\sigma$. (4) Les 3 axiomes du critère de sous-groupe se vérifient directement : $\mathrm{id}\in S_{4,3}$ ; si $\sigma(3)=\sigma'(3)=3$ alors $(\sigma\circ\sigma')(3)=3$ ; et $\sigma(3)=3\Rightarrow\sigma^{-1}(3)=3$.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 2 — centralisateur et centre</span><p>$C_G(g)=\{h,hg=gh\}$, $Z(G)=\{z,\forall g,zg=gz\}$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$C_G(g)$ est un sous-groupe (3 axiomes directs). $Z(G)=\bigcap_g C_G(g)$, intersection de sous-groupes donc sous-groupe ; commutatif car $z,z'\in Z(G)\Rightarrow z\in C_G(z')\Rightarrow zz'=z'z$.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 4 — produit de sous-groupes $H\cdot K$</span><p>(1) Si $G$ commutatif, $H\cdot K$ est un sous-groupe. (2) Si $\forall h,\ h.K.h^{-1}\subset K$, $H\cdot K$ reste un sous-groupe même si $G$ non commutatif.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Preuve via le critère de sous-groupe, en utilisant la commutativité (1) ou l'hypothèse de stabilité de $K$ par conjugaison par $H$ (2) pour regrouper les termes.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 6 — sous-groupes engendrés de $\mathbb Z$</span><p>(1) $\langle m,n\rangle=\mathbb Zm+\mathbb Zn$. (2) $\langle3,73\rangle=\mathbb Z$. (3) $\langle m,n\rangle=\mathrm{pgcd}(m,n)\mathbb Z$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>(2) $73=3\cdot24+1\Rightarrow1=73-24\cdot3\in\langle3,73\rangle$. (3) Par double inclusion, avec l'identité de Bézout pour l'inclusion $\supset$.</p></div>
+
+    <h3>Série 5 — Groupes engendrés (fin), morphismes, actions</h3>
+
+    <div class="box example"><span class="box-label">Ex. 1 (⋆) — générateurs de $\mathbb Z^2$</span><p>(3) Si $ad-bc=\pm1$, $\langle(a,b),(c,d)\rangle=\mathbb Z^2$. (4) Sinon, non.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>(3) On résout un système linéaire dont les solutions sont entières précisément parce que $ad-bc=\pm1$ apparaît au dénominateur. (4) Si $\Delta=ad-bc\ne\pm1$, tout élément du sous-groupe engendré est de la forme $\Delta\cdot(\text{entier})$, donc $(1,0)$ n'y appartient pas.</p></div>
+
+    <div class="box theorem"><span class="box-label">Ex. 2 — groupe dérivé $D(G)=[G,G]$</span><p>$[g,h]:=ghg^{-1}h^{-1}$. Montrer que $D(G)\trianglelefteq G$, et que $\varphi(D(G))=\{e_Z\}$ pour tout morphisme $\varphi:G\to Z$ avec $Z$ commutatif.</p></div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$\mathrm{Ad}_k([g,h])=[\mathrm{Ad}_k(g),\mathrm{Ad}_k(h)]$ — donc $\mathrm{Ad}_k(D(G))\subset D(G)$ pour tout $k$, et par symétrie ($k\to k^{-1}$), égalité : $D(G)$ est distingué. Pour $\varphi(g,h)$ commutant dans $Z$ : $\varphi([g,h])=\varphi(g)\varphi(h)\varphi(g)^{-1}\varphi(h)^{-1}=e_Z$, donc les générateurs de $D(G)$ sont dans $\ker(\varphi)$, donc $D(G)\subset\ker(\varphi)$.<span class="qed">∎</span></p>
+    </div>
+
+    <div class="box example"><span class="box-label">Ex. 5 — injectivité de la translation</span><p>$t_\bullet:G\to\mathrm{Bij}(G)$ est injective.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$t_g$ bijective (réciproque $t_{g^{-1}}$) ; $t_\bullet$ morphisme ($t_{gh}=t_g\circ t_h$) ; $\ker(t_\bullet)=\{e_G\}$ (si $t_g=\mathrm{id}$, alors $g=t_g(e_G)=e_G$), d'où injectivité par le Théorème 2.8.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 6 — orbites et stabilisateurs</span><p>Pour une action $G\curvearrowright_\varphi X$ : (1) « même orbite » est une relation d'équivalence. (3) $G_x=\{g,g\odot x=x\}$ est un sous-groupe. (4) Si $x'=g\odot x$, $G_{x'}=g.G_x.g^{-1}$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>(1) Réflexivité via $\varphi(e_G)=\mathrm{id}_X$ ; symétrie via $\varphi(g^{-1})=\varphi(g)^{-1}$ ; transitivité via $\varphi(g'g)=\varphi(g')\circ\varphi(g)$. (3) Vérification directe des 3 axiomes. (4) Double inclusion en utilisant la bijectivité de $\varphi(g)$ — en particulier $G_x$ et $G_{x'}$ sont isomorphes.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 7 — exemple explicite dans $S_7$</span><p>$\sigma=(1\,3\,5)(2\,7)(4\,6)$, $G=\langle\sigma\rangle$. Déterminer $\mathrm{ord}(\sigma)$ et les orbites de $G$ sur $\{1,\dots,7\}$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>$\sigma^6=\mathrm{id}$ (ppcm des longueurs de cycles 3, 2, 2), donc $\mathrm{ord}(\sigma)=6$. Orbites : $\{1,3,5\}$, $\{2,7\}$, $\{4,6\}$ — exactement les supports des trois cycles disjoints.</p></div>
+
+    <div class="box example"><span class="box-label">Ex. 9 — groupes isomorphes et actions sur $\mathrm{Isom}_{Gr}(G,H)$</span><p>(3) Pour $\psi$ isomorphisme fixé : $\mathrm{Isom}_{Gr}(G,H)=\psi\circ\mathrm{Aut}_{Gr}(G)=\mathrm{Aut}_{Gr}(H)\circ\psi$.</p></div>
+    <div class="proof"><span class="box-label">Solution</span><p>Double inclusion : tout $\varphi\in\mathrm{Isom}_{Gr}(G,H)$ s'écrit $\varphi=\psi\circ(\psi^{-1}\circ\varphi)$ avec $\psi^{-1}\circ\varphi\in\mathrm{Aut}_{Gr}(G)$, et de même $\varphi=(\varphi\circ\psi^{-1})\circ\psi$ avec $\varphi\circ\psi^{-1}\in\mathrm{Aut}_{Gr}(H)$.</p></div>
+
     <p class="source-note">
-      Contenu transcrit à partir du polycopié officiel <em>CoursMATH-110.pdf</em>, dossier <em>2025 (Michel)</em> du Drive de section.
+      Contenu transcrit intégralement à partir du polycopié officiel <em>CoursMATH-110.pdf</em> et des séries 1 à 5 avec corrigés, dossier <em>2025 (Michel)</em> du Drive de section.
     </p>
 
   </article>

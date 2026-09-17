@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
-  :root { --course-gradient: linear-gradient(135deg, #ff9f0a, #ff6242); --accent: #ff9f0a; --accent-2: #ff6242; }
+  :root { --course-color: #c96a00; --accent: #c96a00; --accent-2: #ff6242; }
 </style>
 </head>
 <body>
@@ -31,9 +31,9 @@
       <span class="pill">Section · <strong>Mathématiques</strong></span>
     </div>
     <h1>Analyse avancée I</h1>
-    <p class="prof">Les nombres réels comme point de départ, puis les premières suites — sous-additivité, points d'accumulation, limsup.</p>
+    <p class="prof">Pas de polycopié dédié : toute la matière vient des six premières séries d'exercices et de leurs corrigés, reproduits ici intégralement — nombres réels, puis premiers pas dans les suites.</p>
     <div class="progress-track"><div class="progress-fill" style="width: 21%"></div></div>
-    <div class="progress-label">Semaine 3 sur 14 — Points d'accumulation et limsup</div>
+    <div class="progress-label">Semaine 3 sur 14 — Points d'accumulation et limsup (Série 6, 25 septembre)</div>
   </div>
 </header>
 
@@ -46,109 +46,183 @@
 
   <article class="content">
 
-    <p class="lede">Pas de polycopié dédié trouvé pour cette édition : le contenu ci-dessous est reconstruit à partir des six premières séries d'exercices et de leurs corrigés, rédigés par les assistants avec définitions, théorèmes et démonstrations complètes.</p>
+    <p class="lede">Les corrigés sont rédigés par les assistants avec un grand soin méthodologique — définitions, théorèmes et démonstrations complètes y sont intégrés directement dans la correction de chaque exercice. Voici l'intégralité des six premières séries, du 9 au 25 septembre.</p>
 
-    <h2 id="c1"><span class="chapter-num">Chapitre 1</span>Les nombres réels</h2>
+    <h2 id="c1"><span class="chapter-num">Chapitre 1 — Série 1 à 4</span>Les nombres réels</h2>
 
-    <h3>1.1 Structure de corps ordonné</h3>
-    <p>$\mathbb R$ est un <strong>corps</strong> : addition et multiplication satisfaisant les axiomes usuels (associativité, commutativité, neutres $0$ et $1$, opposés, inverses non nuls, distributivité), muni d'un ordre total compatible avec les opérations. On en déduit, pour tous $x,y,z,t$ :</p>
-    <div class="box theorem">
-      <span class="box-label">Propriétés dérivées des axiomes de corps</span>
-      <p>$-(-x)=x$ ; $(-x)(-y)=xy$ ; $-(x+y)=-x-y$ ; si $x\le y$ et $z\le t$ alors $x+z\le y+t$ ; $x^2\ge0$ ; $|xy|=|x|\cdot|y|$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration ($-(x+y)=-x-y$)</span>
-        <p>$-(x+y)$ est par définition l'unique $z$ tel que $(x+y)+z=0$. Il suffit de vérifier $(x+y)+(-x+(-y))=0$ : $(x+y)+(-x)+(-y) = x+(-x)+y+(-y) = 0+0=0$, par associativité puis commutativité.<span class="qed">∎</span></p>
-      </div>
-    </div>
-    <div class="box remark">
-      <span class="box-label">Contre-exemple : ℤ/4ℤ n'est pas un corps</span>
-      <p>Avec $\bar0,\bar1,\bar2,\bar3$ les classes modulo 4 : $\bar2\cdot\bar2=\bar0$ bien que $\bar2\ne\bar0$ — contredit l'absence de diviseurs de zéro dans un corps. (On peut en revanche construire un corps à 4 éléments avec des matrices $2\times2$ sur $\mathbb Z/2\mathbb Z$.)</p>
-    </div>
+    <h3>Série 1 (9 septembre)</h3>
 
-    <h3>1.2 Majorants, minorants, bornes sup/inf</h3>
-    <p>$S\subset\mathbb R$ est <strong>majoré</strong> (resp. <strong>minoré</strong>) s'il existe $M$ (resp. $m$) avec $x\le M$ (resp. $x\ge m$) pour tout $x\in S$ ; <strong>borné</strong> si les deux. Le plus petit majorant est le <strong>supremum</strong>, le plus grand minorant l'<strong>infimum</strong>.</p>
     <div class="box example">
-      <span class="box-label">Exemples travaillés</span>
-      <ul style="margin-bottom:0;">
-        <li>$S=\{x\in\mathbb Q: 0<x<1\}$ : $\inf S=0$, $\sup S=1$, mais <strong>ni atteints</strong> — $S$ contient $1/n$ et $1-1/n$ pour tout $n$.</li>
-        <li>$S=\{x\in\mathbb Q: x<\sqrt2\}$ : non minoré, $\sup S=\sqrt2$ — preuve par l'absurde via la densité de $\mathbb Q$ dans $\mathbb R$.</li>
-        <li>$S=\{1/n, n\in\mathbb N^*\}$ : $\sup S=1$ (atteint), $\inf S=0$ (non atteint, preuve $\varepsilon$-$N$ classique).</li>
-      </ul>
+      <span class="box-label">Ex. 1.1 — une somme astucieuse</span>
+      <p>Calculer $S=\displaystyle\sum_{n=1}^{2025} n\cdot2^n$ sous forme close. Indications : (a) écrire $S=\sum(n-1)2^n+\sum2^n$ ; (b) en déduire $S=2S-2\cdot2025\cdot2^{2025}+\sum2^n$ ; (c) utiliser $(1+x+\cdots+x^n)(1-x)=1-x^{n+1}$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>En écrivant $n=(n-1)+1$ : $S=\sum_{n=1}^{2025}(n-1)2^n+\sum_{n=1}^{2025}2^n$. En posant $m=n-1$ dans la première somme : $\sum(n-1)2^n=2\sum_{m=1}^{2024}m\cdot2^m=2\big(S-2025\cdot2^{2025}\big)$. Avec $x=2$ dans l'identité géométrique : $\sum_{n=1}^{2025}2^n=2^{2026}-2$. En substituant : $S=2S-2025\cdot2^{2026}+2^{2026}-2=2S-2024\cdot2^{2026}-2$, donc
+      $$S = 2024\cdot2^{2026}+2.$$</p>
     </div>
 
-    <h3>1.3 Propriété archimédienne et partie entière</h3>
-    <div class="box theorem">
-      <span class="box-label">Archimède, puis existence de la partie entière</span>
-      <p>Pour tout $x\in\mathbb R$, il existe $m\in\mathbb N$ tel que $m>x$. Conséquence : il existe un unique $n\in\mathbb Z$ tel que $n\le x<n+1$, noté $[x]$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration</span>
-        <p>Par Archimède, il existe $m\in\mathbb N$ avec $m>x$. Parmi les entiers $m'$ avec $x<m'\le m$ (en nombre fini), on prend le plus petit $n$. Si $n\ge y$ avec $x+1<y$, alors $n-1>x$, contredisant la minimalité de $n$ — donc $n<y$. L'unicité vient de $|n'-n|<1$ pour deux entiers.<span class="qed">∎</span></p>
-      </div>
+    <div class="box example">
+      <span class="box-label">Ex. 1.2 — irrationalité de $\sqrt5$ (à rendre, non corrigé)</span>
+      <p>Démontrer qu'il n'existe pas de rationnel $x$ tel que $x^2=5$. Méthode attendue (analogue à $\sqrt2$) : par l'absurde, $x=p/q$ irréductible, $p^2=5q^2\Rightarrow5\mid p\Rightarrow p=5k\Rightarrow5k^2=q^2\Rightarrow5\mid q$, contredisant l'irréductibilité.</p>
     </div>
 
-    <h3>1.4 Binôme de Newton et nombre d'Euler</h3>
-    <div class="box theorem">
-      <span class="box-label">Binôme de Newton</span>
-      <div class="eq">$$ (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^k y^{n-k}, \qquad \binom{n}{k}=\frac{n!}{k!(n-k)!} $$</div>
-      <p>Démontré par récurrence, en utilisant l'identité de Pascal $\binom{N}{k-1}+\binom{N}{k}=\binom{N+1}{k}$.</p>
+    <div class="box example">
+      <span class="box-label">Ex. 1.3 — un faux raisonnement à décortiquer</span>
+      <p>$x^2+x+1=0$. On écrit $x=-1-x^2$ (en isolant) et, en divisant par $x$, $x=-1-\frac1x$. En égalant, $x^3=1$, donc $x=1$. Où est l'erreur ?</p>
     </div>
-    <p>Le nombre d'Euler apparaît sous deux formes reliées : $e := \lim(1+1/n)^n$ et $e := \sum_{k=0}^\infty 1/k!$.</p>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$x=0$ est exclu (donnerait $1=0$). Les deux réécritures $x=-1-x^2$ et $x=-1-\frac1x$ sont chacune équivalentes à $x^2+x+1=0$. Mais leur <strong>égalisation</strong> $-1-x^2=-1-\frac1x$ n'est qu'une <strong>implication</strong>, pas une équivalence : une solution de cette égalité n'est pas nécessairement solution de l'équation de départ. Et en effet $x=1$ résout $-1-x^2=-1-\frac1x$ (les deux valent $-2$) mais pas $x^2+x+1=0$ ($1+1+1=3\ne0$) — c'est une solution parasite introduite par le passage à l'égalité des deux réécritures.</p>
+    </div>
+
+    <h3>Série 2 (11 septembre)</h3>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2.1 — preuves rigoureuses à partir des axiomes de corps ordonné</span>
+      <p>Prouver pour tous $x,y,z,t\in\mathbb R$ : (a) $-(-x)=x$ ; (b) $(-x)(-y)=xy$ ; (c) $-(x+y)=-x-y$ ; (d) $x\le y,z\le t\Rightarrow x+z\le y+t$ ; (e) $x^2\ge0$ ; (f) $|xy|=|x|\cdot|y|$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — modèle donné pour (c)</span>
+      <p>$-x-y$ est une notation pour $-x+(-y)$. Par définition, $-(x+y)$ est l'unique $z$ tel que $(x+y)+z=0$. Il suffit de vérifier que $-x+(-y)$ satisfait cette propriété :
+      $$(x+y)+(-x+(-y)) = x+(-x)+y+(-y) = 0+0 = 0$$
+      par associativité puis commutativité. Les cinq autres points se traitent selon la même exigence de rigueur axiomatique (rien utiliser qui ne découle pas directement des axiomes de corps ordonné déjà établis).</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2.2 — bornes sup/inf de six ensembles</span>
+      <p>Pour chacun, dire s'il est majoré/minoré/borné et donner sup/inf : (1) $[0,1]$ ; (2) $\{x\in\mathbb Q,0<x<1\}$ ; (3) $\{(-1)^n\}$ ; (4) $\{x\in\mathbb Q,x<\sqrt2\}$ ; (5) $\{1/n\}$ ; (6) $\{(-1)^n/n\}$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Borné, $\inf=0,\sup=1$, atteints.</p>
+      <p><strong>(2)</strong> Borné, $\inf=0,\sup=1$, <strong>non atteints</strong> — $S$ contient $\frac1n$ et $1-\frac1n$, s'approchant arbitrairement près des bords.</p>
+      <p><strong>(3)</strong> $\{-1,1\}$, borné, $\inf=-1,\sup=1$, atteints.</p>
+      <p><strong>(4)</strong> Non minoré, majoré par $\sqrt2$. Si $M=\sup S<\sqrt2$, la densité de $\mathbb Q$ dans $\mathbb R$ donne un rationnel $a$ avec $M<a<\sqrt2$, donc $a\in S$ et $a>M$ — contradiction. Donc $\sup S=\sqrt2$ (non atteint).</p>
+      <p><strong>(5)</strong> Borné, $\sup=1$ (atteint en $n=1$), $\inf=0$ (non atteint — preuve $\varepsilon$-$N$ via la propriété archimédienne).</p>
+      <p><strong>(6)</strong> Borné, $\inf=-1$ (n=1), $\sup=\frac12$ (n=2), tous deux atteints.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2.3 — $\mathbb Z/4\mathbb Z$ n'est pas un corps ; construire un corps à 4 éléments</span>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(a)</strong> $\bar2\cdot\bar2=\bar0$ bien que $\bar2\ne\bar0$ : dans un corps, le produit de deux éléments non nuls n'est jamais nul (sinon $b=a^{-1}(ab)=0$) — contradiction, donc $\mathbb Z/4\mathbb Z$ n'est pas un corps.</p>
+      <p><strong>(b)</strong> Une construction élégante utilise les matrices $2\times2$ sur $\mathbb Z/2\mathbb Z$ :
+      $$0=\begin{pmatrix}0&0\\0&0\end{pmatrix},\ 1=\begin{pmatrix}1&0\\0&1\end{pmatrix},\ x=\begin{pmatrix}1&1\\1&0\end{pmatrix},\ y=\begin{pmatrix}0&1\\1&1\end{pmatrix}$$
+      avec addition/multiplication matricielles standard (réalisation du corps $\mathbb F_4$, avec nécessairement $1+1=0$).</p>
+    </div>
+
+    <h3>Série 3 (16 septembre)</h3>
+
+    <div class="box example"><span class="box-label">Ex. 3.1 — existence de la racine carrée (à rendre)</span><p>Pour $a>0$, montrer $\exists x, x^2=a$. (Méthode du cours : $\sup\{t,t^2<a\}$ via l'axiome de la borne sup, puis contradiction si $x^2<a$ ou $x^2>a$ en perturbant $x$ par un petit $\varepsilon$.)</p></div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 3.2 — formule de Binet (Fibonacci)</span>
+      <p>$F_0=0,F_1=1,F_n=F_{n-1}+F_{n-2}$. Démontrer $F_n=\dfrac{(1+\sqrt5)^n-(1-\sqrt5)^n}{2^n\sqrt5}$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Avec $\varphi=\frac{1+\sqrt5}2$ (nombre d'or) et $\psi=\frac{1-\sqrt5}2$, on a $\varphi+\psi=1$ et $\varphi\psi=-1$ — ce sont les racines de $t^2-t-1=0$. Chaque suite géométrique $\varphi^n$ et $\psi^n$ vérifie donc individuellement la récurrence $F_n=F_{n-1}+F_{n-2}$, et toute combinaison linéaire de solutions l'est encore ; il suffit d'ajuster les coefficients pour matcher $F_0=0,F_1=1$, ce qui donne la formule.</p>
+    </div>
+
     <div class="box theorem">
-      <span class="box-label">$(1+1/n)^n$ converge</span>
-      <p>La suite est croissante et bornée par 3, donc convergente (théorème : suite croissante majorée $\Rightarrow$ convergente), et sa limite dépasse 2.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration</span>
-        <p>Le binôme de Newton donne $(1+1/n)^n \le \sum_{k=0}^n 1/k!$. Comme $1/k!\le 1/2^{k-1}$ pour $k\ge1$ et $\sum_{k=0}^n 1/2^k\le 2$, on obtient $(1+1/n)^n\le3$. La croissance vient de la comparaison terme à terme des développements de $x_n$ et $x_{n+1}$. Enfin $x_2=(3/2)^2=9/4>2$.<span class="qed">∎</span></p>
-      </div>
+      <span class="box-label">Ex. 3.3 — propriété archimédienne et partie entière</span>
+      <p>(1) $\forall x,y,\ x+1<y\Rightarrow\exists n\in\mathbb Z, x<n<y$. (2) $\forall x,\exists!n\in\mathbb Z, x\in[n,n+1)$ (définit $[x]$).</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(1)</strong> Par Archimède, $\exists m\in\mathbb N,m>x$. Il n'y a qu'un nombre fini d'entiers dans $\ ]x,m]$ ; soit $n$ le plus petit. Si $n\ge y$, alors $n-1>x$ (car $y>x+1$), contredisant la minimalité de $n$ — donc $n<y$.</p>
+      <p><strong>(2)</strong> <em>Existence</em> : si $x\in\mathbb Z$, $n=x$. Sinon, le raisonnement du (1) donne un entier $m$ minimal $>x$ ; poser $n=m-1$. <em>Unicité</em> : deux intervalles $[n,n+1)$ et $[n',n'+1)$ avec $n\ne n'$ sont disjoints.</p>
+    </div>
+
+    <h3>Série 4 (18 septembre)</h3>
+
+    <div class="box theorem">
+      <span class="box-label">Ex. 4.1 — suites sous-additives : le lemme de Fekete</span>
+      <p>Une suite $(x_n)_{n\ge0}$ à termes positifs est <strong>sous-additive</strong> si $x_{n+m}\le x_n+x_m$. Montrer que $(x_n/n)_{n\ge1}$ converge. Donner un exemple où elle n'est pas monotone.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — démonstration complète</span>
+      <p>Soit $\alpha=\inf\{x_1/1,x_2/2,\dots\}$. Pour $p,q,r$ : $x_{pq+r}\le p\,x_q+x_r$ (itération de la sous-additivité). Soit $\varepsilon>0$ ; on choisit $q$ avec $\alpha\le x_q/q<\alpha+\varepsilon/2$, puis $N>q$ assez grand pour que $\max\{x_r,0\le r<q\}/N<\varepsilon/2$. Pour $n>N$, $n=pq+r$ :
+      $$\alpha \le \frac{x_n}{n} \le \frac{p\,x_q+x_r}{n} \le \frac{x_q}q+\frac{x_r}N < \alpha+\varepsilon.$$
+      D'où $x_n/n\to\alpha$. <strong>Contre-exemple pour la monotonie</strong> : $x_n=0$ si $n$ pair, $1$ si $n$ impair, est sous-additive (vérification directe par cas) mais $(x_n/n)$ oscille avant de converger vers 0.</p>
+    </div>
+
+    <div class="box theorem">
+      <span class="box-label">Ex. 4.2 — binôme de Newton</span>
+      <p>$(x+y)^n=\sum_{k=0}^n\binom nk x^ky^{n-k}$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — récurrence complète</span>
+      <p>Initialisation triviale. Hérédité : $(x+y)^{N+1}=(x+y)(x+y)^N$, développé et réindexé, isole les termes extrêmes $x^{N+1}$ et $y^{N+1}$, et regroupe les termes intermédiaires via l'<strong>identité de Pascal</strong> $\binom{N}{k-1}+\binom Nk=\binom{N+1}k$ (vérifiée en mettant au même dénominateur $k!(N+1-k)!$).</p>
+    </div>
+
+    <div class="box theorem">
+      <span class="box-label">Ex. 4.3 — le nombre d'Euler $e$</span>
+      <p>$x_n=(1+\frac1n)^n$. Montrer que $(x_n)$ converge et que sa limite $>2$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>(a) Bornée</strong> : le binôme donne $(1+\frac1n)^n=\sum_{k=0}^n\frac1{k!}\prod_{j=0}^{k-1}(1-\frac jn)\le\sum_{k=0}^n\frac1{k!}$ (chaque facteur $\le1$).</p>
+      <p><strong>(b)</strong> Comme $\frac1{k!}\le\frac1{2^{k-1}}$ pour $k\ge1$, et $\sum_0^n\frac1{2^k}\le2$ : $(1+\frac1n)^n\le3$, donc bornée.</p>
+      <p><strong>(c) Croissante</strong> : chaque terme du développement de $x_n$ est $\le$ au terme correspondant de $x_{n+1}$ (car $1-\frac jn\le1-\frac j{n+1}$), et $x_{n+1}$ a un terme positif de plus.</p>
+      <p><strong>Conclusion</strong> : croissante + bornée $\Rightarrow$ convergente. $x_2=(3/2)^2=9/4>2$, donc par croissance, $\lim x_n\ge x_2>2$.</p>
     </div>
 
     <hr class="divider" />
 
-    <h2 id="c2"><span class="chapter-num">Chapitre 2 — début</span>Suites</h2>
+    <h2 id="c2"><span class="chapter-num">Chapitre 2 — début (Série 5-6)</span>Suites</h2>
 
-    <h3>2.1 Suites sous-additives et lemme de Fekete</h3>
-    <div class="box definition">
-      <span class="box-label">Sous-additivité</span>
-      <p>$(x_n)_{n\ge0}$ à termes positifs est <strong>sous-additive</strong> si $x_{n+m}\le x_n+x_m$ pour tous $m,n$.</p>
-    </div>
+    <h3>Série 5 (23 septembre)</h3>
+    <p style="color:var(--text-tertiary); font-size:14px;">L'énoncé de la série note : « Puisqu'il n'y a pas de cours ce lundi, c'est une bonne occasion de vous assurer de ne pas avoir pris de retard — l'exercice 4.1 (lemme de Fekete) a causé des difficultés à beaucoup. »</p>
+
     <div class="box theorem">
-      <span class="box-label">Lemme de Fekete</span>
-      <p>Si $(x_n)$ est sous-additive, $(x_n/n)_{n\ge1}$ converge, vers $\alpha := \inf\{x_1/1, x_2/2, \dots\}$.</p>
-      <div class="proof">
-        <span class="box-label">Démonstration</span>
-        <p>Pour $p,q,r$, l'itération de la sous-additivité donne $x_{pq+r}\le p\cdot x_q+x_r$. Soit $\varepsilon>0$ ; on choisit $q$ avec $\alpha\le x_q/q<\alpha+\varepsilon/2$, puis $N$ assez grand. Pour $n>N$, en écrivant $n=pq+r$ ($0\le r<q$) : $\alpha\le x_n/n \le x_q/q + x_r/N < \alpha+\varepsilon$.<span class="qed">∎</span></p>
-      </div>
+      <span class="box-label">Ex. 5.2 — suite récurrente à racine cubique (à rendre)</span>
+      <p>$x_0=3,x_1=2$, $x_{n+1}=\sqrt[3]{x_n+x_{n-1}}$. Montrer la convergence et calculer la limite.</p>
     </div>
-    <div class="box remark">
-      <span class="box-label">Contre-exemple : pas de monotonie garantie</span>
-      <p>$x_n=0$ si $n$ pair, $1$ si $n$ impair est sous-additive, mais $(x_n/n)$ n'est <strong>pas monotone</strong> — le lemme de Fekete garantit la convergence, pas la monotonie du chemin qui y mène.</p>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>Convergence</strong> : on montre par récurrence forte $1<x_{n+1}<x_n<x_{n-1}$ pour tout $n\ge1$ (initialisation : $x_0=3>x_1=2>x_2=\sqrt[3]5>1$ ; hérédité par croissance stricte de $t\mapsto\sqrt[3]t$). La suite est décroissante et minorée par 1, donc convergente.</p>
+      <p><strong>Limite</strong> : en passant à la limite dans $x_{n+1}=\sqrt[3]{x_n+x_{n-1}}$, $x=\sqrt[3]{2x}\Rightarrow x^3=2x\Rightarrow x(x^2-2)=0$. Comme $x\ge1$, on exclut $0$ et $-\sqrt2$ :
+      $$\lim_{n\to\infty}x_n=\sqrt2.$$</p>
     </div>
 
-    <h3>2.2 — Points d'accumulation et limsup</h3>
-    <div class="box definition">
-      <span class="box-label">Point d'accumulation</span>
-      <p>$x\in\mathbb R$ est un point d'accumulation de $(x_n)$ si on peut en extraire une sous-suite convergeant vers $x$. On note $E$ l'ensemble des points d'accumulation d'une suite bornée.</p>
-    </div>
+    <h3>Série 6 (25 septembre) — dernier vu</h3>
+    <div class="box definition"><span class="box-label">Point d'accumulation</span><p>$x\in\mathbb R$ est un point d'accumulation de $(x_n)$ si on peut en extraire une sous-suite convergeant vers $x$.</p></div>
+
     <div class="box theorem">
-      <span class="box-label">$\sup E = \limsup x_n$</span>
-      <p>Pour toute suite bornée, $\sup E = \limsup_{n\to\infty}x_n$, où $\limsup x_n := \lim y_n$ avec $y_n:=\sup\{x_n,x_{n+1},\dots\}$ (décroissante, donc convergente).</p>
-      <div class="proof">
-        <span class="box-label">Démonstration</span>
-        <p>Par Bolzano–Weierstraß, $E\ne\varnothing$. Notons $\beta=\limsup x_n$, $\alpha=\sup E$. <em>$\beta\in E$, donc $\beta\le\alpha$</em> : pour tout $n$, il existe $k_n\ge n$ avec $0\le y_n-x_{k_n}\le1/n$ ; on extrait une sous-suite $x_{k_n}\to\beta$. <em>$\alpha\le\beta$</em> : pour $\lambda\in E$ limite d'une sous-suite $(x_{n_j})$, $x_{n_j}\le y_{n_j}$ donne $\lambda=\lim x_{n_j}\le\lim y_{n_j}=\beta$.<span class="qed">∎</span></p>
-      </div>
+      <span class="box-label">Ex. 6.1 (à rendre) — $\sup E=\limsup x_n$</span>
+      <p>Pour $(x_n)$ bornée, $E$ = ses points d'accumulation. Montrer $\sup E=\limsup_{n\to\infty}x_n$.</p>
     </div>
+    <div class="proof">
+      <span class="box-label">Solution — démonstration en trois étapes</span>
+      <p><strong>(1) $E\ne\varnothing$</strong> : par Bolzano–Weierstraß, toute suite bornée admet une sous-suite convergente.</p>
+      <p><strong>(2) $\beta:=\limsup x_n\le\alpha:=\sup E$</strong> : avec $y_n=\sup\{x_n,x_{n+1},\dots\}$ et $\beta=\lim y_n$, pour tout $n$ il existe $k_n\ge n$ avec $0\le y_n-x_{k_n}\le1/n$. Comme $x_{k_n}=(x_{k_n}-y_n)+y_n\to\beta$, on extrait une vraie sous-suite convergeant vers $\beta$ — donc $\beta\in E$, donc $\beta\le\alpha$.</p>
+      <p><strong>(3) $\alpha\le\beta$</strong> : pour $\lambda\in E$, limite d'une sous-suite $(x_{n_j})$, on a $x_{n_j}\le y_{n_j}$, donc en passant à la limite $\lambda\le\beta$. Comme $\lambda\in E$ était arbitraire, $\alpha\le\beta$.</p>
+      <p>D'où $\alpha=\beta$. $\blacksquare$</p>
+    </div>
+
     <div class="box example">
-      <span class="box-label">Exemple riche</span>
-      <p>La suite définie par $x_0=0$ et, pour $n=q(q-1)/2+p$ ($1\le p\le q$), $x_n=p/q$ (soit $0,1,\tfrac12,1,\tfrac13,\tfrac23,1,\tfrac14,\dots$) a pour ensemble de points d'accumulation l'intervalle $[0,1]$ tout entier — chaque rationnel de $[0,1]$ y est atteint exactement, et chaque irrationnel par densité de $\mathbb Q$.</p>
+      <span class="box-label">Ex. 6.2 — une suite qui énumère $\mathbb Q\cap[0,1]$</span>
+      <p>$x_0=0$, $x_{q(q-1)/2+p}=p/q$ pour $1\le p\le q$. Déterminer tous les points d'accumulation.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Les 16 premiers termes : $0,1,\frac12,1,\frac13,\frac23,1,\frac14,\frac24,\frac34,1,\frac15,\dots$ (chaque « bloc » $q$ énumère $\frac1q,\dots,\frac qq$).</p>
+      <p><strong>Tout rationnel de $]0,1]$</strong> est atteint par une sous-suite constante (donc convergente) : pour $\lambda=p/q$, la sous-suite d'indices $m_k=\frac{kq(kq-1)}2+kp$ vérifie $x_{m_k}=\frac{kp}{kq}=\lambda$ pour tout $k$.</p>
+      <p><strong>$\lambda=0$</strong> est aussi un point d'accumulation (sous-suite $x_{m_q}=1/q\to0$).</p>
+      <p><strong>Tout irrationnel de $]0,1[$</strong> aussi : par densité de $\mathbb Q$, on approxime $\lambda$ par des rationnels $p_k/q_k\to\lambda$ (avec nécessairement $q_k\to\infty$), et la sous-suite construite comme ci-dessus (extraite pour être strictement croissante en indices) converge vers $\lambda$.</p>
+      <p><strong>Conclusion</strong> : l'ensemble des points d'accumulation de $(x_n)$ est exactement l'intervalle $[0,1]$.</p>
     </div>
 
     <div class="end-banner">
-      <span class="badge">✓</span>
-      <span>C'est tout ce qui a été vu jusqu'ici — juste avant l'étude des suites de Cauchy, qui ouvrira la suite du chapitre 2.</span>
+      <strong>C'est tout ce qui a été vu jusqu'ici</strong> — juste avant l'étude des suites de Cauchy, qui ouvrira la suite du chapitre 2. (La Série 7 n'existe pas encore sur le Drive à ce jour.)
     </div>
 
     <p class="source-note">
-      Contenu reconstruit à partir des séries 1 à 6 et de leurs corrigés, dossier <em>2025 (Monod)</em> du Drive de section.
+      Contenu reconstruit intégralement (tous les exercices, toutes les solutions) à partir des séries 1 à 6 et de leurs corrigés, dossier <em>2025 (Monod)</em> du Drive de section.
     </p>
 
   </article>

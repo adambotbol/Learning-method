@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
-  :root { --course-gradient: linear-gradient(135deg, #0071e3, #32ade6); --accent: #0071e3; --accent-2: #32ade6; }
+  :root { --course-color: #0071e3; --accent: #0071e3; --accent-2: #32ade6; }
 </style>
 </head>
 <body>
@@ -21,6 +21,7 @@
       <a href="#ch2">Ch. 2</a>
       <a href="#ch3">Ch. 3</a>
       <a href="#ch4">Ch. 4</a>
+      <a href="#ex">Exercices</a>
     </div>
   </div>
 </nav>
@@ -33,7 +34,7 @@
       <span class="pill">Manuel · <strong>Ansermet, Mécanique (PPUR)</strong></span>
     </div>
     <h1>Physique générale : mécanique</h1>
-    <p class="prof">14 chapitres, de la méthode scientifique de Galilée au solide indéformable — voici les quatre premiers.</p>
+    <p class="prof">14 chapitres, de la méthode scientifique de Galilée au solide indéformable — voici les quatre premiers, théorie complète (manuscrit du cours + slides) et les quatre premières séries d'exercices, corrigées intégralement.</p>
     <div class="progress-track"><div class="progress-fill" style="width: 29%"></div></div>
     <div class="progress-label">Chapitre 4 sur 14 — Oscillateur harmonique et mouvement circulaire</div>
   </div>
@@ -46,162 +47,351 @@
     <a href="#ch2">2. Cinématique et dynamique du point matériel</a>
     <a href="#ch3">3. Frottements et balistique</a>
     <a href="#ch4">4. Oscillateur harmonique et mouvement circulaire</a>
+    <a href="#ex">Exercices — séries 1 à 4</a>
   </nav>
 
   <article class="content">
 
-    <p class="lede">Le cours PHYS-101(f) s'appuie sur le <em>Traité de Physique — Mécanique</em> de Jean-Philippe Ansermet (EPFL), organisé comme un MOOC de 24 leçons couvrant 14 chapitres. Voici la matière vue jusqu'ici, telle qu'elle a été enseignée.</p>
+    <p class="lede">Le cours s'appuie à la fois sur des slides et sur un manuscrit complet rédigé par le Dr Bréchet (chapitres 1 à 4 disponibles, identiques dans leur contenu mathématique). Voici la théorie intégrale de ces quatre chapitres, suivie des quatre premières séries d'exercices avec leurs corrigés complets et applications numériques.</p>
 
     <h2 id="ch1"><span class="chapter-num">Chapitre 1</span>Étudier la mécanique</h2>
 
     <h3>1.1 — Une brève histoire de la méthode</h3>
-    <p>Avant d'écrire la moindre équation, le cours pose la question : comment sait-on qu'une loi physique est vraie ? Quatre étapes historiques structurent la réponse.</p>
+    <p>Le cours ex-cathedra comprend 14 leçons hebdomadaires de trois heures plus une heure d'applications, complétées par des tutorats. Avant d'écrire la moindre équation, il pose la question : comment sait-on qu'une loi physique est vraie ?</p>
     <ul>
-      <li><strong>Aristote</strong> (384–325 av. J.-C.) sépare le mouvement céleste, jugé parfait, du mouvement terrestre, jugé corrompu — une méthodologie sans dialogue entre théorie et expérience.</li>
-      <li><strong>Galilée</strong> (1564–1642) impose la méthode scientifique : interroger la nature par l'expérience, puis la traduire en langage mathématique.</li>
-      <li><strong>Kepler</strong> (1571–1630), à partir des observations de Tycho Brahé, énonce trois lois du mouvement céleste : orbites elliptiques (le Soleil à un foyer), loi des aires (aire balayée par unité de temps constante), loi des périodes (T²/a³ = constante).</li>
-      <li><strong>Newton</strong> (1643–1727) unifie mécanique céleste et terrestre en trois lois, avec le calcul différentiel et intégral comme langage.</li>
+      <li><strong>Aristote</strong> (384–325 av. J.-C.) distingue le mouvement céleste, jugé parfait, du mouvement terrestre, jugé « capricieux » — une méthodologie non expérimentale, imposant ses présupposés philosophiques à la nature.</li>
+      <li><strong>Galilée</strong> (1564–1642) impose la méthode scientifique : interroger la nature par l'expérience, puis la traduire en langage mathématique. Formule le <strong>principe d'inertie</strong> : le mouvement rectiligne uniforme est l'état « naturel » d'un corps, toute déviation étant due à une force. A prédit qu'en l'absence d'air, une plume et une masse de plomb tombent à la même vitesse — vérifié après sa mort par Torricelli, puis démontré en direct lors de la mission Apollo 15.</li>
+      <li><strong>Kepler</strong> (1571–1630), à partir des observations de Tycho Brahé, énonce trois lois : (1) orbites elliptiques, le Soleil à un foyer ; (2) loi des aires (aire balayée par unité de temps = constante) ; (3) loi des périodes ($T^2/a^3=$ constante).</li>
+      <li><strong>Newton</strong> (1643–1727), à Trinity College Cambridge, combine le principe d'inertie de Galilée et les lois de Kepler pour découvrir les lois de la mécanique, exposées dans les <em>Principia Mathematica</em>, en posant simultanément les bases du calcul différentiel et intégral.</li>
     </ul>
     <div class="box remark">
-      <span class="box-label">Remarque</span>
-      <p>La mécanique classique a ses limites : théorie du chaos (Poincaré 1889, Lorenz 1960), relativité restreinte (Einstein 1905), mécanique quantique (Schrödinger, Heisenberg 1925). Le cours les mentionne dès l'introduction pour situer le cadre de validité de tout ce qui suit.</p>
+      <span class="box-label">Limites de la mécanique newtonienne</span>
+      <p>Laplace postule un déterminisme absolu (« Donnez-moi les conditions initiales… »). Poincaré (fin XIX<sup>e</sup>) montre que des systèmes simples peuvent avoir des solutions très complexes → théorie du chaos (popularisée par Lorenz dès 1960). Début XX<sup>e</sup> : la relativité restreinte (Lorentz, Poincaré, Einstein) invalide Newton aux vitesses proches de $c$ ; la mécanique quantique (Schrödinger, Heisenberg, Dirac) l'invalide à petite échelle. Citation de Maxwell citée en cours sur l'impossibilité de dériver les lois physiques sans l'expérience.</p>
     </div>
 
     <h3>1.2 — Calcul différentiel, l'outil du cours</h3>
     <p>La dérivée est introduite comme limite infinitésimale d'un taux de variation :</p>
-    <div class="eq">$$ v(t) \equiv \lim_{\Delta t \to 0} \frac{\Delta x(t)}{\Delta t} = \frac{dx}{dt}, \qquad a(t) \equiv \frac{dv}{dt} = \frac{d^2x}{dt^2} $$</div>
-    <p>avec la notation « point » de Newton : $v = \dot{x}$, $a = \dot{v} = \ddot{x}$. Pour une fonction composée $h(t) = f(g(t))$, la règle de la chaîne donne $\dfrac{dh}{dt} = \dfrac{df}{dg}\dfrac{dg}{dt}$ — utilisée par exemple pour l'oscillateur $x(t) = A\cos(\omega t + \varphi)$, dont la dérivée $\dot{x}(t) = -A\omega\sin(\omega t+\varphi)$ réapparaît au chapitre 4.</p>
+    <div class="eq">$$ v(t) \equiv \lim_{\Delta t \to 0} \frac{\Delta x(t)}{\Delta t} = \frac{dx}{dt} = \dot x, \qquad a(t) \equiv \frac{dv}{dt} = \frac{d^2x}{dt^2} = \dot v = \ddot x $$</div>
+    <p>Géométriquement, $v(t)$ est la pente de la tangente à $x(t)$. Pour une composition $h(t)=f(g(t))$, la règle de la chaîne donne $\dfrac{dh}{dt}=\dfrac{df}{dg}\dfrac{dg}{dt}$ — appliquée en cours à deux exemples : l'oscillateur $x(t)=A\cos(\omega t+\varphi) \Rightarrow \dot x=-A\omega\sin(\omega t+\varphi)$ (réutilisé au chapitre 4), et l'énergie cinétique $T=\tfrac12 m\dot x^2 \Rightarrow \dfrac{dT}{dt}=m\dot x\ddot x=$ force $\times$ vitesse $=$ puissance.</p>
     <div class="box definition">
       <span class="box-label">Développement limité au premier ordre</span>
-      <p>$f(x+dx) = f(x) + \dfrac{df}{dx}dx$ (exact, à l'infinitésimal près) ; approximation utilisée dès que $\Delta x \ll x$ : $f(x+\Delta x) \approx f(x) + \dfrac{df}{dx}\Delta x$.</p>
+      <p>$f(x+dx)=f(x)+\dfrac{df}{dx}dx$ (exact, infinitésimal) ; approximation dès que $\Delta x\ll x$ : $f(x+\Delta x)\simeq f(x)+\dfrac{df}{dx}\Delta x$.</p>
     </div>
 
     <h3>1.3 — Calcul vectoriel</h3>
-    <p>Dans un repère direct (base orthonormée $(\hat{x}_1,\hat{x}_2,\hat{x}_3)$, règle de la main droite) :</p>
+    <p>Dans un <strong>repère direct</strong> (base orthonormée $(\hat x_1,\hat x_2,\hat x_3)$, règle de la main droite ou du tire-bouchon). Convention de notation : scalaires en police normale, vecteurs en gras. Le produit vectoriel a été introduit par Josiah Willard Gibbs.</p>
     <div class="box definition">
       <span class="box-label">Produit scalaire</span>
-      <p>$\mathbf{a}\cdot\mathbf{b} = a_1b_1+a_2b_2+a_3b_3 = \|\mathbf{a}\|\|\mathbf{b}\|\cos\theta$, commutatif, avec $\hat{x}_i\cdot\hat{x}_j = \delta_{ij}$.</p>
+      <p>$\mathbf a\cdot\mathbf b=a_1b_1+a_2b_2+a_3b_3=\|\mathbf a\|\|\mathbf b\|\cos\theta$, avec $\hat x_i\cdot\hat x_j=\delta_{ij}$ (Kronecker). Propriétés : $\mathbf a\cdot\mathbf a=\|\mathbf a\|^2$ ; $\mathbf a_\parallel\cdot\mathbf b=\mathbf a\cdot\mathbf b$ ; $\mathbf a_\perp\cdot\mathbf b=0$.</p>
     </div>
     <div class="box definition">
       <span class="box-label">Produit vectoriel</span>
-      <p>$\mathbf{a}\times\mathbf{b} = \|\mathbf{a}\|\|\mathbf{b}\|\sin\theta\,\hat{x}_3$ dans le plan adapté, anticommutatif ($\mathbf{a}\times\mathbf{b}=-\mathbf{b}\times\mathbf{a}$), non associatif, avec $\hat{x}_i\times\hat{x}_j = \varepsilon_{ijk}\hat{x}_k$.</p>
+      <p>$\mathbf a\times\mathbf b=(a_2b_3-a_3b_2)\hat x_1+(a_3b_1-a_1b_3)\hat x_2+(a_1b_2-a_2b_1)\hat x_3=\|\mathbf a\|\|\mathbf b\|\sin\theta\,\hat x_3$ (dans le plan adapté), avec $\hat x_i\times\hat x_j=\varepsilon_{ijk}\hat x_k$ (Levi-Civita). Anticommutatif, <strong>non associatif</strong>. Norme = aire du parallélogramme engendré par $\mathbf a,\mathbf b$.</p>
     </div>
-    <p>Le <strong>produit mixte</strong> $(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}$ est invariant par permutation circulaire et nul si deux vecteurs sont égaux. L'identité du double produit vectoriel, souvent réutilisée :</p>
-    <div class="eq">$$ \mathbf{a}\times(\mathbf{b}\times\mathbf{c}) = (\mathbf{a}\cdot\mathbf{c})\,\mathbf{b} - (\mathbf{a}\cdot\mathbf{b})\,\mathbf{c} \quad \text{(BAC–CAB)}$$</div>
+    <p><strong>Produit mixte</strong> $(\mathbf a\times\mathbf b)\cdot\mathbf c$ : invariant par permutation circulaire (volume du prisme engendré), nul si deux vecteurs sont égaux ou si $\mathbf c\in\mathrm{span}(\mathbf a,\mathbf b)$.</p>
+    <div class="box theorem">
+      <span class="box-label">Identité du double produit vectoriel (BAC–CAB)</span>
+      <div class="eq">$$ \mathbf a\times(\mathbf b\times\mathbf c) = (\mathbf a\cdot\mathbf c)\,\mathbf b - (\mathbf a\cdot\mathbf b)\,\mathbf c $$</div>
+      <p>Très utilisée dès le chapitre 4 (mouvement circulaire) et au-delà.</p>
+    </div>
 
     <hr class="divider" />
 
     <h2 id="ch2"><span class="chapter-num">Chapitre 2</span>Cinématique et dynamique du point matériel</h2>
 
     <h3>2.1 — Cinématique : décrire le mouvement</h3>
-    <p>La <strong>cinématique</strong> décrit le mouvement (position, vitesse, accélération) sans s'occuper de ses causes ; la <strong>dynamique</strong> étudie ces causes (force, quantité de mouvement, moment cinétique). Le <strong>point matériel</strong> est un modèle idéalisant un objet par un point portant toute sa masse — un modèle qui a ses limites : pas de rotation propre, erreurs qualitatives (billard, plongeon) ou quantitatives (période d'un pendule) s'il est mal appliqué.</p>
+    <p>La <strong>cinématique</strong> décrit le mouvement (position, vitesse, accélération) sans considérer ses causes ; la <strong>dynamique</strong> étudie ces causes (force, quantité de mouvement, moment cinétique). Le <strong>point matériel</strong> est un modèle idéalisant un objet par un point portant toute sa masse — bonne approximation dans de nombreux cas (boule de billard en translation, pendule simple, plongeur en chute simple), mais insuffisante dès qu'il y a rotation propre (boule avec effet, triple saut périlleux, avion en virage), menant à des erreurs qualitatives ou quantitatives (p. ex. période d'oscillation d'une barre).</p>
     <div class="box definition">
       <span class="box-label">Référentiel vs. repère</span>
-      <p>Un <strong>référentiel</strong> est un solide indéformable réel (au moins 4 points matériels non coplanaires, fixes entre eux). Un <strong>repère</strong> est l'entité géométrique virtuelle associée — trois vecteurs non coplanaires définissant un pavage de l'espace.</p>
+      <p>Un <strong>référentiel</strong> est un solide indéformable réel : un ensemble d'au moins 4 points matériels non coplanaires, à distance constante les uns des autres. Un <strong>repère</strong> est l'entité géométrique associée — trois vecteurs non coplanaires de norme constante, servant d'étalon.</p>
     </div>
-    <p>Vecteur position $\mathbf{r}(t) = x(t)\hat{x}+y(t)\hat{y}+z(t)\hat{z}$ ; la trajectoire $\Gamma$ est l'ensemble des points parcourus (droite en chute libre, cercle pour une particule chargée en champ magnétique, parabole pour un projectile, ellipse pour une planète, hyperbole pour une comète). Le vecteur vitesse $\mathbf{v}(t) = \dot{\mathbf{r}}(t)$ est toujours tangent à la trajectoire ; l'accélération $\mathbf{a}(t) = \dot{\mathbf{v}}(t)$ se décompose en général en composantes tangentielle et normale (dirigée vers l'intérieur de la courbure).</p>
+    <p>Vecteur position $\mathbf r(t)=x(t)\hat x+y(t)\hat y+z(t)\hat z$ ; unité SI : mètre. La <strong>trajectoire</strong> $\Gamma$ est le lieu géométrique parcouru : droite (chute libre), cercle (particule chargée en champ magnétique), parabole (balistique sans frottement), ellipse (orbite planétaire, 1<sup>re</sup> loi de Kepler), hyperbole (comète). Le vecteur vitesse $\mathbf v(t)=\dot{\mathbf r}(t)$ est toujours tangent à la trajectoire ; l'accélération $\mathbf a(t)=\dot{\mathbf v}(t)$ se décompose en général en composantes tangentielle et normale (vers l'intérieur de la courbure).</p>
 
     <h3>2.2 — Mouvement rectiligne</h3>
     <div class="box theorem">
       <span class="box-label">MRU et MRUA</span>
-      <p><strong>Mouvement rectiligne uniforme</strong> ($a=0$) : $x(t) = vt + x_0$.<br />
-      <strong>Mouvement rectiligne uniformément accéléré</strong> ($a$ = cste) : $v(t) = at+v_0$, puis $x(t) = \tfrac{1}{2}at^2+v_0t+x_0$.</p>
+      <p><strong>Mouvement rectiligne uniforme</strong> ($v$ = cste) : $x(t)=vt+x_0$ (une seule condition initiale, équation du 1<sup>er</sup> ordre).<br />
+      <strong>Mouvement rectiligne uniformément accéléré</strong> ($a$ = cste) : $v(t)=at+v_0$, puis $x(t)=\tfrac12at^2+v_0t+x_0$ (deux conditions initiales : position et vitesse).</p>
     </div>
 
     <h3>2.3 — Les lois de Newton</h3>
-    <p>Une grandeur est <strong>extensive</strong> si elle s'additionne pour un ensemble d'objets (masse, quantité de mouvement, force, volume), <strong>intensive</strong> sinon (position, vitesse, accélération, température). La masse $m$ est extensive, scalaire, conservée (Lavoisier).</p>
+    <p>Une grandeur est <strong>extensive</strong> si elle s'additionne pour un ensemble d'objets (masse, quantité de mouvement, force, volume), <strong>intensive</strong> sinon (position, vitesse, accélération, température). La masse $m$ est extensive, scalaire, conservée en mécanique newtonienne (non conservée en relativité : $E=mc^2$). Unité : kg, étalon historique = barreau de platine iridié à Sèvres.</p>
     <div class="box theorem">
-      <span class="box-label">1ère loi de Newton — principe d'inertie (Galilée)</span>
-      <p>« Tout corps persévère dans l'état de mouvement uniforme en ligne droite à moins qu'une force n'agisse sur lui. » En l'absence de force extérieure, $\mathbf{p} = $ cste. Un <strong>référentiel d'inertie</strong> est un référentiel où ce principe est vérifié — il en existe une infinité, en translation à vitesse constante les uns par rapport aux autres.</p>
+      <span class="box-label">1<sup>ère</sup> loi de Newton — principe d'inertie (Galilée)</span>
+      <p>« Tout corps persévère dans l'état de mouvement uniforme en ligne droite à moins qu'une force n'agisse sur lui. » Un <strong>référentiel d'inertie</strong> est un référentiel où ce principe est vérifié — il en existe une infinité, en translation à vitesse constante les uns par rapport aux autres. Le choix dépend de l'échelle du problème : un petit pendule se contente du référentiel terrestre, le pendule de Foucault (67 m) exige le référentiel héliocentrique.</p>
     </div>
+    <p><strong>Composition des forces (expérience de Stevin)</strong> : la force résultante mesurée est la diagonale du parallélogramme engendré par les deux forces composantes — vérifié expérimentalement par des dynamomètres.</p>
     <div class="box theorem">
-      <span class="box-label">2e loi de Newton</span>
-      <p>$$\sum \mathbf{F}_{ext} = \dot{\mathbf{p}}$$ La résultante des forces extérieures égale la variation de quantité de mouvement.</p>
+      <span class="box-label">2<sup>e</sup> loi de Newton</span>
+      <div class="eq">$$\sum \mathbf F_{ext} = \dot{\mathbf p}$$</div>
+      <p>Valable aussi en électrodynamique et en physique quantique ; remplacée en relativité générale par la courbure de l'espace-temps.</p>
     </div>
     <div class="proof">
-      <span class="box-label">D'où vient $\mathbf{p}=m\mathbf{v}$</span>
-      <p>En écrivant $\mathbf{p}=f(m,\mathbf{v})$ et en exploitant l'extensivité de $\mathbf{p}$ et $m$ sur $k$ copies identiques d'un système, on montre $f(m,\mathbf{v})=m\cdot f(\mathbf{v})$. Le rasoir d'Ockham impose la forme la plus simple compatible avec l'expérience, $f(\mathbf{v})=\gamma\mathbf{v}$ avec $\gamma=1$ pour $v\ll c$ — d'où $\mathbf{p}=m\mathbf{v}$.</p>
+      <span class="box-label">D'où vient $\mathbf p=m\mathbf v$</span>
+      <p>En écrivant $\mathbf p=f(m,\mathbf v)$, l'extensivité de $\mathbf p$ et $m$ ($f(km,\mathbf v)=k\,f(m,\mathbf v)$) montre par dérivation que $f(\mathbf v)=\gamma\mathbf v$ est linéaire en $\mathbf v$. L'expérience du <strong>choc mou entre glisseurs identiques</strong> sur rail à air (un glisseur de vitesse $v$ percute un glisseur immobile, l'ensemble repart à $v/2$) fixe $\gamma=1$, d'où $\mathbf p=m\mathbf v$.</p>
     </div>
-    <p>À masse constante ($\dot m = 0$), la 2e loi se réduit à la forme la plus familière :</p>
-    <div class="eq">$$ \sum \mathbf{F}_{ext} = m\mathbf{a} \qquad [\text{unité : le newton, } 1\,\text{N} = 1\,\text{kg}\cdot\text{m}\cdot\text{s}^{-2}] $$</div>
+    <p>À masse constante ($\dot m=0$), la 2<sup>e</sup> loi se réduit à sa forme la plus familière :</p>
+    <div class="eq">$$ \sum \mathbf F_{ext} = m\mathbf a \qquad [\text{unité : le newton, } 1\,\text{N} = 1\,\text{kg}\cdot\text{m}\cdot\text{s}^{-2}] $$</div>
 
     <hr class="divider" />
 
     <h2 id="ch3"><span class="chapter-num">Chapitre 3</span>Frottements et balistique</h2>
 
     <h3>3.1 — Forces de frottement</h3>
-    <p><strong>Frottements secs</strong> (deux surfaces solides). Tant qu'il n'y a pas glissement, le frottement statique équilibre exactement la force motrice ; la loi de Coulomb borne son intensité maximale :</p>
-    <div class="eq">$$ \|\mathbf{F}_f\| \le \mu_s \|\mathbf{N}\| $$</div>
-    <p>où $\mu_s$ est le coefficient de frottement statique et $\mathbf{N}$ la réaction normale — un résultat de de Vinci : la force maximale est indépendante de l'aire de contact, proportionnelle au poids. Une fois le glissement amorcé, le frottement cinétique (Amontons–Coulomb) s'oppose à la vitesse : $\mathbf{F}_f = -\mu_c\|\mathbf{N}\|\hat{\mathbf{v}}$, avec $\mu_c<\mu_s$ (acier/acier : 0.74 statique, 0.57 cinétique ; glace/glace : 0.1 / 0.03 ; téflon/téflon : 0.04 / 0.03).</p>
-    <p><strong>Frottements visqueux</strong> (solide en mouvement dans un fluide). En régime laminaire (faible vitesse), loi de Stokes : $\mathbf{F}_f = -k\eta\mathbf{v} = -b\mathbf{v}$ (avec $k=6\pi R$ pour une sphère de rayon $R$, $\eta$ la viscosité). En régime turbulent, la traînée devient quadratique : $\mathbf{F}_f = -\tfrac{1}{2}C_xA\rho v^2\hat{\mathbf{v}}$.</p>
+    <p>Considérées comme propriétés fondamentales jusqu'à Aristote, réinterprétées comme interactions après Galilée. Discipline associée : la <strong>tribologie</strong>. Coulomb (fin XVIII<sup>e</sup>) distingue frottements statique et cinétique ; Léonard de Vinci (déb. XVI<sup>e</sup>) avait déjà noté que la force de frottement est proportionnelle à la réaction normale et indépendante de l'aire de contact ; Amontons (deux siècles plus tard) : indépendante de la vitesse.</p>
+    <p><strong>Frottements secs.</strong> Tant qu'il n'y a pas glissement, le frottement statique équilibre exactement la force motrice, borné par la loi de Coulomb :</p>
+    <div class="eq">$$ \|\mathbf F_f\| \le \mu_s \|\mathbf N\| $$</div>
+    <p>Une fois le glissement amorcé, le frottement cinétique s'oppose à la vitesse : $\mathbf F_f=-\mu_c\|\mathbf N\|\hat{\mathbf v}$, avec $\mu_c<\mu_s$ toujours (acier/acier : 0.74/0.57 ; glace/glace : 0.1/0.03 ; téflon/téflon : 0.04/0.03 ; articulation humaine : 0.01/0.003 ; caoutchouc/asphalte : 1.0/0.8).</p>
+    <p><strong>Frottements visqueux</strong> (solide dans un fluide). Régime laminaire (loi de Stokes) : $\mathbf F_f=-k\eta\mathbf v=-b\mathbf v$, avec $k=6\pi R$ pour une sphère de rayon $R$ (viscosités à 25°C en N·s·m⁻²: air 0.00002, eau 0.0009, sang 0.004, huile 0.2, miel 10, ketchup 100, verre 1000). Régime turbulent (traînée) : $\mathbf F_f=-\tfrac12 C_xA\rho v^2\hat{\mathbf v}$ — le $C_x$ automobile est passé de 0.7–1.0 au début du XX<sup>e</sup> siècle à 0.2–0.3 aujourd'hui, un facteur 3 en un siècle.</p>
 
     <h3>3.2 — Balistique sans frottement</h3>
-    <p>La méthode de résolution, systématique tout au long du cours : choisir référentiel et repère → lister les forces extérieures → poser les conditions initiales → appliquer la 2e loi de Newton → projeter sur les axes → intégrer → obtenir l'équation de la trajectoire.</p>
+    <p><strong>Démarche systématique</strong> enseignée dès ce chapitre : choisir référentiel/repère → forces extérieures → conditions initiales → 2<sup>e</sup> loi de Newton → projection sur les axes → intégration → équation de la trajectoire.</p>
     <div class="box theorem">
       <span class="box-label">Chute libre universelle</span>
-      <p>Avec $\mathbf{P}=m\mathbf{g}$ comme seule force, $\sum\mathbf{F}_{ext}=m\mathbf{a} \Rightarrow \mathbf{a}=\mathbf{g}$ = cste, <em>indépendant de la masse</em> — plume et bille de plomb tombent à la même vitesse dans le vide (expérience de Torricelli), avec $g=9.81\,\text{m}\cdot\text{s}^{-2}$.</p>
+      <p>Avec $\mathbf P=m\mathbf g$ comme seule force, $\mathbf a=\mathbf g=$ cste, <em>indépendant de la masse</em>, avec $g=9.81\,\text{m·s}^{-2}$ (45° de latitude, niveau de la mer).</p>
     </div>
-    <p>Équations horaires ($\hat z$ vers le haut, conditions initiales $\mathbf r_0,\mathbf v_0$) : $x(t)=v_{0x}t+x_0$, $y(t)=v_{0y}t+y_0$, $z(t) = -\tfrac12 gt^2+v_{0z}t+z_0$. Pour une chute libre pure ($v_0=0$, hauteur $h$), le temps de chute vaut $t_c=\sqrt{2h/g}$. Pour un tir d'angle $\alpha$ et de vitesse $v_0$, la trajectoire est une parabole :</p>
+    <p>Équations horaires ($\hat z$ vers le haut) : $x(t)=v_{0x}t+x_0$, $y(t)=v_{0y}t+y_0$, $z(t)=-\tfrac12gt^2+v_{0z}t+z_0$. Chute libre pure ($v_0=0$, hauteur $h$) : $t_c=\sqrt{2h/g}$. Tir d'angle $\alpha$, vitesse $v_0$ — trajectoire parabolique :</p>
     <div class="eq">$$ z(x) = -\frac{g}{2v_0^2\cos^2\alpha}\,x^2 + \tan\alpha \cdot x $$</div>
 
     <h3>3.3 — Balistique avec frottement (régime laminaire)</h3>
-    <p>Avec la force de Stokes, $m\mathbf a = m\mathbf g - b\mathbf v$ : le mouvement dépend désormais de la masse. On définit le <strong>temps d'amortissement</strong> $\tau \equiv m/b$.</p>
+    <p>Avec la force de Stokes, $m\mathbf a=m\mathbf g-b\mathbf v$ : le mouvement dépend de la masse. Temps d'amortissement $\tau\equiv m/b$.</p>
     <div class="box theorem">
       <span class="box-label">Mouvement horizontal</span>
-      <p>$v_x(t) = v_{0x}e^{-t/\tau}$, puis $x(t) = v_{0x}\tau(1-e^{-t/\tau}) = x_\infty(1-e^{-t/\tau})$ — la trajectoire tend vers une asymptote horizontale $x_\infty = v_{0x}\tau$.</p>
+      <p>$v_x(t)=v_{0x}e^{-t/\tau}$, $x(t)=v_{0x}\tau(1-e^{-t/\tau})=x_\infty(1-e^{-t/\tau})$, avec asymptote $x_\infty=v_{0x}\tau$. À $t=\tau$ : $v_x/v_{0x}=e^{-1}\approx37\%$.</p>
     </div>
     <div class="box theorem">
       <span class="box-label">Mouvement vertical</span>
-      <p>Vitesse limite de chute (le frottement compense le poids) : $v_\infty = -g\tau$. Puis $v_z(t) = (v_{0z}-v_\infty)e^{-t/\tau}+v_\infty$ et $z(t) = (v_{0z}-v_\infty)\tau(1-e^{-t/\tau}) + v_\infty t$.</p>
+      <p>Vitesse limite $v_\infty=-g\tau$ (le frottement compense le poids). $v_z(t)=(v_{0z}-v_\infty)e^{-t/\tau}+v_\infty$, $z(t)=(v_{0z}-v_\infty)\tau(1-e^{-t/\tau})+v_\infty t$. Exemples cités en cours : vitesse limite d'un homme en chute libre dans l'atmosphère $\approx200$ km/h ; d'un faucon pèlerin en piqué $\approx300$ km/h (meilleur $C_x$).</p>
     </div>
-    <p>$\tau$ et $v_\infty$ sont inversement proportionnels à la viscosité $\eta$ du fluide — illustré en cours par une même bille lâchée dans l'eau, la glycérine puis l'huile.</p>
+    <p>Trajectoire avec frottement : $z(x)=(v_{0z}-v_\infty)\tau\cdot x/x_\infty-v_\infty\tau\ln(1-x/x_\infty)$, avec asymptote verticale en $x=x_\infty$. $\tau$ et $v_\infty$ sont inversement proportionnels à la viscosité $\eta$ (illustré par une bille lâchée successivement dans l'eau, la glycérine, l'huile).</p>
 
     <hr class="divider" />
 
     <h2 id="ch4"><span class="chapter-num">Chapitre 4 — dernier vu</span>Oscillateur harmonique et mouvement circulaire</h2>
-    <p style="color:var(--text-tertiary); font-size: 14px; margin-top:-10px;">Correspond à la Série 4 d'exercices, datée du 3 octobre — le cours s'arrête ici pour l'instant.</p>
+    <p style="color:var(--text-tertiary); font-size: 14px; margin-top:-10px;">Correspond à la Série 4, datée du 3 octobre — le cours s'arrête ici pour l'instant.</p>
 
     <h3>4.1 — Oscillateur harmonique (sans frottement)</h3>
-    <p>Modèle vibratoire universel : phonons et photons en mécanique quantique, réduction de vibrations en ingénierie, fluctuations en cosmologie et même en finance. Loi de Hooke : $\mathbf F_e = -k\mathbf d$ ($k>0$, régime élastique réversible ; au-delà, régime plastique irréversible).</p>
+    <p>Modèle vibratoire universel : en mécanique quantique (vibrations moléculaires, phonons, photons), en ingénierie (réduction des vibrations), en cosmologie (formation des galaxies), et même en finance (fluctuation des titres). Loi de Hooke : $\mathbf F_e=-k\mathbf d$ (régime élastique réversible ; au-delà, régime plastique irréversible jusqu'à fracture).</p>
     <div class="box theorem">
       <span class="box-label">Équation du mouvement</span>
-      <p>Sans frottement, $m\ddot x = -kx$. En posant la pulsation $\omega \equiv \sqrt{k/m}$ :</p>
-      <div class="eq">$$ \ddot x + \omega^2 x = 0 \qquad \Longrightarrow \qquad x(t) = C\cos(\omega t + \varphi) $$</div>
-      <p>Période $T=2\pi/\omega$, fréquence $f=1/T$. Avec conditions initiales $x(0)=x_0$, $\dot x(0)=v_0$ :</p>
+      <p>Sans frottement, $m\ddot x=-kx$. Avec $\omega\equiv\sqrt{k/m}$ :</p>
+      <div class="eq">$$ \ddot x + \omega^2 x = 0 \qquad\Longrightarrow\qquad x(t) = C\cos(\omega t + \varphi) $$</div>
+      <p>Obtenue via les solutions complexes $x(t)=e^{\pm i\omega t}$ et la formule d'Euler $e^{\pm i\omega t}=\cos(\omega t)\pm i\sin(\omega t)$ (démontrée géométriquement sur le cercle trigonométrique ; cas $\omega t=\pi$ donnant l'identité $e^{i\pi}+1=0$). Période $T=2\pi/\omega$, fréquence $f=1/T$. Avec $x(0)=x_0,\dot x(0)=v_0$ :</p>
       <div class="eq">$$ x(t) = x_0\cos(\omega t) + \frac{v_0}{\omega}\sin(\omega t) $$</div>
     </div>
 
     <h3>4.2 — Oscillateur harmonique amorti</h3>
-    <p>Avec frottement visqueux (loi de Stokes), $m\mathbf a = -b\mathbf v - k\mathbf r$, soit $\ddot x + 2\gamma\dot x + \omega_0^2 x = 0$, avec pulsation propre $\omega_0\equiv\sqrt{k/m}$ et facteur d'amortissement $\gamma\equiv b/(2m)$. L'équation caractéristique $\lambda^2+2\gamma\lambda+\omega_0^2=0$ distingue trois régimes :</p>
+    <p>Avec frottement visqueux, $m\ddot x=-b\dot x-kx$, soit $\ddot x+2\gamma\dot x+\omega_0^2x=0$ avec $\omega_0\equiv\sqrt{k/m}$ et $\gamma\equiv b/(2m)=1/(2\tau)$. Équation caractéristique $\lambda^2+2\gamma\lambda+\omega_0^2=0$, trois régimes :</p>
     <div class="box example">
       <span class="box-label">1 — Amortissement faible ($\gamma<\omega_0$)</span>
-      <p>$x(t) = Ce^{-\gamma t}\cos(\omega t+\varphi)$ avec $\omega=\sqrt{\omega_0^2-\gamma^2}$ — oscillation d'amplitude exponentiellement décroissante.</p>
+      <p>$x(t)=Ce^{-\gamma t}\cos(\omega t+\varphi)$, $\omega=\sqrt{\omega_0^2-\gamma^2}$ — amplitude exponentiellement décroissante. Avec $x(0)=x_0,\dot x(0)=0$ : $\varphi=-\arctan(\gamma/\omega)$, $C=x_0\sqrt{1+\gamma^2/\omega^2}$.</p>
     </div>
     <div class="box example">
       <span class="box-label">2 — Amortissement fort ($\gamma>\omega_0$)</span>
-      <p>$x(t) = A_1 e^{-t/\tau_1} + A_2 e^{-t/\tau_2}$ — retour à l'équilibre sans oscillation, par pure décroissance exponentielle.</p>
+      <p>$x(t)=A_1e^{-t/\tau_1}+A_2e^{-t/\tau_2}$, $\tau_{1,2}=1/(\gamma\mp\omega)$ — retour à l'équilibre sans oscillation.</p>
     </div>
     <div class="box example">
       <span class="box-label">3 — Amortissement critique ($\gamma=\omega_0$)</span>
-      <p>$x(t) = (A+Bt)e^{-\omega_0 t}$ — le retour à l'équilibre le plus rapide possible, sans oscillation.</p>
+      <p>$x(t)=(A+Bt)e^{-\omega_0t}$ — le retour le plus rapide possible, sans oscillation. Avec $x(0)=x_0,\dot x(0)=0$ : $x(t)=x_0(1+\omega_0t)e^{-\omega_0t}$.</p>
     </div>
     <div class="box remark">
       <span class="box-label">Expérience du cours</span>
-      <p>Un œuf cru et un œuf cuit, suspendus à des ressorts identiques en torsion : l'œuf cuit s'amortit vite (frottement interne solide), le cru beaucoup moins — une manière très concrète de voir γ en action.</p>
+      <p>Un pendule de torsion œuf cru vs œuf cuit : le liquide interne de l'œuf cru génère un frottement visqueux interne qui l'amortit fortement, contrairement à l'œuf cuit (solide).</p>
     </div>
 
     <h3>4.3 — Mouvement circulaire</h3>
-    <p>Pour un mouvement circulaire uniforme (rayon $R$ constant, vitesse scalaire $v$ constante) : $v = R\omega$ où $\omega \equiv \dot\varphi$ est la vitesse angulaire. En vecteur, $\boldsymbol\omega \equiv \omega\hat z$ (règle du tire-bouchon) :</p>
+    <p>Mouvement circulaire uniforme : $s(t)=R\varphi(t)$, vitesse angulaire $\omega\equiv\dot\varphi$, $v=R\omega$. En vecteur, $\boldsymbol\omega\equiv\omega\hat z$ :</p>
     <div class="eq">$$ \mathbf v(t) = \boldsymbol\omega \times \mathbf r(t), \qquad \mathbf a(t) = \boldsymbol\omega \times \mathbf v(t) = -\omega^2 \mathbf r(t) $$</div>
-    <p>C'est l'<strong>accélération centripète</strong>, de norme $a=\omega^2R=v^2/R$, dirigée vers le centre — obtenue directement via l'identité BAC-CAB du chapitre 1. Pour un mouvement circulaire <em>uniformément accéléré</em>, on définit l'accélération angulaire $\alpha\equiv\dot\omega=\ddot\varphi$ = cste, et les équations horaires se déduisent par simple analogie avec le MRUA du §2.2 : $\omega(t)=\alpha t+\omega_0$, $\varphi(t)=\tfrac12\alpha t^2+\omega_0t+\varphi_0$.</p>
+    <p>C'est l'<strong>accélération centripète</strong> (norme $a=\omega^2R=v^2/R$, vers le centre), obtenue via l'identité BAC-CAB du chapitre 1. Pour un mouvement circulaire uniformément accéléré, accélération angulaire $\alpha\equiv\dot\omega=\ddot\varphi=$ cste : $\omega(t)=\alpha t+\omega_0$, $\varphi(t)=\tfrac12\alpha t^2+\omega_0t+\varphi_0$, par simple analogie avec le MRUA du §2.2.</p>
+
+    <hr class="divider" />
+
+    <h2 id="ex"><span class="chapter-num">Exercices</span>Séries 1 à 4, corrigées intégralement</h2>
+
+    <h3>Série 1 — Ordres de grandeur (12 septembre)</h3>
+
+    <div class="box example">
+      <span class="box-label">Ex. 1 — combien d'accordeurs de piano à New York ?</span>
+      <p>Estimation de Fermi guidée par sous-questions (population, familles, possession d'un piano, fréquence d'accordage, capacité annuelle d'un accordeur).</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Population NYC $\approx8\cdot10^6$ (agglomération $\approx30\cdot10^6$). En estimant $\sim2$ millions de familles, 20% possédant un piano $\to\sim400\,000$ pianos, 1 accordage/an chacun $\to400\,000$ accordages/an. Un accordeur traite $\sim4$ clients/jour $\times200$ jours/an $=800$ accordages/an. <strong>Résultat : $\sim500$ accordeurs</strong> (fourchette raisonnable admise : 20 à 2000 — un problème de Fermi ne vise jamais un résultat exact).</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2 — sept estimations rapides</span>
+      <p>(a) Crayons pour tracer l'équateur ; (b) robes de mariée vendues/an en Italie ; (c) cheveux sur la tête ; (d) gouttes d'eau dans les océans ; (e) billets de CHF 10 empilés Terre-Lune ; (f) temps de construction d'une fourmilière par une fourmi ; (g) distance parcourue par les paupières en une vie.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>(a) Mine $\approx10$ cm trace $\approx100$ m ; équateur $L=2\pi R_T\approx60\,000$ km $\to$ <strong>$\approx600\,000$ crayons</strong>.<br />
+      (b) $\approx4\cdot10^5$ mariages/an en Italie, 50% achètent une robe $\to$ <strong>$\approx2\cdot10^5$ robes/an</strong>.<br />
+      (c) $\sim100$ cheveux/cm² sur $\sim500$ cm² $\to$ <strong>$\approx50\,000$ cheveux</strong>.<br />
+      (d) Volume des océans $\approx1.4\cdot10^{18}$ m³, goutte $\approx10$ mm³ $\to$ <strong>$\approx10^{26}$ gouttes</strong>.<br />
+      (e) Distance Terre-Lune $\approx4\cdot10^8$ m, épaisseur/billet $\approx10^{-4}$ m $\to$ <strong>$\approx4\cdot10^{12}$ billets $\approx$ 40 000 milliards CHF</strong> (à comparer au coût du programme Apollo, $\approx135$ milliards $).<br />
+      (f) $\sim30\,000$ brindilles, 1 min chacune $\to$ <strong>$\approx21$ jours</strong>.<br />
+      (g) 70 ans, clignement toutes les 5 s pendant 2/3 du temps, 2 cm/clignement $\to$ <strong>$\approx6000$ km</strong>.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 3 — analyse dimensionnelle de G</span>
+      <p>Déterminer la dimension de $G$ dans $F_G=GM_1M_2/r^2$.</p>
+    </div>
+    <div class="proof"><span class="box-label">Solution</span><p>$G = L^3M^{-1}T^{-2}$, soit $[\text{m}^3\,\text{kg}^{-1}\,\text{s}^{-2}]$.</p></div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 4 — trajectoire elliptique</span>
+      <p>$\mathbf r=a\cos(\omega t)\hat x+b\sin(\omega t)\hat y$. Montrer que la trajectoire est une ellipse (a) par les coordonnées, (b) par le lieu géométrique $\|AM\|+\|MB\|=K=$ cste.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>(a) $x=a\cos(\omega t)$, $y=b\sin(\omega t)$ $\Rightarrow$ $x^2/a^2+y^2/b^2=\cos^2+\sin^2=1$.<br />
+      (b) Avec $A=(-d,0)$, $B=(d,0)$, l'équation $\sqrt{y^2+(x+d)^2}+\sqrt{y^2+(x-d)^2}=K$ est mise au carré deux fois pour éliminer les racines, aboutissant à $\dfrac{4x^2}{K^2}+\dfrac{4y^2}{K^2-4d^2}=1$ ; en posant $a^2=K^2/4$, $b^2=(K^2-4d^2)/4$, on retrouve $x^2/a^2+y^2/b^2=1$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 5 — point sur une roue (cycloïde)</span>
+      <p>Roue de rayon $R$, point $P$ sur sa circonférence, angle de rotation $\varphi$. Trouver $x_P(\varphi), y_P(\varphi)$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>$\overrightarrow{OA}=R\varphi\hat x+R\hat y$, $\overrightarrow{AP}=-R\sin\varphi\,\hat x-R\cos\varphi\,\hat y$, d'où
+      $$x_P=R(\varphi-\sin\varphi), \qquad y_P=R(1-\cos\varphi).$$
+      Aux petits angles ($\varphi\to0$) : $dx_P/d\varphi\simeq0$, $dy_P/d\varphi\simeq R\varphi$ — décollage initialement purement vertical. La trajectoire est une <strong>cycloïde</strong>.</p>
+    </div>
+
+    <h3>Série 2 — Produits et cinématique (19 septembre)</h3>
+
+    <div class="box example">
+      <span class="box-label">Ex. 1 — produits scalaire, vectoriel, mixte</span>
+      <p>(b) Interprétation géométrique de $\mathbf a\cdot(\mathbf b\times\mathbf c)$. (c) Trajectoire d'un point de vitesse $\mathbf v=\boldsymbol\omega\times\mathbf r$, $\boldsymbol\omega=\omega\hat z$ constant.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>(b) Au signe près, c'est le <strong>volume du parallélépipède</strong> engendré par $\mathbf a,\mathbf b,\mathbf c$ (base $\|\mathbf b\|\|\mathbf c\|\sin\phi$ × hauteur $\|\mathbf a\|\cos\theta$).</p>
+      <p>(c) Par identification composante par composante : $\dot x=-\omega y$, $\dot y=\omega x$, $\dot z=0$ (mouvement plan). En dérivant : $\ddot x=-\omega^2x$, $\ddot y=-\omega^2y$ (deux oscillateurs harmoniques couplés), solutions $x=R\cos(\omega t+\varphi)$, $y=R\sin(\omega t+\varphi)$ $\Rightarrow$ $x^2+y^2=R^2$ : <strong>trajectoire circulaire</strong> de rayon $R$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 3 — aller-retour</span>
+      <p>$v(t)=b_0t^2-a_0t$. (a) Trouver $x(t)$. (b)-(c) Pour $b_0=1\,\text{m·s}^{-3}$, $a_0=1\,\text{m·s}^{-2}$ : instants d'arrêt et de retour au point de départ. (d) Vitesse moyenne.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>(a) $x(t)=\tfrac13b_0t^3-\tfrac12a_0t^2$ (intégration, $x(0)=0$).<br />
+      (b) $v(1)=0$ : arrêt à $t=1$ s.<br />
+      (c) $x(3/2)=0$ : retour au point de départ à $t=1.5$ s (mais vitesse instantanée non nulle à cet instant — le corrigé insiste sur la différence entre vitesse moyenne et vitesse instantanée).<br />
+      (d) $\bar v(t)=x(t)/t=\tfrac13b_0t^2-\tfrac12a_0t$.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 4 — le « tir sur singe »</span>
+      <p>Montrer que si un tireur vise la ligne de mire <em>initiale</em> d'une cible qui tombe en chute libre au moment du tir, il la touche nécessairement.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Équations horaires du projectile $\mathbf r_P(t)=v_0\cos\alpha'\,t\,\hat x+(-\tfrac12gt^2+v_0\sin\alpha'\,t)\hat z$ et de la cible $\mathbf r_C(t)=\ell\,\hat x+(-\tfrac12gt^2+h)\hat z$ (chute libre pure). En égalant les deux, le terme $-\tfrac12gt^2$ commun s'annule, laissant $v_0\cos\alpha'\,t^*=\ell$, $v_0\sin\alpha'\,t^*=h$, d'où $\tan\alpha'=h/\ell=\tan\alpha$ $\Rightarrow$ <strong>$\alpha=\alpha'$</strong>, indépendamment de $g$ et $v_0$.</p>
+    </div>
+
+    <h3>Série 3 — Balistique (26 septembre)</h3>
+
+    <div class="box example">
+      <span class="box-label">Ex. 1 — portée maximale de tir</span>
+      <p>Montrer que la portée est maximale pour un angle de tir de 45°.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Portée : $x(\alpha)=(v_0^2/g)\sin(2\alpha)$. Dérivée nulle $\Rightarrow\cos(2\alpha^*)=0$ $\Rightarrow$ <strong>$\alpha^*=\pi/4$</strong> (45°).</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2 — bataille de boules de neige</span>
+      <p>Distance $d$, vitesse initiale $v_0$ ; trouver les deux angles de tir donnant le même point d'impact, et le décalage de lancer nécessaire pour qu'elles arrivent en même temps.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution — application numérique</span>
+      <p>À partir de $x(t_i)=d$, $z(t_i)=0$ : $gd/v_0^2=\sin(2\theta)$, deux solutions $\theta_1=\tfrac12\arcsin(gd/v_0^2)$ et $\theta_2=\pi/2-\theta_1$.</p>
+      <p>Avec $d=25$ m, $v_0=20$ m/s, $g=9.81$ : <strong>$\theta_1=18.9°$, $\theta_2=71.1°$</strong>. Temps de vol $t_{1,2}=d/(v_0\cos\theta_{1,2})$ : <strong>$t_1=1.32$ s, $t_2=3.86$ s</strong>, d'où <strong>$\Delta t=2.54$ s</strong> (temps d'attente avant de lancer la seconde boule pour un impact simultané).</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 3 — accident de la route (reconstitution)</span>
+      <p>Freinage sur $L=60$ m, passage piéton à $d=15$ m avant le point d'impact, débris de phare retrouvés à $d=15$ m après, hauteur des phares $h=1$ m, décélération maximale $a=5.2\,\text{m/s}^2$. Le piéton traversait-il sur le passage clouté ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p><strong>Freinage</strong> : $v_0=\sqrt{2La}$ $\Rightarrow$ <strong>$v_0=25\,\text{m/s}=90\,\text{km/h}$</strong> (excès de vitesse, limite 50 km/h). Temps de freinage $t_f=\sqrt{2L/a}\Rightarrow t_f=4.8$ s.</p>
+      <p><strong>Débris de phare</strong> (balistique post-collision, chute libre depuis hauteur $h$) : mise en équation aboutissant à une équation du 2<sup>e</sup> degré en $t_c$ (temps de collision), dont on retient la racine physique $<t_f$. <strong>AN : $t_c=0.92$ s</strong>, position du choc $x_c\approx5.88$ m après l'axe du passage piéton. <strong>Conclusion : le piéton traversait hors du passage clouté.</strong></p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 4 — boule sur barre tournante avec frottement visqueux</span>
+      <p>Barre de longueur $\ell$ coulissant sans frottement sec sur une tige verticale, boule de masse $m$ à son extrémité, tension $\mathbf T=-T\hat\rho$, frottement visqueux laminaire.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution (coordonnées cylindriques)</span>
+      <p>Équations scalaires : $-T=-m\ell\dot\varphi^2$ (radial), $-b\ell\dot\varphi=m\ell\ddot\varphi$ (azimutal), $-mg-b\dot z=m\ddot z$ (vertical). Avec $\tau=m/b$ :</p>
+      <p>(b) Intégration azimutale ($\dot\varphi(0)=\omega_0$) : $\dot\varphi(t)=\omega_0 e^{-t/\tau}$.<br />
+      (c) Changement de variable homogénéisant l'équation verticale, avec $\dot z(0)=0$ : $\dot z(t)=g\tau(e^{-t/\tau}-1)$.<br />
+      (d) Vitesse limite : $\lim\dot\varphi=0$, $\lim\dot z=-g\tau$ — chute purement verticale, la rotation s'éteint.<br />
+      (e) Tension : $T(t)=m\ell\dot\varphi^2(t)=m\ell\omega_0^2e^{-2t/\tau}$.</p>
+    </div>
+
+    <h3>Série 4 — Oscillateur harmonique (3 octobre)</h3>
+
+    <div class="box example">
+      <span class="box-label">Ex. 1 — suspension d'une voiture</span>
+      <p>Masse $M=1500$ kg, ressort de constante $k$, période visée $T=0.8$ s. (a) Calculer $k$. (b) Abaissement lors de l'ajout d'une malle $m=70$ kg. (c) Pourquoi un camion à vide est-il inconfortable ?</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>(a) Changement de variable homogénéisant l'équation en $\ddot x+(k/M)x=0$, $\omega=\sqrt{k/M}=2\pi/T$, donc $k=M\omega^2=M(2\pi/T)^2$. <strong>AN : $k\approx92\,528\,\text{kg/s}^2\approx92.5$ kN/m.</strong></p>
+      <p>(b) Abaissement $\Delta z=-mg/k$. <strong>AN : $\Delta z\approx-7.42$ mm.</strong></p>
+      <p>(c) Pour une voiture $m\ll M$, donc $\omega=\sqrt{k/(M+m)}\simeq\sqrt{k/M}$ reste quasi inchangé. Pour un camion, la variation de charge est du même ordre que sa masse à vide, donc $\omega$ s'écarte fortement de sa valeur idéale à vide → inconfort quand il roule sans chargement.</p>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 2 — oscillateur sur plan incliné</span>
+      <p>Masse $m$ sur plan incliné d'angle $\alpha$, sans frottement, ressort $(\ell_0,k)$. Trouver l'équation horaire avec $x(0)=2\ell_0+\frac{g}{\omega^2}\sin\alpha$, $\dot x(0)=0$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Bilan des forces, projection : $m\ddot x=mg\sin\alpha-k(x-\ell_0)$. Position d'équilibre : $x_0=\ell_0+\frac{mg}{k}\sin\alpha$. Changement de variable $y=x-x_0$ : $\ddot y+\omega^2y=0$, $\omega=\sqrt{k/m}$. Avec les conditions initiales données (déphasage nul, amplitude $\ell_0$) :</p>
+      <div class="eq">$$ x(t) = \ell_0\big(1+\cos(\omega t)\big) + \frac{g}{\omega^2}\sin\alpha $$</div>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 3 — système de deux ressorts symétriques</span>
+      <p>Point matériel sur une barre horizontale, deux ressorts identiques ($\ell_0\sqrt2$ à vide, $k$) disposés symétriquement à distance $\ell_0$. Trouver $x(t)$ avec $x(0)=0$, $\dot x(0)=\ell_0\omega$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Développement au 1<sup>er</sup> ordre des déformations en petites oscillations : les composantes selon $\hat y$ s'annulent, la force résultante se réduit à $\mathbf F_e=-kx\,\hat x$. D'où $\ddot x+\omega^2x=0$, $\omega=\sqrt{k/m}$, position d'équilibre $x_0=0$. Avec les conditions initiales (déphasage nul, amplitude $\ell_0$) :</p>
+      <div class="eq">$$ x(t) = \ell_0\sin(\omega t) $$</div>
+    </div>
+
+    <div class="box example">
+      <span class="box-label">Ex. 4 — deux boules liées par un ressort vertical</span>
+      <p>Deux boules identiques de masse $m$ liées par un ressort $(k,\ell_0)$, lâchées sans vitesse initiale, $z_2(0)=z_1(0)+2\ell_0$.</p>
+    </div>
+    <div class="proof">
+      <span class="box-label">Solution</span>
+      <p>Équations couplées : $\ddot z_1+\frac km(z_1-z_2+\ell_0)+g=0$, $\ddot z_2+\frac km(z_2-z_1-\ell_0)+g=0$.</p>
+      <p>(b) Centre de masse $Z_G=\tfrac12(z_1+z_2)$ : les termes élastiques s'annulent par somme $\Rightarrow$ <strong>mouvement balistique pur</strong> $\ddot Z_G=-g$.</p>
+      <p>(c) Déformation $y=z_2-z_1-\ell_0$ : <strong>oscillateur de pulsation double</strong> $\omega=\sqrt{2k/m}$, avec $y(0)=\ell_0,\dot y(0)=0$ : $y(t)=\ell_0\cos(\omega t)$.</p>
+      <p>(d) En recombinant $z_1=Z_G-\tfrac12(y+\ell_0)$, $z_2=Z_G+\tfrac12(y+\ell_0)$ :
+      $$z_1(t)=-\tfrac12gt^2+\tfrac{\ell_0}{2}(1-\cos(\omega t))+z_1(0)$$
+      $$z_2(t)=-\tfrac12gt^2-\tfrac{\ell_0}{2}(1-\cos(\omega t))+z_2(0)$$
+      chaque boule combine une chute libre du centre de masse et une oscillation relative de pulsation $\sqrt{2k/m}$.</p>
+    </div>
 
     <div class="end-banner">
-      <span class="badge">✓</span>
-      <span>C'est tout ce qui a été vu jusqu'ici. La suite (coordonnées cylindriques et sphériques, rotations) arrivera au chapitre 5.</span>
+      <strong>C'est tout ce qui a été vu jusqu'ici.</strong> La suite (coordonnées cylindriques et sphériques, rotations) arrivera au chapitre 5.
     </div>
 
     <p class="source-note">
-      Contenu reconstruit à partir des slides de cours (01 à 04) et de la Série 4 d'exercices, dossier <em>2025 (Bréchet)</em> du Drive de section — manuel de référence : <em>Physique — Mécanique</em>, J.-P. Ansermet, PPUR.
+      Contenu reconstruit intégralement à partir du manuscrit du cours (note1–note4.pdf), des slides (chapitres 01–04) et des quatre premières séries d'exercices avec leurs corrigés — dossier <em>2025 (Bréchet)</em> du Drive de section. Manuel de référence : <em>Physique — Mécanique</em>, J.-P. Ansermet, PPUR.
     </p>
 
   </article>
