@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Information, Calcul et Communication — Mon semestre</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<style>
+  :root { --course-gradient: linear-gradient(135deg, #ff375f, #ff6482); --accent: #ff375f; --accent-2: #ff6482; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="../index.html">← Mon semestre</a>
+    <div class="nav-links">
+      <a href="#c1">Algorithmes</a>
+      <a href="#c2">Complexité</a>
+      <a href="#c3">Récursivité</a>
+    </div>
+  </div>
+</nav>
+
+<header class="course-hero">
+  <div class="course-hero-inner">
+    <div class="course-meta-row">
+      <span class="pill">Code · <strong>CS-119</strong></span>
+      <span class="pill">Professeur · <strong>Sébastien Doeraene</strong></span>
+      <span class="pill">Langage · <strong>C++</strong></span>
+    </div>
+    <h1>Information, Calcul et Communication</h1>
+    <p class="prof">Les bases de l'algorithmique — écrire un algorithme, mesurer sa complexité, le rendre récursif.</p>
+    <div class="progress-track"><div class="progress-fill" style="width: 8%"></div></div>
+    <div class="progress-label">Tout début de semestre — fondamentaux de l'algorithmique</div>
+  </div>
+</header>
+
+<div class="course-layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <a href="#c1">Écrire un algorithme</a>
+    <a href="#c2">Complexité</a>
+    <a href="#c3">Récursivité en C++</a>
+  </nav>
+
+  <article class="content">
+
+    <div class="box remark">
+      <span class="box-label">Une note avant de commencer</span>
+      <p>Le dossier de section pour cette édition (2025, Doeraene) ne contient ni slides ni notes de cours — seulement des dossiers d'examens vides et un mini-projet. Ce qui suit a donc été reconstruit à partir des rappels de cours présents dans les énoncés et corrigés d'examens des éditions précédentes (Chappelier, Doeraene), qui couvrent les mêmes fondamentaux en tout début de semestre. Le langage utilisé au fil du cours est le <strong>C++</strong>, pas Python.</p>
+    </div>
+
+    <h2 id="c1"><span class="chapter-num">Fondamentaux</span>Écrire un algorithme</h2>
+    <p>Un algorithme s'écrit d'abord en pseudo-code : entrées/sorties, assignations, conditions (<code>Si</code>), boucles (<code>tant que</code>), et récursivité. Cette structure abstraite précède toujours l'implémentation dans un langage précis.</p>
+
+    <div class="box example">
+      <span class="box-label">Structures et fonctions</span>
+      <p>Le cours introduit tôt les <code>struct</code> pour regrouper des données liées, dans une approche procédurale — par exemple une <code>struct Ressource</code> ou une <code>struct Tache</code> — avec une attention particulière portée à la minimisation de la duplication de code et au respect strict du format d'affichage attendu.</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c2"><span class="chapter-num">Fondamentaux</span>Complexité algorithmique</h2>
+    <p>La complexité $C(n)$ compte le nombre d'opérations fondamentales en fonction de la taille $n$ de l'entrée, avec les notations $\Theta$, $O$, $\Omega$. Classes usuelles, de la plus rapide à la plus lente :</p>
+    <ul>
+      <li>constante — $O(1)$</li>
+      <li>logarithmique — $O(\log n)$ (dichotomie)</li>
+      <li>linéaire — $O(n)$</li>
+      <li>polynomiale — $O(n^2), O(n^3), \dots$</li>
+      <li>quasi-linéaire — $O(n\log n)$</li>
+      <li>exponentielle — $O(2^n)$</li>
+    </ul>
+
+    <div class="box theorem">
+      <span class="box-label">Exemple travaillé : compter les chiffres d'un entier</span>
+      <p>Une fonction récursive <code>chiffres(p)</code> qui compte les chiffres d'un entier $p$ vérifie l'équation de récurrence $T(n) = T(n/10) + \Theta(1)$, d'où $T(n) \in \Theta(\log n)$.</p>
+      <div class="proof">
+        <span class="box-label">Le piège méthodologique</span>
+        <p>Il faut bien définir ce qu'est « $n$ » : si $n=|p|$ (la valeur de l'entier) plutôt que $n=\log|p|$ (le nombre de chiffres), la complexité s'exprime différemment. Une erreur classique du cours est de confondre le nombre d'itérations d'une boucle avec sa complexité totale — celle-ci dépend aussi de la complexité du corps de la boucle.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="c3"><span class="chapter-num">Fondamentaux — dernier vu</span>Récursivité en C++</h2>
+    <p>Exemple complet et représentatif : le calcul de $1/e$ par sa série entière, $\dfrac1e = \sum_{k=0}^\infty \dfrac{(-1)^k}{k!}$.</p>
+
+    <pre><code>double factorielle(double n) {
+    if (n &lt;= 1.0) return 1.0;
+    return n * factorielle(n - 1.0);
+}
+
+// version efficace, Θ(n) : chaque terme se déduit du précédent
+double approx_inv_e(double n) {
+    double term(1.0), res(term);
+    for (double i(1); i &lt;= n; ++i) {
+        term = -term;
+        term /= i;
+        res += term;
+    }
+    return res;
+}
+
+// version naïve : recalcule factorielle(k) à chaque terme → Θ(n²)
+
+void affiche_inv_e() {
+    int n(-1);
+    do {
+        cout &lt;&lt; "Entrez un entier strictement supérieur à 1 : ";
+        cin &gt;&gt; n;
+    } while (n &lt;= 1);
+
+    for (int i(2); i &lt;= n; ++i)
+        cout &lt;&lt; "ordre " &lt;&lt; i &lt;&lt; " : " &lt;&lt; approx_inv_e(i) &lt;&lt; endl;
+}</code></pre>
+
+    <div class="box remark">
+      <span class="box-label">Ce que cet exemple enseigne</span>
+      <p>Deux implémentations du même calcul peuvent avoir des complexités très différentes : la version qui recalcule <code>factorielle(k)</code> à chaque terme de la somme est en $\Theta(n^2)$, alors que la version qui met à jour le terme précédent est en $\Theta(n)$. C'est l'illustration centrale du lien entre complexité et façon d'écrire le code, pas seulement l'algorithme sur le papier.</p>
+    </div>
+
+    <div class="end-banner">
+      <span class="badge">✓</span>
+      <span>C'est la matière la plus fiable disponible pour le début de ce cours. Pas de contenu sur la logique formelle, l'information/entropie, les réseaux ou la cryptographie (RSA) — ces sujets, vus en fin de semestre dans les archives d'examens, ne sont pas inclus ici.</span>
+    </div>
+
+    <p class="source-note">
+      Contenu reconstruit à partir de rappels de cours présents dans des corrigés d'examens (Chappelier 2023, Doeraene 2024) et du fichier <em>Lisez-moi (CS-119).docx</em> — à défaut de notes de cours dédiées pour l'édition en cours dans le Drive de section.
+    </p>
+
+  </article>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

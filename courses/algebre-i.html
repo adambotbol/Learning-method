@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Algèbre I — Mon semestre</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<link rel="stylesheet" href="../assets/css/style.css" />
+<style>
+  :root { --course-gradient: linear-gradient(135deg, #5e5ce6, #af52de); --accent: #5e5ce6; --accent-2: #af52de; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="../index.html">← Mon semestre</a>
+    <div class="nav-links">
+      <a href="#s1">S1</a>
+      <a href="#s2">S2</a>
+      <a href="#s3">S3</a>
+      <a href="#s4">S4</a>
+    </div>
+  </div>
+</nav>
+
+<header class="course-hero">
+  <div class="course-hero-inner">
+    <div class="course-meta-row">
+      <span class="pill">Cours · <strong>Structures fondamentales</strong></span>
+      <span class="pill">Professeur · <strong>Wyss</strong></span>
+      <span class="pill">Section · <strong>Mathématiques</strong></span>
+    </div>
+    <h1>Algèbre I</h1>
+    <p class="prof">Les fondations avant l'algèbre : logique, ensembles, fonctions, relations — les structures algébriques (groupes, anneaux) arrivent juste après.</p>
+    <div class="progress-track"><div class="progress-fill" style="width: 29%"></div></div>
+    <div class="progress-label">Semaine 4 sur 14 — Relations d'équivalence et construction de ℤ</div>
+  </div>
+</header>
+
+<div class="course-layout">
+  <nav class="toc">
+    <div class="toc-title">Sommaire</div>
+    <a href="#s1">1. Logique et récurrence</a>
+    <a href="#s2">2. Théorie des ensembles</a>
+    <a href="#s3">3. Applications (fonctions)</a>
+    <a href="#s4">4. Relations d'équivalence</a>
+  </nav>
+
+  <article class="content">
+
+    <p class="lede">Pas de notes de cours dédiées trouvées pour cette édition : ce qui suit est reconstruit fidèlement à partir des quatre premières séries d'exercices et de leurs corrigés très détaillés — qui contiennent définitions, théorèmes et démonstrations complètes.</p>
+
+    <h2 id="s1"><span class="chapter-num">Semaine 1</span>Logique et raisonnement mathématique</h2>
+
+    <h3>1.1 Logique propositionnelle</h3>
+    <p>On combine des propositions $P, Q, R$ avec les connecteurs $\wedge$ (et), $\vee$ (ou), $\neg$ (négation), $\Rightarrow$ (implication), $\Leftrightarrow$ (équivalence). Une <strong>tautologie</strong> est une expression toujours vraie, quelle que soit la valeur de vérité de ses composantes — vérifiable par table de vérité.</p>
+    <div class="box theorem">
+      <span class="box-label">Tautologies fondamentales</span>
+      <ul style="margin-bottom:0;">
+        <li><em>Ex falso quodlibet</em> : $(P \wedge \neg P) \Rightarrow Q$ — d'une contradiction on déduit n'importe quoi.</li>
+        <li>Double négation : $\neg\neg P \Leftrightarrow P$.</li>
+        <li>Modus ponens : $(P \wedge (P\Rightarrow Q)) \Rightarrow Q$.</li>
+        <li>Négation d'une implication : $\neg(P\Rightarrow Q) \Leftrightarrow (P \wedge \neg Q)$ — montre que $\Rightarrow$ s'exprime entièrement avec $\neg, \wedge, \vee$.</li>
+        <li>Distributivité : $(P \wedge (Q\vee R)) \Leftrightarrow ((P\wedge Q)\vee(P\wedge R))$.</li>
+      </ul>
+    </div>
+
+    <h3>1.2 Raisonnement par récurrence</h3>
+    <div class="box definition">
+      <span class="box-label">Principe d'induction simple</span>
+      <p>Pour montrer $P(n)$ pour tout $n\ge n_0$ : <strong>initialisation</strong> — montrer $P(n_0)$ ; <strong>hérédité</strong> — montrer $P(n)\Rightarrow P(n+1)$ pour tout $n\ge n_0$.</p>
+    </div>
+    <p>Exemple classique : $\forall n\ge 1,\ 1+2+\cdots+n = \dfrac{n(n+1)}{2}$. Initialisation triviale ; à l'hérédité, $1+\cdots+(n+1) = \dfrac{n(n+1)}{2}+(n+1) = \dfrac{(n+1)(n+2)}{2}$, exactement la formule au rang $n+1$.</p>
+    <div class="box remark">
+      <span class="box-label">Le piège du « paradoxe des chevaux »</span>
+      <p>Un faux raisonnement par récurrence prétend prouver que tous les chevaux d'un groupe de $n$ sont de la même couleur. L'erreur : l'hérédité suppose implicitement que les sous-groupes $\{h_1,\dots,h_n\}$ et $\{h_2,\dots,h_{n+1}\}$ se chevauchent — faux pour $n=1$. Ça illustre pourquoi il faut vérifier l'hérédité pour <em>tout</em> $n$, petits cas compris.</p>
+    </div>
+    <div class="box theorem">
+      <span class="box-label">Théorème fondamental de l'arithmétique</span>
+      <p>Tout entier $n\ge 2$ s'écrit comme un produit de nombres premiers, de façon unique à l'ordre près. Démontré par récurrence forte : existence en factorisant $n+1=k\cdot k'$ si non premier, unicité via le lemme d'Euclide (si $p_1'$ divise un produit de premiers, il est égal à l'un d'eux).</p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="s2"><span class="chapter-num">Semaine 2</span>Théorie des ensembles</h2>
+
+    <h3>2.1 Union, intersection, différence</h3>
+    <p>Pour $A=\{1,2,3,4\}$, $B=\{3,4,5,6\}$ : $A\cup B = \{1,2,3,4,5,6\}$, $A\cap B=\{3,4\}$, $A\setminus B=\{1,2\}$.</p>
+    <div class="box theorem">
+      <span class="box-label">Simplification par union/intersection</span>
+      <p>Si $A\cup B=A\cup C$ et $A\cap B=A\cap C$, alors $B=C$.</p>
+      <div class="proof">
+        <span class="box-label">Démonstration</span>
+        <p>Double inclusion : pour $x\in B$, si $x\notin A$ alors $x\in A\cup B=A\cup C$ donc $x\in C$ ; si $x\in A$ alors $x\in A\cap B=A\cap C$ donc $x\in C$. Dans les deux cas $x\in C$, donc $B\subseteq C$ ; par symétrie $C\subseteq B$.<span class="qed">∎</span></p>
+      </div>
+    </div>
+
+    <h3>2.2 Lois de De Morgan</h3>
+    <div class="eq">$$ A\setminus(B\cup C) = (A\setminus B)\cap(A\setminus C), \qquad A\setminus(B\cap C) = (A\setminus B)\cup(A\setminus C) $$</div>
+    <p>Elles découlent directement des tautologies logiques $\neg(P\vee Q)\Leftrightarrow(\neg P\wedge\neg Q)$ appliquées à l'appartenance ensembliste.</p>
+
+    <h3>2.3 Cardinalité : produit cartésien et ensemble des parties</h3>
+    <p>Pour $A,B$ finis : $|A\times B|=|A|\cdot|B|$, et $|2^A|=2^{|A|}$.</p>
+    <div class="proof">
+      <span class="box-label">Démonstration de $|2^A|=2^{|A|}$</span>
+      <p>En énumérant $A=\{a_1,\dots,a_n\}$, on met en bijection les sous-ensembles $E\subseteq A$ et les $n$-uplets $(e_i)\in\{0,1\}^n$ via la fonction indicatrice ($e_i=1$ si $a_i\in E$). Donc $|2^A|=|\{0,1\}^n|=2^n$.<span class="qed">∎</span></p>
+    </div>
+
+    <hr class="divider" />
+
+    <h2 id="s3"><span class="chapter-num">Semaine 3</span>Applications (fonctions)</h2>
+
+    <div class="box definition">
+      <span class="box-label">Injectivité, surjectivité, bijectivité</span>
+      <p>Pour $f:A\to B$ : <strong>injective</strong> si $f(x)=f(y)\Rightarrow x=y$ ; <strong>surjective</strong> si $\forall b\in B,\exists a\in A, f(a)=b$ ; <strong>bijective</strong> si les deux à la fois.</p>
+    </div>
+    <p>Exemple travaillé : $f:\mathbb N\to\mathbb N$, $f(n)=n+1$ si $n$ pair, $f(n)=n-1$ si $n$ impair, est une <em>involution</em> ($f\circ f=\mathrm{id}$), donc bijective — sa réciproque est elle-même.</p>
+    <div class="box theorem">
+      <span class="box-label">Composition et surjectivité</span>
+      <p>Si $f:A\to B$ et $g:B\to C$ sont surjectives, $g\circ f$ l'est aussi. Si $g\circ f$ est surjective, alors $g$ l'est (mais pas nécessairement $f$).</p>
+    </div>
+    <p>La fonction induite sur les parties $\Phi:2^A\to 2^B$, $\Phi(E)=f(E)$, est injective si et seulement si $f$ l'est — un résultat qui relie directement l'injectivité « ponctuelle » et « ensembliste ».</p>
+    <p>Dénombrement : pour $A,B$ finis de cardinaux $a,b$, il y a $b^a$ fonctions $A\to B$ au total, et $b(b-1)\cdots(b-a+1)$ fonctions injectives (nulles si $b<a$).</p>
+
+    <hr class="divider" />
+
+    <h2 id="s4"><span class="chapter-num">Semaine 4 — dernier vu</span>Relations d'équivalence</h2>
+
+    <div class="box definition">
+      <span class="box-label">Relation d'équivalence</span>
+      <p>Une relation $R$ sur $X$ est une relation d'équivalence si elle est <strong>réflexive</strong> ($\forall x, xRx$), <strong>symétrique</strong> ($xRy\Rightarrow yRx$), <strong>transitive</strong> ($xRy \wedge yRz \Rightarrow xRz$).</p>
+    </div>
+    <p>Exemple travaillé sur $\mathbb R$ : la relation $x^2-y^2=x-y$ <em>est</em> une relation d'équivalence, car équivalente à $f(x)=f(y)$ pour $f(x)=x^2-x$. Remarque générale : toute relation induite par une fonction ($f(x)=f(x')$) est une relation d'équivalence.</p>
+    <p>Une relation d'équivalence sur $X$ induit une <strong>partition</strong> de $X$ en classes, et réciproquement — l'ensemble des classes se note $X/R$.</p>
+
+    <div class="box theorem">
+      <span class="box-label">Construction de ℤ à partir de ℕ × ℕ</span>
+      <p>Sur $\mathbb N\times\mathbb N$ : $(m_1,n_1)\equiv(m_2,n_2) \iff m_1+n_2=n_1+m_2$. C'est une relation d'équivalence, et $(\mathbb N\times\mathbb N)/{\equiv}$ est en bijection avec $\mathbb Z$ via $\varphi([(a,b)])=a-b$.</p>
+      <div class="proof">
+        <span class="box-label">Démonstration (esquisse)</span>
+        <p>Réflexivité/symétrie/transitivité viennent de la commutativité de $+$ sur $\mathbb N$. $\varphi$ est bien définie (indépendante du représentant), injective ($a-b=c-d\Rightarrow a+d=b+c\Rightarrow[(a,b)]=[(c,d)]$), et surjective (pour $k\ge0$, $k=\varphi([(k,0)])$ ; pour $k<0$, $k=\varphi([(0,-k)])$).<span class="qed">∎</span></p>
+      </div>
+      <p style="margin-top:12px;">C'est la construction formelle des entiers relatifs comme « différences formelles » de deux entiers naturels — l'exemple canonique d'une construction par quotient.</p>
+    </div>
+
+    <div class="box remark">
+      <span class="box-label">Lien injection / surjection — axiome du choix</span>
+      <p>Il existe une surjection $A\twoheadrightarrow B$ si et seulement s'il existe une injection $B\hookrightarrow A$. Le sens non trivial utilise l'<strong>axiome du choix</strong> : pour chaque $a\in A$, l'ensemble $F_a=g^{-1}(\{a\})$ est non vide, et l'axiome permet de choisir un représentant $b_a\in F_a$ pour chacun, définissant une injection $A\hookrightarrow B$.</p>
+    </div>
+
+    <div class="end-banner">
+      <span class="badge">✓</span>
+      <span>C'est tout ce qui a été vu jusqu'ici. La semaine 5 bascule vers la dénombrabilité (Cantor–Schröder–Bernstein) — pas encore couverte ici. Aucune structure algébrique (groupe, anneau) n'a encore été introduite.</span>
+    </div>
+
+    <p class="source-note">
+      Contenu reconstruit à partir des séries 1 à 4 et de leurs corrigés complets, dossier <em>2025 (Wyss)</em> du Drive de section.
+    </p>
+
+  </article>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
