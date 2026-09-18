@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --course-color: #3a6b66;
-    --glow1: rgba(169, 217, 209, 0.42);
-    --glow2: rgba(58, 107, 102, 0.3);
-    --m1: #a9d9d1;
-    --m2: #3a6b66;
+    --gem: #8b5cf6;
+    --gem-light: #b794ff;
+    --gem-deep: #6528d9;
+    --course-color: #6528d9;
+    --gem-tint: rgba(139,92,246,0.13);
   }
 </style>
 </head>
@@ -35,6 +35,21 @@
 </nav>
 
 <header class="course-hero">
+  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="47" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feGaussianBlur in="d" stdDeviation="11" />
+      </filter>
+    </defs>
+    <g filter="url(#feutre)">
+      <ellipse cx="248" cy="119" rx="300" ry="88" fill="#8b5cf6" transform="rotate(-13 248 119)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1172" cy="104" rx="262" ry="82" fill="#1256c4" transform="rotate(10 1172 104)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1300" cy="330" rx="213" ry="72" fill="#ff4d7e" transform="rotate(-8 1300 330)" style="mix-blend-mode:multiply" />
+      <ellipse cx="642" cy="339" rx="258" ry="74" fill="#00bfc4" transform="rotate(7 642 339)" style="mix-blend-mode:multiply" />
+    </g>
+  </svg>
   <div class="course-hero-inner">
     <div class="course-glass">
     <div class="course-meta-row">

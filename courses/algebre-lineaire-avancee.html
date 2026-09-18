@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --course-color: #1f5c4d;
-    --glow1: rgba(111, 192, 161, 0.42);
-    --glow2: rgba(31, 92, 77, 0.28);
-    --m1: #6fc0a1;
-    --m2: #1f5c4d;
+    --gem: #00a86b;
+    --gem-light: #4fd3a0;
+    --gem-deep: #00764a;
+    --course-color: #00764a;
+    --gem-tint: rgba(0,168,107,0.13);
   }
 </style>
 </head>
@@ -34,6 +34,21 @@
 </nav>
 
 <header class="course-hero">
+  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="21" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feGaussianBlur in="d" stdDeviation="11" />
+      </filter>
+    </defs>
+    <g filter="url(#feutre)">
+      <ellipse cx="255" cy="120" rx="302" ry="88" fill="#00a86b" transform="rotate(-14 255 120)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1170" cy="104" rx="262" ry="82" fill="#00bfc4" transform="rotate(11 1170 104)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1298" cy="330" rx="214" ry="72" fill="#1256c4" transform="rotate(-6 1298 330)" style="mix-blend-mode:multiply" />
+      <ellipse cx="635" cy="340" rx="258" ry="74" fill="#f5b324" transform="rotate(8 635 340)" style="mix-blend-mode:multiply" />
+    </g>
+  </svg>
   <div class="course-hero-inner">
     <div class="course-glass">
     <div class="course-meta-row">
@@ -62,7 +77,7 @@
     <p class="lede">Le cours s'appuie sur un polycopié officiel de 12 chapitres. Les séries d'exercices confirment que le cours a couvert l'intégralité du chapitre 1 et les paragraphes 2.1 à 2.5 du chapitre 2 (le §2.6 « Groupe quotient » existe dans le polycopié mais n'est testé par aucune série disponible — il n'est donc pas inclus).</p>
 
     <h2 id="c1"><span class="chapter-num">Chapitre 1</span>Le langage des ensembles</h2>
-    <p style="font-style:italic; color:var(--text-tertiary); margin-top:-10px;">« Le langage est un ensemble de citations. »</p>
+    <p style="font-style:italic; color:var(--ink-faint); margin-top:-10px;">« Le langage est un ensemble de citations. »</p>
 
     <h3>1.1 La théorie des ensembles</h3>
     <p>La notion d'ensemble semble naturelle, mais sa formalisation rigoureuse n'est apparue qu'au XIX<sup>e</sup> siècle, quand certains objets mathématiques ont semblé posséder des propriétés paradoxales défiant l'intuition. On la construit avec le <strong>calcul des prédicats du premier ordre</strong> : variables, prédicats, quantificateurs ($\forall,\exists,\exists!$), égalité, connecteurs logiques ($\wedge,\vee,\Rightarrow,\Leftrightarrow,\neg$), règles syntaxiques et système de déduction partant d'axiomes.</p>
@@ -143,7 +158,7 @@
     <hr class="divider" />
 
     <h2 id="c2"><span class="chapter-num">Chapitre 2 — jusqu'à §2.5</span>Groupes</h2>
-    <p style="font-style:italic; color:var(--text-tertiary); margin-top:-10px;">« The introduction of the digit 0 or the group concept was general nonsense too... »</p>
+    <p style="font-style:italic; color:var(--ink-faint); margin-top:-10px;">« The introduction of the digit 0 or the group concept was general nonsense too... »</p>
 
     <h3>2.1 Groupes abstraits</h3>
     <div class="box definition">

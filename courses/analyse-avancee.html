@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --course-color: #93701f;
-    --glow1: rgba(237, 205, 128, 0.42);
-    --glow2: rgba(147, 112, 31, 0.28);
-    --m1: #edcd80;
-    --m2: #93701f;
+    --gem: #f5b324;
+    --gem-light: #ffd571;
+    --gem-deep: #a9760a;
+    --course-color: #a9760a;
+    --gem-tint: rgba(245,179,36,0.16);
   }
 </style>
 </head>
@@ -33,6 +33,21 @@
 </nav>
 
 <header class="course-hero">
+  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="33" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feGaussianBlur in="d" stdDeviation="11" />
+      </filter>
+    </defs>
+    <g filter="url(#feutre)">
+      <ellipse cx="245" cy="118" rx="300" ry="88" fill="#f5b324" transform="rotate(-12 245 118)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1178" cy="103" rx="262" ry="82" fill="#ff4d7e" transform="rotate(10 1178 103)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1302" cy="329" rx="213" ry="72" fill="#00a86b" transform="rotate(-7 1302 329)" style="mix-blend-mode:multiply" />
+      <ellipse cx="645" cy="339" rx="258" ry="74" fill="#8b5cf6" transform="rotate(6 645 339)" style="mix-blend-mode:multiply" />
+    </g>
+  </svg>
   <div class="course-hero-inner">
     <div class="course-glass">
     <div class="course-meta-row">
@@ -187,7 +202,7 @@
     <h2 id="c2"><span class="chapter-num">Chapitre 2 — début (Série 5-6)</span>Suites</h2>
 
     <h3>Série 5 (23 septembre)</h3>
-    <p style="color:var(--text-tertiary); font-size:14px;">L'énoncé de la série note : « Puisqu'il n'y a pas de cours ce lundi, c'est une bonne occasion de vous assurer de ne pas avoir pris de retard — l'exercice 4.1 (lemme de Fekete) a causé des difficultés à beaucoup. »</p>
+    <p style="color:var(--ink-faint); font-size:14px;">L'énoncé de la série note : « Puisqu'il n'y a pas de cours ce lundi, c'est une bonne occasion de vous assurer de ne pas avoir pris de retard — l'exercice 4.1 (lemme de Fekete) a causé des difficultés à beaucoup. »</p>
 
     <div class="box theorem">
       <span class="box-label">Ex. 5.2 — suite récurrente à racine cubique (à rendre)</span>

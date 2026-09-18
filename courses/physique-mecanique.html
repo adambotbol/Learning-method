@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --course-color: #2c4870;
-    --glow1: rgba(111, 157, 208, 0.42);
-    --glow2: rgba(39, 74, 114, 0.28);
-    --m1: #6f9dd0;
-    --m2: #274a72;
+    --gem: #1256c4;
+    --gem-light: #5b8ee8;
+    --gem-deep: #0b3a8a;
+    --course-color: #0b3a8a;
+    --gem-tint: rgba(18,86,196,0.12);
   }
 </style>
 </head>
@@ -36,6 +36,21 @@
 </nav>
 
 <header class="course-hero">
+  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="11" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feGaussianBlur in="d" stdDeviation="11" />
+      </filter>
+    </defs>
+    <g filter="url(#feutre)">
+      <ellipse cx="240" cy="118" rx="300" ry="88" fill="#1256c4" transform="rotate(-12 240 118)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1175" cy="102" rx="262" ry="82" fill="#00bfc4" transform="rotate(9 1175 102)" style="mix-blend-mode:multiply" />
+      <ellipse cx="1305" cy="328" rx="212" ry="72" fill="#8b5cf6" transform="rotate(-8 1305 328)" style="mix-blend-mode:multiply" />
+      <ellipse cx="650" cy="338" rx="258" ry="74" fill="#00a86b" transform="rotate(7 650 338)" style="mix-blend-mode:multiply" />
+    </g>
+  </svg>
   <div class="course-hero-inner">
     <div class="course-glass">
     <div class="course-meta-row">
@@ -179,7 +194,7 @@
     <hr class="divider" />
 
     <h2 id="ch4"><span class="chapter-num">Chapitre 4 — dernier vu</span>Oscillateur harmonique et mouvement circulaire</h2>
-    <p style="color:var(--text-tertiary); font-size: 14px; margin-top:-10px;">Correspond à la Série 4, datée du 3 octobre — le cours s'arrête ici pour l'instant.</p>
+    <p style="color:var(--ink-faint); font-size: 14px; margin-top:-10px;">Correspond à la Série 4, datée du 3 octobre — le cours s'arrête ici pour l'instant.</p>
 
     <h3>4.1 — Oscillateur harmonique (sans frottement)</h3>
     <p>Modèle vibratoire universel : en mécanique quantique (vibrations moléculaires, phonons, photons), en ingénierie (réduction des vibrations), en cosmologie (formation des galaxies), et même en finance (fluctuation des titres). Loi de Hooke : $\mathbf F_e=-k\mathbf d$ (régime élastique réversible ; au-delà, régime plastique irréversible jusqu'à fracture).</p>
