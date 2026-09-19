@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mon semestre — EPFL</title>
 <meta name="description" content="Mes cinq matières du semestre, mises en forme à partir de mes notes de cours." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2242%22 fill=%22%230e9a5b%22/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -24,84 +24,111 @@
 </nav>
 
 <header class="hero">
-  <svg class="wash" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="9" result="n" />
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feGaussianBlur in="d" stdDeviation="11" />
-      </filter>
-    </defs>
-    <g filter="url(#feutre)">
-      <ellipse cx="250" cy="150" rx="300" ry="92" fill="#ff4d7e" transform="rotate(-14 250 150)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1160" cy="130" rx="280" ry="86" fill="#1256c4" transform="rotate(11 1160 130)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1290" cy="400" rx="230" ry="78" fill="#00a86b" transform="rotate(-8 1290 400)" style="mix-blend-mode:multiply" />
-      <ellipse cx="820" cy="505" rx="280" ry="76" fill="#f5b324" transform="rotate(7 820 505)" style="mix-blend-mode:multiply" />
-      <ellipse cx="830" cy="120" rx="170" ry="62" fill="#8b5cf6" transform="rotate(-20 830 120)" style="mix-blend-mode:multiply" />
-      <ellipse cx="980" cy="430" rx="190" ry="66" fill="#00bfc4" transform="rotate(16 980 430)" style="mix-blend-mode:multiply" />
-    </g>
-  </svg>
   <div class="wrap">
-    <span class="eyebrow">EPFL · Bachelor · Section Mathématiques</span>
-    <h1>Cinq matières.<br />Un seul endroit.</h1>
-    <p>Une mise en forme claire de mes cours, telle qu'ils avancent — reconstruite à partir de mes notes et polycopiés, chapitre après chapitre.</p>
+    <div class="label-row">
+      <span>EPFL · Section mathématiques</span>
+      <span class="muted">Semestre d'automne · 05 / 05</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1 class="display">Cinq matières.<br /><span class="accent">Un seul endroit.</span></h1>
+        <p class="hero-sub">Mes cours mis en forme au fur et à mesure qu'ils avancent — théorie, démonstrations et exercices corrigés, reconstruits à partir des polycopiés et des séries du Drive de section.</p>
+      </div>
+
+      <div class="orb-stage">
+        <svg class="orb" viewBox="0 0 360 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="orbBody" cx="36%" cy="28%" r="78%">
+              <stop offset="0%" stop-color="#77e8b3" />
+              <stop offset="26%" stop-color="#1ba86a" />
+              <stop offset="62%" stop-color="#0c7143" />
+              <stop offset="100%" stop-color="#05391f" />
+            </radialGradient>
+            <radialGradient id="orbRim" cx="72%" cy="80%" r="52%">
+              <stop offset="0%" stop-color="#4fdca1" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#4fdca1" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbShadow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#14140f" stop-opacity="0.42" />
+              <stop offset="100%" stop-color="#14140f" stop-opacity="0" />
+            </radialGradient>
+            <clipPath id="orbClip"><circle cx="180" cy="175" r="138" /></clipPath>
+          </defs>
+
+          <ellipse cx="196" cy="332" rx="140" ry="22" fill="url(#orbShadow)" />
+          <circle cx="180" cy="175" r="138" fill="url(#orbBody)" />
+
+          <g clip-path="url(#orbClip)" opacity="0.22">
+            <polygon points="60,120 150,70 190,150 95,190" fill="#d9fff0" opacity="0.5" />
+            <polygon points="150,70 245,95 235,175 190,150" fill="#ffffff" opacity="0.35" />
+            <polygon points="95,190 190,150 205,250 110,265" fill="#a8f5d3" opacity="0.4" />
+            <polygon points="235,175 300,205 255,285 205,250" fill="#d9fff0" opacity="0.3" />
+            <polygon points="110,265 205,250 175,320 105,300" fill="#ffffff" opacity="0.2" />
+          </g>
+
+          <circle cx="180" cy="175" r="138" fill="url(#orbRim)" />
+          <ellipse cx="132" cy="112" rx="46" ry="30" fill="url(#orbGlow)" transform="rotate(-28 132 112)" />
+          <ellipse cx="238" cy="262" rx="26" ry="14" fill="#ffffff" opacity="0.12" transform="rotate(-20 238 262)" />
+        </svg>
+      </div>
+    </div>
   </div>
 </header>
 
 <main class="wrap" id="matieres">
   <div class="grid">
 
-    <a class="card gem-ruby" href="courses/algebre-i.html">
-      <div class="card-icon">Σ</div>
-      <div class="card-code">MATH · Semestre d'automne</div>
-      <h3>Algèbre I</h3>
-      <p>Structures fondamentales — logique, théorie des ensembles, applications, relations d'équivalence.</p>
+    <a class="card key-emerald" href="courses/algebre-i.html">
+      <div class="card-index"><span>01 / 05</span><span class="gem"></span></div>
+      <h3>Algèbre <span class="accent">I</span></h3>
+      <p>Structures fondamentales — logique, récurrence, théorie des ensembles, applications, relations d'équivalence et construction de ℤ.</p>
       <div class="card-footer">
-        <span class="card-progress">Semaine 4 / 14</span>
+        <span>Semaine 4 / 14</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <a class="card gem-sapphire" href="courses/physique-mecanique.html">
-      <div class="card-icon">m</div>
-      <div class="card-code">PHYS-101(f) · Semestre d'automne</div>
-      <h3>Physique générale : mécanique</h3>
-      <p>De Galilée à l'oscillateur harmonique — cinématique, dynamique de Newton, frottements, balistique.</p>
+    <a class="card key-pine" href="courses/physique-mecanique.html">
+      <div class="card-index"><span>02 / 05</span><span class="gem"></span></div>
+      <h3>Physique <span class="accent">générale</span></h3>
+      <p>De la méthode de Galilée à l'oscillateur harmonique — cinématique, lois de Newton, frottements, balistique, mouvement circulaire.</p>
       <div class="card-footer">
-        <span class="card-progress">Chapitre 4 / 14</span>
+        <span>Chapitre 4 / 14</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <a class="card gem-emerald" href="courses/algebre-lineaire-avancee.html">
-      <div class="card-icon">G</div>
-      <div class="card-code">MATH-110 · Semestre d'automne</div>
-      <h3>Algèbre linéaire avancée I</h3>
-      <p>Le langage des ensembles, cardinalité, puis les premiers pas dans la théorie des groupes.</p>
+    <a class="card key-jade" href="courses/algebre-lineaire-avancee.html">
+      <div class="card-index"><span>03 / 05</span><span class="gem"></span></div>
+      <h3>Algèbre <span class="accent">linéaire</span></h3>
+      <p>Le langage des ensembles, cardinalité et théorèmes de Cantor, puis la théorie des groupes jusqu'aux actions et au théorème de Lagrange.</p>
       <div class="card-footer">
-        <span class="card-progress">Chapitre 2 / 12</span>
+        <span>Chapitre 2 / 12</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <a class="card gem-citrine" href="courses/analyse-avancee.html">
-      <div class="card-icon">ℝ</div>
-      <div class="card-code">MATH · Semestre d'automne</div>
-      <h3>Analyse avancée I</h3>
-      <p>Les nombres réels, bornes sup/inf, puis les suites — sous-additivité, points d'accumulation.</p>
+    <a class="card key-moss" href="courses/analyse-avancee.html">
+      <div class="card-index"><span>04 / 05</span><span class="gem"></span></div>
+      <h3>Analyse <span class="accent">avancée</span></h3>
+      <p>Les nombres réels, bornes sup/inf, propriété archimédienne, binôme de Newton — puis les suites, Fekete et les points d'accumulation.</p>
       <div class="card-footer">
-        <span class="card-progress">Semaine 3 / 14</span>
+        <span>Semaine 3 / 14</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
 
-    <a class="card card-wide gem-amethyst" href="courses/icc.html">
-      <div class="card-icon">{ }</div>
-      <div class="card-code">CS-119 · Semestre d'automne</div>
-      <h3>Information, Calcul et Communication</h3>
-      <p>Algorithmique, complexité, récursivité, machines de Turing et classe NP — bases de la programmation en C++.</p>
+    <a class="card card-wide key-verdigris" href="courses/icc.html">
+      <div class="card-index"><span>05 / 05</span><span class="gem"></span></div>
+      <h3>Information, calcul et <span class="accent">communication</span></h3>
+      <p>Algorithmique et complexité, récursivité, structures de données, représentation binaire, débogage, machines de Turing et classe NP — en C++.</p>
       <div class="card-footer">
-        <span class="card-progress">Mi-semestre 1</span>
+        <span>Mi-semestre 1</span>
         <span class="card-arrow">→</span>
       </div>
     </a>
@@ -109,8 +136,9 @@
   </div>
 </main>
 
-<footer class="site-footer">
-  Contenu reconstruit à partir de mes notes de cours EPFL — mis à jour au fil du semestre.
+<footer class="wrap site-footer">
+  <span>Reconstruit depuis le Drive de section</span>
+  <span>Mis à jour au fil du semestre</span>
 </footer>
 
 <script src="assets/js/main.js"></script>

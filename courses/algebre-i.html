@@ -8,15 +8,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --gem: #ff4d7e;
-    --gem-light: #ff85a6;
-    --gem-deep: #d31555;
-    --course-color: #d31555;
-    --gem-tint: rgba(255,77,126,0.13);
+    --accent: #0e9a5b;
+    --accent-deep: #0a6a3e;
+    --orb1: #77e8b3;
+    --orb2: #1ba86a;
+    --orb3: #0c7143;
+    --orb4: #05391f;
   }
 </style>
 </head>
@@ -35,32 +36,55 @@
 </nav>
 
 <header class="course-hero">
-  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="4" result="n" />
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feGaussianBlur in="d" stdDeviation="11" />
-      </filter>
-    </defs>
-    <g filter="url(#feutre)">
-      <ellipse cx="250" cy="120" rx="300" ry="88" fill="#ff4d7e" transform="rotate(-13 250 120)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1180" cy="105" rx="265" ry="82" fill="#8b5cf6" transform="rotate(10 1180 105)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1300" cy="330" rx="215" ry="72" fill="#f5b324" transform="rotate(-7 1300 330)" style="mix-blend-mode:multiply" />
-      <ellipse cx="640" cy="340" rx="260" ry="74" fill="#00bfc4" transform="rotate(6 640 340)" style="mix-blend-mode:multiply" />
-    </g>
-  </svg>
   <div class="course-hero-inner">
-    <div class="course-glass">
-    <div class="course-meta-row">
-      <span class="pill">Cours · <strong>Structures fondamentales</strong></span>
-      <span class="pill">Professeur · <strong>Wyss</strong></span>
-      <span class="pill">Section · <strong>Mathématiques</strong></span>
+    <div class="label-row">
+      <span>MATH · Structures fondamentales · Wyss</span>
+      <span class="muted">01 / 05</span>
     </div>
-    <h1>Algèbre I</h1>
-    <p class="prof">Les fondations avant l'algèbre : logique, ensembles, fonctions, relations — les structures algébriques (groupes, anneaux) arrivent juste après. Il n'existe pas de polycopié dédié : toute la matière ci-dessous vient des séries d'exercices et de leurs corrigés très détaillés, reproduits ici intégralement.</p>
-    <div class="progress-track"><div class="progress-fill" style="width: 29%"></div></div>
-    <div class="progress-label">Semaine 4 sur 14 — Relations d'équivalence et construction de ℤ</div>
+
+    <div class="course-head">
+      <div>
+        <h1>Algèbre <span class="accent">I</span></h1>
+        <p class="prof">Les fondations avant l'algèbre : logique, ensembles, fonctions, relations. Il n'existe pas de polycopié dédié — toute la matière vient des séries d'exercices et de leurs corrigés, reproduits ici intégralement.</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 29%"></div></div>
+        <div class="progress-label">Semaine 4 / 14 — Relations d'équivalence et construction de ℤ</div>
+      </div>
+
+      <div class="orb-stage">
+        <svg class="orb" viewBox="0 0 360 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="orbBody" cx="36%" cy="28%" r="78%">
+              <stop offset="0%" stop-color="var(--orb1)" />
+              <stop offset="26%" stop-color="var(--orb2)" />
+              <stop offset="62%" stop-color="var(--orb3)" />
+              <stop offset="100%" stop-color="var(--orb4)" />
+            </radialGradient>
+            <radialGradient id="orbRim" cx="72%" cy="80%" r="52%">
+              <stop offset="0%" stop-color="var(--orb1)" stop-opacity="0.65" />
+              <stop offset="100%" stop-color="var(--orb1)" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbShadow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#14140f" stop-opacity="0.42" />
+              <stop offset="100%" stop-color="#14140f" stop-opacity="0" />
+            </radialGradient>
+            <clipPath id="orbClip"><circle cx="180" cy="175" r="138" /></clipPath>
+          </defs>
+          <ellipse cx="196" cy="332" rx="140" ry="22" fill="url(#orbShadow)" />
+          <circle cx="180" cy="175" r="138" fill="url(#orbBody)" />
+          <g clip-path="url(#orbClip)" opacity="0.2">
+            <polygon points="60,120 150,70 190,150 95,190" fill="#ffffff" opacity="0.45" />
+            <polygon points="150,70 245,95 235,175 190,150" fill="#ffffff" opacity="0.3" />
+            <polygon points="95,190 190,150 205,250 110,265" fill="#ffffff" opacity="0.35" />
+            <polygon points="235,175 300,205 255,285 205,250" fill="#ffffff" opacity="0.25" />
+          </g>
+          <circle cx="180" cy="175" r="138" fill="url(#orbRim)" />
+          <ellipse cx="132" cy="112" rx="46" ry="30" fill="url(#orbGlow)" transform="rotate(-28 132 112)" />
+        </svg>
+      </div>
     </div>
   </div>
 </header>

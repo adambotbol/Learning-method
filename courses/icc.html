@@ -8,15 +8,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../assets/css/style.css" />
 <style>
   :root {
-    --gem: #8b5cf6;
-    --gem-light: #b794ff;
-    --gem-deep: #6528d9;
-    --course-color: #6528d9;
-    --gem-tint: rgba(139,92,246,0.13);
+    --accent: #0d7c74;
+    --accent-deep: #095851;
+    --orb1: #7fe0d6;
+    --orb2: #12a297;
+    --orb3: #0a6a64;
+    --orb4: #04322f;
   }
 </style>
 </head>
@@ -35,32 +36,55 @@
 </nav>
 
 <header class="course-hero">
-  <svg class="wash" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <filter id="feutre" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.013 0.018" numOctaves="4" seed="47" result="n" />
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="95" xChannelSelector="R" yChannelSelector="G" result="d" />
-        <feGaussianBlur in="d" stdDeviation="11" />
-      </filter>
-    </defs>
-    <g filter="url(#feutre)">
-      <ellipse cx="248" cy="119" rx="300" ry="88" fill="#8b5cf6" transform="rotate(-13 248 119)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1172" cy="104" rx="262" ry="82" fill="#1256c4" transform="rotate(10 1172 104)" style="mix-blend-mode:multiply" />
-      <ellipse cx="1300" cy="330" rx="213" ry="72" fill="#ff4d7e" transform="rotate(-8 1300 330)" style="mix-blend-mode:multiply" />
-      <ellipse cx="642" cy="339" rx="258" ry="74" fill="#00bfc4" transform="rotate(7 642 339)" style="mix-blend-mode:multiply" />
-    </g>
-  </svg>
   <div class="course-hero-inner">
-    <div class="course-glass">
-    <div class="course-meta-row">
-      <span class="pill">Code · <strong>CS-119</strong></span>
-      <span class="pill">Professeur · <strong>Sébastien Doeraene</strong></span>
-      <span class="pill">Langage · <strong>C++</strong></span>
+    <div class="label-row">
+      <span>CS-119 · Sébastien Doeraene</span>
+      <span class="muted">05 / 05</span>
     </div>
-    <h1>Information, Calcul et Communication</h1>
-    <p class="prof">Le dossier de l'édition en cours ne contient pas de notes de cours dédiées — tout ce qui suit est reconstruit à partir des examens de mi-semestre (2023, 2024) et d'exercices équivalents d'éditions antérieures, qui couvrent fidèlement la même matière de début de semestre.</p>
-    <div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div>
-    <div class="progress-label">Matière du premier examen — algorithmique, complexité, machines de Turing, NP</div>
+
+    <div class="course-head">
+      <div>
+        <h1>Information, calcul et <span class="accent">communication</span></h1>
+        <p class="prof">Le dossier de l'édition en cours ne contient pas de notes de cours dédiées — tout ce qui suit est reconstruit à partir des examens de mi-semestre 2023 et 2024, lus intégralement, qui couvrent la même matière.</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div>
+        <div class="progress-label">Mi-semestre 1 — algorithmique, complexité, Turing, NP</div>
+      </div>
+
+      <div class="orb-stage">
+        <svg class="orb" viewBox="0 0 360 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="orbBody" cx="36%" cy="28%" r="78%">
+              <stop offset="0%" stop-color="var(--orb1)" />
+              <stop offset="26%" stop-color="var(--orb2)" />
+              <stop offset="62%" stop-color="var(--orb3)" />
+              <stop offset="100%" stop-color="var(--orb4)" />
+            </radialGradient>
+            <radialGradient id="orbRim" cx="72%" cy="80%" r="52%">
+              <stop offset="0%" stop-color="var(--orb1)" stop-opacity="0.65" />
+              <stop offset="100%" stop-color="var(--orb1)" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="orbShadow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#14140f" stop-opacity="0.42" />
+              <stop offset="100%" stop-color="#14140f" stop-opacity="0" />
+            </radialGradient>
+            <clipPath id="orbClip"><circle cx="180" cy="175" r="138" /></clipPath>
+          </defs>
+          <ellipse cx="196" cy="332" rx="140" ry="22" fill="url(#orbShadow)" />
+          <circle cx="180" cy="175" r="138" fill="url(#orbBody)" />
+          <g clip-path="url(#orbClip)" opacity="0.2">
+            <polygon points="60,120 150,70 190,150 95,190" fill="#ffffff" opacity="0.45" />
+            <polygon points="150,70 245,95 235,175 190,150" fill="#ffffff" opacity="0.3" />
+            <polygon points="95,190 190,150 205,250 110,265" fill="#ffffff" opacity="0.35" />
+            <polygon points="235,175 300,205 255,285 205,250" fill="#ffffff" opacity="0.25" />
+          </g>
+          <circle cx="180" cy="175" r="138" fill="url(#orbRim)" />
+          <ellipse cx="132" cy="112" rx="46" ry="30" fill="url(#orbGlow)" transform="rotate(-28 132 112)" />
+        </svg>
+      </div>
     </div>
   </div>
 </header>
